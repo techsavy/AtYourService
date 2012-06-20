@@ -38,6 +38,24 @@ namespace AtYourService.Web.Tests
             return context;
         }
 
+        public static HttpContextBase FakeAuthenticatedHttpContext(string url, string userName)
+        {
+            var context = FakeHttpContext();
+            context.Request.SetupRequestUrl(url);
+
+            var identity = new Mock<IIdentity>();
+            identity.SetupGet(i => i.IsAuthenticated).Returns(true);
+            identity.SetupGet(i => i.Name).Returns(userName);
+
+            var principal = new Mock<IPrincipal>();
+            principal.SetupGet(p => p.Identity).Returns(identity.Object);
+
+            var contextMock = Mock.Get(context);
+            contextMock.SetupGet(c => c.User).Returns(principal.Object);
+
+            return context;
+        }
+
         public static HttpContextBase FakeUnauthenticatedHttpContext(string url, string userName)
         {
             var context = FakeHttpContext();

@@ -10,7 +10,14 @@ namespace AtYourService.Web.Tests
 
         public override object this[string name]
         {
-            get { return _sessionStorage[name]; }
+            get
+            {
+                if (!_sessionStorage.ContainsKey(name))
+                    return null;
+
+                return _sessionStorage[name];
+            }
+
             set { _sessionStorage[name] = value; }
         }
 

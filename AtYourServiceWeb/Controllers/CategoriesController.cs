@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AtYourService.Domain;
-using AtYourService.Domain.Categories;
-using AtYourService.Web.Helpers;
-using AtYourService.Web.Properties;
-using NHibernate;
-using NHibernate.Transform;
-
+﻿
 namespace AtYourService.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Domain.Categories;
+    using Helpers;
+    using NHibernate;
+    using NHibernate.Transform;
+    using Properties;
+
     public class CategoriesController : BaseController
     {
 

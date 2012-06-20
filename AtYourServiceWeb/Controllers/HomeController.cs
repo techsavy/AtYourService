@@ -17,6 +17,5 @@ namespace AtYourService.Web.Controllers
         {
             return View();
         }
-
     }
 }

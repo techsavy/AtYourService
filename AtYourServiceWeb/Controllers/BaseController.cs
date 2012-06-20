@@ -51,8 +51,7 @@ namespace AtYourService.Web.Controllers
         {
             if (User.Identity.IsAuthenticated && Session[SessionKeys.User] == null)
             {
-                var session = DependencyResolver.Current.GetService<ISession>();
-                var user = session.QueryOver<Domain.Users.User>()
+                var user = NHibernateSession.QueryOver<Domain.Users.User>()
                     .Where(u => u.Email == User.Identity.Name)
                     .SingleOrDefault();
 

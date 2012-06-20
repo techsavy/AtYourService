@@ -6,10 +6,6 @@
 
 namespace AtYourService.Web.Tests.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Web.Mvc;
     using Moq;
     using NHibernate;
@@ -47,5 +43,19 @@ namespace AtYourService.Web.Tests.Controllers
 
             Assert.AreEqual(0, controller.Session.Count);
         }
+
+        //[Test]
+        //public void Authenticated_User_New_SessionAction_Executing()
+        //{
+        //    var sessionMock = new Mock<ISession>();
+        //    var actionExecutingContextMock = new Mock<ActionExecutingContext>();
+
+        //    var controller = new FakeBaseController(sessionMock.Object);
+        //    controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Home/", "test"));
+
+        //    controller.ExecuteOnActionExecuting(actionExecutingContextMock.Object);
+
+        //    Assert.AreEqual(1, controller.Session.Count);
+        //}
     }
 }
