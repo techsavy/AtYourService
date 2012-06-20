@@ -84,6 +84,7 @@ namespace AtYourService.Web
 
             builder.RegisterType<AccountMembershipService>().As<IMembershipService>();
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();
+            builder.RegisterType<NHibernateContext>().AsSelf();
 
             builder.RegisterModule(new AutofacWebTypesModule());
             var container = builder.Build();

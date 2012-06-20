@@ -181,6 +181,7 @@
     <Compile Include="SessionKeys.cs" />
     <Compile Include="Util\AutoMapperConfiguration.cs" />
     <Compile Include="Util\BundleExtensions.cs" />
+    <Compile Include="Util\NHibernateContext.cs" />
     <Compile Include="ViewDataKeys.cs" />
   </ItemGroup>
   <ItemGroup>

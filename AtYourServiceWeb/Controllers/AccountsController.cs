@@ -2,17 +2,18 @@
 namespace AtYourService.Web.Controllers
 {
     using System.Web.Mvc;
+    using AutoMapper;
     using Domain.Users;
     using Models;
     using Security;
-    using AutoMapper;
-    using NHibernate;
+    using Util;
 
     public class AccountsController : BaseController
     {
         private readonly IFormsAuthenticationService _formsAuthenticationService;
 
-        public AccountsController(ISession session, IFormsAuthenticationService formsAuthenticationService) : base(session)
+        public AccountsController(NHibernateContext nHibernateContext, IFormsAuthenticationService formsAuthenticationService)
+            : base(nHibernateContext)
         {
             _formsAuthenticationService = formsAuthenticationService;
         }

@@ -1,20 +1,25 @@
 ﻿
 namespace AtYourService.Web.Controllers
 {
+    using System;
+    using System.Diagnostics.Contracts;
     using System.Web.Mvc;
     using AutoMapper;
     using Core.Commanding;
     using Models;
     using NHibernate;
+    using Util;
 
     public abstract class BaseController : Controller
     {
-        protected BaseController(ISession session)
+        protected BaseController(NHibernateContext nHibernateContext)
         {
-            NHibernateSession = session;
+            Contract.Requires(nHibernateContext != null);
+
+            _nHibernateContext = nHibernateContext;
         }
 
-        protected ISession NHibernateSession { get; private set; }
+        private readonly NHibernateContext _nHibernateContext;
 
         protected void ExecuteCommand(ICommand command)
         {
@@ -28,9 +33,14 @@ namespace AtYourService.Web.Controllers
             return command.Result;
         }
 
+        protected TResult ExecuteQuery<TResult>(Func<ISession, TResult> query)
+        {
+            return _nHibernateContext.ExecuteQuery(query);
+        }
+
         private CommandContext CreateCommandContext()
         {
-            return new CommandContext(NHibernateSession, User.Identity.Name);
+            return new CommandContext(_nHibernateContext.Session, User.Identity.Name);
         }
 
         /// <summary>
@@ -51,9 +61,10 @@ namespace AtYourService.Web.Controllers
         {
             if (User.Identity.IsAuthenticated && Session[SessionKeys.User] == null)
             {
-                var user = NHibernateSession.QueryOver<Domain.Users.User>()
+                var user = ExecuteQuery(
+                    session => session.QueryOver<Domain.Users.User>()
                     .Where(u => u.Email == User.Identity.Name)
-                    .SingleOrDefault();
+                    .SingleOrDefault());
 
                 var userInfo = Mapper.Map<UserInfo>(user);
                 Session[SessionKeys.User] = userInfo;

@@ -2,11 +2,12 @@
 namespace AtYourService.Web.Controllers
 {
     using System.Web.Mvc;
-    using NHibernate;
+    using Util;
 
     public class HomeController : BaseController
     {
-        public HomeController(ISession session) : base(session)
+        public HomeController(NHibernateContext nHibernateContext)
+            : base(nHibernateContext)
         {
         }
 

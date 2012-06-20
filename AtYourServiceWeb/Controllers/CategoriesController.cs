@@ -6,9 +6,9 @@ namespace AtYourService.Web.Controllers
     using System.Web.Mvc;
     using Domain.Categories;
     using Helpers;
-    using NHibernate;
     using NHibernate.Transform;
     using Properties;
+    using Util;
 
     public class CategoriesController : BaseController
     {
@@ -16,7 +16,8 @@ namespace AtYourService.Web.Controllers
         //
         // GET: /Categories/
 
-        public CategoriesController(ISession session) : base(session)
+        public CategoriesController(NHibernateContext nHibernateContext)
+            : base(nHibernateContext)
         {
         }
 
@@ -32,21 +33,23 @@ namespace AtYourService.Web.Controllers
 
         private IList<Category> GetCategories()
         {
-            var categories = NHibernateSession.QueryOver<Category>().Where(c => c.ParentCategory == null)
+            var categories =  ExecuteQuery(
+                session => session.QueryOver<Category>().Where(c => c.ParentCategory == null)
                 .OrderBy(c => c.Name).Asc
                 .Fetch(c => c.SubCategories).Eager
                 .TransformUsing(Transformers.DistinctRootEntity)
-                .List();
+                .List());
 
             return categories;
         }
 
         public ActionResult Menu()
         {
-            var cats = NHibernateSession.QueryOver<Category>().Where(c => c.ParentCategory == null)
+            var cats = ExecuteQuery(
+                session => session.QueryOver<Category>().Where(c => c.ParentCategory == null)
                 .Fetch(c => c.SubCategories).Eager
                 .TransformUsing(Transformers.DistinctRootEntity)
-                .List<Category>();
+                .List<Category>());
 
             return PartialView(cats);
         }
