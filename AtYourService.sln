@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtYourServiceWeb", "AtYourServiceWeb\AtYourServiceWeb.csproj", "{588EA2F0-4261-4CC2-8D3C-7A432B540F95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{1774E8C1-339F-4FBE-A01C-E27F967863D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{4D550779-8195-4455-AF87-8A252F0DE791}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0BE7AFE-8001-436E-945C-AA735A697ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{2D2F9794-F69C-4257-B200-47C60C7EDE02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8EC1417B-01C1-4001-95BD-62EF3C94841A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{438A8C45-9DA9-48FF-AACA-60B34EE1C073}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Spatial\PowerCollections.dll = Libs\Spatial\PowerCollections.dll
+		Libs\Spatial\PowerCollections.xml = Libs\Spatial\PowerCollections.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spatial", "Spatial", "{3DF0434B-B352-4EF0-A7AE-97A72000DC4C}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Spatial\GeoAPI.dll = Libs\Spatial\GeoAPI.dll
+		Libs\Spatial\GeoAPI.xml = Libs\Spatial\GeoAPI.xml
+		Libs\Spatial\NetTopologySuite.dll = Libs\Spatial\NetTopologySuite.dll
+		Libs\Spatial\NetTopologySuite.IO.MsSqlSpatial.dll = Libs\Spatial\NetTopologySuite.IO.MsSqlSpatial.dll
+		Libs\Spatial\NetTopologySuite.xml = Libs\Spatial\NetTopologySuite.xml
+		Libs\Spatial\NHibernate.Spatial.dll = Libs\Spatial\NHibernate.Spatial.dll
+		Libs\Spatial\NHibernate.Spatial.MsSql2008.dll = Libs\Spatial\NHibernate.Spatial.MsSql2008.dll
+		Libs\Spatial\NHibernate.Spatial.MsSqlSpatial.dll = Libs\Spatial\NHibernate.Spatial.MsSqlSpatial.dll
+		Libs\Spatial\NHibernate.Spatial.xml = Libs\Spatial\NHibernate.Spatial.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTests", "DomainTests\DomainTests.csproj", "{839ACB0C-7DA2-4023-AF74-E6CDD0DDC7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtYourServiceWebTests", "AtYourServiceWebTests\AtYourServiceWebTests.csproj", "{8BE16098-2F4E-46F0-AC56-44EB8D25753A}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AtYourService.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{588EA2F0-4261-4CC2-8D3C-7A432B540F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588EA2F0-4261-4CC2-8D3C-7A432B540F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588EA2F0-4261-4CC2-8D3C-7A432B540F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588EA2F0-4261-4CC2-8D3C-7A432B540F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1774E8C1-339F-4FBE-A01C-E27F967863D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1774E8C1-339F-4FBE-A01C-E27F967863D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1774E8C1-339F-4FBE-A01C-E27F967863D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1774E8C1-339F-4FBE-A01C-E27F967863D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D550779-8195-4455-AF87-8A252F0DE791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D550779-8195-4455-AF87-8A252F0DE791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D550779-8195-4455-AF87-8A252F0DE791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D550779-8195-4455-AF87-8A252F0DE791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D2F9794-F69C-4257-B200-47C60C7EDE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D2F9794-F69C-4257-B200-47C60C7EDE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D2F9794-F69C-4257-B200-47C60C7EDE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D2F9794-F69C-4257-B200-47C60C7EDE02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC1417B-01C1-4001-95BD-62EF3C94841A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC1417B-01C1-4001-95BD-62EF3C94841A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC1417B-01C1-4001-95BD-62EF3C94841A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC1417B-01C1-4001-95BD-62EF3C94841A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839ACB0C-7DA2-4023-AF74-E6CDD0DDC7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839ACB0C-7DA2-4023-AF74-E6CDD0DDC7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839ACB0C-7DA2-4023-AF74-E6CDD0DDC7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839ACB0C-7DA2-4023-AF74-E6CDD0DDC7D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{438A8C45-9DA9-48FF-AACA-60B34EE1C073} = {C0BE7AFE-8001-436E-945C-AA735A697ED2}
+		{3DF0434B-B352-4EF0-A7AE-97A72000DC4C} = {438A8C45-9DA9-48FF-AACA-60B34EE1C073}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,267 @@
+﻿@model IEnumerable<AtYourService.Domain.Categories.Category>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="span9">
+        <h2 class="pull-left">
+            All Categories</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        @Html.Message()
+        <div class="accordion" id="cat-accordion">
+            @foreach (var category in Model)
+            {
+                <div class="accordion-group" style="border-color: rgb(245, 245, 245)">
+                    <div class="accordion-heading" style="background-color: rgb(245, 245, 245)">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#cat-accordion" href="#collapse-@category.Id">
+                            @category.Name </a>
+                    </div>
+                    <div id="collapse-@category.Id" class="accordion-body collapse in">
+                        <div class="accordion-inner">
+                            <div class="btn-group">
+                                <a class="btn btn-info btn-add-sub" href="#" data-parent="@category.Id"><i class="icon-plus icon-white"></i> Add Sub Category</a>                                 
+                                <a class="btn btn-info btn-edit-cat" href="#" data-id="@category.Id" data-name="@category.Name"><i class="icon-pencil icon-white"></i> Edit</a>                                 
+                                <a class="btn btn-info btn-del-cat" href="#" data-parent="@category.Id" data-name="@category.Name"><i class="icon-trash icon-white"></i> Delete</a>
+                            </div>
+                            <p class="divider">
+                            </p>
+                            <ul class="unstyled">
+                                @foreach (var subCategory in category.SubCategories)
+                                {
+                                    <li>
+                                        <div class="btn-group">
+                                            <a class="btn btn-edit-cat" href="#" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-pencil"></i> @subCategory.Name</a> <a class="btn dropdown-toggle"
+                                                                                                                                                                href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="btn-edit-cat" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-pencil"></i> Edit</a></li>
+                                                <li><a href="#" class="btn-del-cat" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-trash"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>                               
+            }
+        </div>
+        <a class="btn btn-info btn-add-main" href="#"><i class="icon-plus icon-white"></i> Add Category</a>
+    </div>
+    <div class="modal hide fade" id="modal-add-main-cat">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+                &times;</button>
+            <h3>
+                Add Category</h3>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("AddCategory", "Categories", FormMethod.Post, new { @class = "form-horizontal", id = "add-main-cat-form" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="MainCategoryName">
+                        Name<span class="required-star">*</span></label>
+                    <div class="controls">
+                        <input class="input-large" data-val="true" data-val-length="The field Name must be a string with a minimum length of 3 and a maximum length of 50."
+                               data-val-length-max="50" data-val-length-min="3" data-val-required="The Name is required."
+                               id="MainCategoryName" name="MainCategoryName" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="MainCategoryName" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Close</a> <a href="#" id="btn-add-main-cat"
+                                                                      class="btn btn-primary">Save</a>
+        </div>
+    </div>
+    <div class="modal hide fade" id="modal-add-sub-cat">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+                &times;</button>
+            <h3>
+                Add Sub Category</h3>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("AddSubCategory", "Categories", FormMethod.Post, new { @class = "form-horizontal", id = "add-sub-cat-form" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="SubCategoryName">
+                        Name<span class="required-star">*</span></label>
+                    <div class="controls">
+                        <input class="input-large" data-val="true" data-val-length="The field Name must be a string with a minimum length of 3 and a maximum length of 50."
+                               data-val-length-max="50" data-val-length-min="3" data-val-required="The Name is required."
+                               id="SubCategoryName" name="SubCategoryName" type="text" value="" />
+                        <input id="ParentCategory" name="ParentCategory" type="hidden" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="SubCategoryName" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Close</a> <a href="#" id="btn-add-sub-cat"
+                                                                      class="btn btn-primary">Save</a>
+        </div>
+    </div>
+    <div class="modal hide fade" id="modal-edit-cat">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+                &times;</button>
+            <h3>
+                Edit Category</h3>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("RenameCategory", "Categories", FormMethod.Post, new { @class = "form-horizontal", id = "edit-cat-form" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="CategoryName">
+                        Name<span class="required-star">*</span></label>
+                    <div class="controls">
+                        <input class="input-large" data-val="true" data-val-length="The field Name must be a string with a minimum length of 3 and a maximum length of 50."
+                               data-val-length-max="50" data-val-length-min="3" data-val-required="The Name is required."
+                               id="CategoryName" name="CategoryName" type="text" value="" />
+                        <input id="CategoryId" name="CategoryId" type="hidden" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="CategoryName" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Close</a> <a href="#" id="btn-edit-cat"
+                                                                      class="btn btn-primary">Save changes</a>
+        </div>
+    </div>
+    <div class="modal hide fade" id="modal-del-cat">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+                &times;</button>
+            <h3>
+                Delete Category</h3>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete <strong><span id="ph-del-name">this</span></strong> category?
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">No</a> <a href="#" id="btn-del-cat"
+                                                                      class="btn btn-primary">Yes</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".collapse").collapse();
+        $(".collapse:first").collapse('show');
+
+        // add sub cat
+        $('.btn-add-sub').click(function () {
+            $('#ParentCategory').val($(this).attr('data-parent'));
+            $('#modal-add-sub-cat').modal('show');
+            clearValidationErrors();
+            $('#SubCategoryName').focus();
+
+            return false;
+        });
+
+        $('#modal-add-sub-cat').on('hidden', function () {
+            $('#SubCategoryName').val('');
+            $('#ParentCategory').val('');
+        });
+
+        $('#btn-add-sub-cat').on('click', function (e) {
+            e.preventDefault();
+            
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddSubCategory")",
+                data: $('#add-sub-cat-form').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        location.reload();
+                    }
+                }
+            });            
+        });
+
+        // edit sub cat
+        $('.btn-edit-cat').click(function () {
+            $('#CategoryName').val($(this).attr('data-name'));
+            $('#CategoryId').val($(this).attr('data-id'));
+            $('#modal-edit-cat').modal('show');
+            clearValidationErrors();
+            $('#CategoryName').focus();
+
+            return false;
+        });
+
+        $('#modal-edit-cat').on('hidden', function () {
+            $('#CategoryId').val('');
+        });
+
+        $('#btn-edit-cat').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("RenameCategory")",
+                data: $('#edit-cat-form').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        location.reload();
+                    }
+                }
+            });
+            
+        });
+
+        // delete cat
+        $('.btn-del-cat').click(function () {
+            $('#ph-del-name').html($(this).attr('data-name'));
+            $('#modal-del-cat').modal('show');
+        });
+    });
+
+    // add main cat
+    $('.btn-add-main').click(function () {
+        $('#modal-add-main-cat').modal('show');
+        clearValidationErrors();
+        $('#MainCategoryName').focus();
+    });
+
+    $('#modal-add-main-cat').on('hidden', function () {
+        $('#MainCategoryName').val('');
+    });
+
+    $('#btn-add-main-cat').on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AddCategory")",
+            data: $('#add-main-cat-form').serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    location.reload();
+                }
+            }
+        });
+    });
+    
+
+    function clearValidationErrors() {
+        $('.field-validation-error')
+           .removeClass('field-validation-error')
+           .addClass('field-validation-valid');
+
+        $('.input-validation-error')
+           .removeClass('input-validation-error')
+           .addClass('valid');
+    }    
+</script>

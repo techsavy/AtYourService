@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AtYourService.Domain.Adverts.Advert" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEAAAAAAAAAEAAAAIBAAEAAAAAAAAAAAAAAAAACAQ=</HashCode>
+      <FileName>Adverts\Advert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Categories.AddCategoryCommand" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Categories\AddCategoryCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Categories.Category" Collapsed="true">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAwAAAAAgAAAAAAAAAAwAAA=</HashCode>
+      <FileName>Categories\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Categories.RenameCategoryCommand" Collapsed="true">
+    <Position X="5.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Categories\RenameCategoryCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.Administrator" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\Administrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.Client" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Users\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.ClientSettings" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Users\ClientSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.CreateAdministratorCommand" Collapsed="true">
+    <Position X="2.75" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\CreateAdministratorCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.CreateClientCommand" Collapsed="true">
+    <Position X="0.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\CreateClientCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.CreateUserCommand" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAAAAAAAAIAAQAACAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Users\CreateUserCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.DuplicateEmailException" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\DuplicateEmailException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.LoginUserCommand" Collapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Users\LoginUserCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AtYourService.Domain.Users.User" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAgAAACAAgAAAAAIKAAwAEAAAAAAAAACAgAABAAA=</HashCode>
+      <FileName>Users\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

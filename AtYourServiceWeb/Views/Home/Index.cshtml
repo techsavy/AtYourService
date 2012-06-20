@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="span5">
+        <div class="well">
+            <h2>
+                Welcome!</h2>
+            <p>
+                We help you find businesses/services that you are looking for near your area. You
+                can also publish your business with us.</p>
+        </div>
+        <div id="social">
+            <h2>
+                Social network integration area</h2>
+            <ul>
+                <li>Facebook</li><li>Google+</li></ul>
+        </div>
+    </div>
+    <div class="span4">
+        @(User.Identity.IsAuthenticated ? Html.Partial("_Actions") : Html.Partial("_Login"))
+    </div>
+    <!--/span-->
+</div>
+<div class="row">
+    <div class="span9" id="map-canvas" style="width: 100%; height: 300px">
+    </div>
+</div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var map;
+    function initialize() {
+        var latlng = new google.maps.LatLng(6.9319444, 79.8877778);
+        var options = { zoom: 14, center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById
+            ("map-canvas"), options);
+
+        placeMarker(new google.maps.LatLng(6.9349444, 79.8897778), "Abc Caterer");
+        placeMarker(new google.maps.LatLng(6.9389444, 79.8817778), "Xyz Cabs");
+    }
+    $(function () {
+        $('.dropdown-toggle').dropdown();
+        initialize();
+    });
+
+    function placeMarker(location, name) {
+        var marker = new google.maps.Marker({
+            position: location,
+            animation: google.maps.Animation.DROP,
+            map: map,
+            title: name
+        });
+    }
+</script>

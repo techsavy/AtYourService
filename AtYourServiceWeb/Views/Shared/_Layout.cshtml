@@ -1,0 +1,113 @@
+@using AtYourService.Web
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Service descovery and publication">
+    <meta name="author" content="Eranga">
+    <title>@ViewBag.Title</title>
+    <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bootstrap/css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bootstrap/js")"></script>
+</head>
+<body class="background">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </a><a class="brand" href="#">l33tn33s</a>
+                @*<div class="nav-collapse">*@
+                    <ul class="nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="divider-vertical"></li>
+                        <li class="divider-vertical"></li>
+                        <li style="height: 25px;">
+                            <form class="form-search">
+                            <input type="text" class="input-medium search-query" placeholder="Looking For">
+                            <input type="text" class="input-medium search-query" placeholder="Location">
+                            <button type="submit" class="btn">
+                                Search</button></form>
+                        </li>
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Partial("_UserMenu", Session[SessionKeys.User])
+                    }
+                    else
+                    {
+                        <div class="btn-group pull-right">
+                            @Html.ActionLink("Sign Up", "SignUp", "Accounts", null, new { @class = "btn btn-info"})
+                            @Html.ActionLink("Sign In", "Login", "Accounts", null, new { @class = "btn"})
+                        </div>
+                    }
+                @*</div>*@
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <h3>
+                        &nbsp;&nbsp;Categories</h3>
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Major Category 1 <span class="badge">4</span></li>
+                        <li class="active"><a href="#">Sub Category 1</a></li>
+                        <li>@Html.ActionLink("Sub Category 2", "Browse", "Categories", new { id = 2 }, null)</li>
+                        <li><a href="#">Sub Category 3</a></li>
+                        <li><a href="#">Sub Category 4</a></li>
+                        <li class="nav-header">Major Category 2</li>
+                        <li><a href="#">Sub Category 1</a></li>
+                        <li><a href="#">Sub Category 2</a></li>
+                        <li><a href="#">Sub Category 3</a></li>
+                        <li><a href="#">Sub Category 4</a></li>
+                        <li><a href="#">Sub Category 5</a></li>
+                        <li><a href="#">Sub Category 6</a></li>
+                        <li class="nav-header"><a href="#">Major Category 2</a></li>
+                        <li><a href="#">Sub Category 1</a></li>
+                        <li><a href="#">Sub Category 2</a></li>
+                        <li><a href="#">Sub Category 3</a></li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("All categories", "Index", "Categories", null, new { @class = "btn" })</li>
+                    </ul>
+                </div>
+                <!--/.well -->
+                <blockquote>
+                    <p>
+                        Success story 1</p>
+                    <small>Person 1</small>
+                </blockquote>
+                <blockquote>
+                    <p>
+                        Success story 2</p>
+                    <small>Person 2</small>
+                </blockquote>
+            </div>
+            <div class="span9">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="footer">
+            <p class="pull-right">
+                <a href="#">Back to top</a></p>
+            <p>
+                &copy;2012 Eranga</p>
+        </footer>
+    </div>
+    <!-- /container -->
+    <div class="modal hide fade" id="modal-message">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a><h3>
+                At Your Service</h3>
+        </div>
+        <div class="modal-body" id="modal-message-body">
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn btn-primary">OK</a></div>
+    </div>
+</body>
+</html>

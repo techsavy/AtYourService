@@ -1,0 +1,35 @@
+﻿@model LoginModel
+@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <legend>Login</legend>
+        <div class="control-group">
+            @Html.Custom().LabelFor(model => model.Email)
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Email, new { @class = "input-medium", type = "email" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.Custom().LabelFor(model => model.Password)
+            <div class="controls">
+                @Html.PasswordFor(model => model.Password, new { @class = "input-medium" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">
+            </label>
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.RememberMe)
+                    Remember Me
+                </label>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Login" />
+            @Html.ActionLink("Sign Up", "SignUp", "Accounts", null, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

@@ -1,0 +1,87 @@
+body
+{
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+.sidebar-nav
+{
+    padding: 9px 0;
+}
+.footer
+{
+    margin-top: 45px;
+    padding: 35px 0 36px;
+    border-top: 1px solid #e5e5e5;
+}
+.footer p
+{
+    margin-bottom: 0;
+    color: #555;
+}
+.center
+{
+    text-align: center;
+}
+.signUp-nav 
+{
+    background-color: rgb(0, 136, 204);
+    color: #fff;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #f00;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+.backgrounds 
+{
+    background: #fff;
+    background-image: linear-gradient(bottom, rgb(255,255,255) 33%, rgb(245,249,255) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 33%, rgb(245,249,255) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 33%, rgb(245,249,255) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 33%, rgb(245,249,255) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 33%, rgb(245,249,255) 100%);
+
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.33, rgb(255,255,255)),
+	    color-stop(1, rgb(245,249,255))
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#F5F9FF', endColorstr='#ffffff');/*For IE7-8-9*/     
+}
+
+.background {
+    background-image: url("../Content/Images/bg.png");
+}
+
+.placeholder { color: #aaa; }
+
+.cat-header {
+    font-size: 14px;
+    text-transform: none;
+}

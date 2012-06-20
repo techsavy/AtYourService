@@ -1,0 +1,11 @@
+﻿@model IEnumerable<AtYourService.Domain.Categories.Category>
+
+@foreach(var category in Model)
+{
+    <div>@category.Name</div>
+    foreach (var subCategory in category.SubCategories)
+    {
+     <span>-</span><div>@subCategory.Name</div>
+    }
+}
+
