@@ -72,7 +72,7 @@ namespace AtYourService.Web.Controllers
             return Json(new { Success = true });
         }
 
-        public ActionResult RenameCategory(int categoryId, string categoryName)
+        public JsonResult RenameCategory(int categoryId, string categoryName)
         {
             ExecuteCommand(new RenameCategoryCommand(categoryId, categoryName));
 

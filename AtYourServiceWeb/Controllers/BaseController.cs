@@ -25,16 +25,14 @@ namespace AtYourService.Web.Controllers
         {
             Contract.Requires(command != null);
 
-            command.Execute(CreateCommandContext());
+            _nHibernateContext.ExecuteCommand(command);
         }
 
         protected TResult ExecuteCommand<TResult>(ICommand<TResult> command)
         {
             Contract.Requires(command != null);
 
-            command.Execute(CreateCommandContext());
-
-            return command.Result;
+            return _nHibernateContext.ExecuteCommand(command);
         }
 
         protected TResult ExecuteQuery<TResult>(Func<ISession, TResult> query)
@@ -42,11 +40,6 @@ namespace AtYourService.Web.Controllers
             Contract.Requires(query != null);
 
             return _nHibernateContext.ExecuteQuery(query);
-        }
-
-        private CommandContext CreateCommandContext()
-        {
-            return new CommandContext(_nHibernateContext.Session, User.Identity.Name);
         }
 
         /// <summary>
