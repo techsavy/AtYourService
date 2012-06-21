@@ -23,11 +23,15 @@ namespace AtYourService.Web.Controllers
 
         protected void ExecuteCommand(ICommand command)
         {
+            Contract.Requires(command != null);
+
             command.Execute(CreateCommandContext());
         }
 
         protected TResult ExecuteCommand<TResult>(ICommand<TResult> command)
         {
+            Contract.Requires(command != null);
+
             command.Execute(CreateCommandContext());
 
             return command.Result;
@@ -35,6 +39,8 @@ namespace AtYourService.Web.Controllers
 
         protected TResult ExecuteQuery<TResult>(Func<ISession, TResult> query)
         {
+            Contract.Requires(query != null);
+
             return _nHibernateContext.ExecuteQuery(query);
         }
 
