@@ -16,7 +16,7 @@ namespace AtYourService.Domain.Tests.User
     public class CreateClientTest : NHibernateIntegrationTestBase
     {
         [Test]
-        public void CreateClientWithAllRequiedInformation()
+        public void Create_Client_With_All_Required_Information()
         {
             const string name = "test";
             var initialCount = Session.QueryOver<Client>().Where(c => c.Name == name).RowCount();

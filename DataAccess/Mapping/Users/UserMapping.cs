@@ -7,6 +7,7 @@
 namespace AtYourService.Data.Mapping.Users
 {
     using Domain.Users;
+    using NHibernate;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,7 +24,16 @@ namespace AtYourService.Data.Mapping.Users
             Property(user => user.LastActiveDate, m => m.NotNullable(true));
             Property(user => user.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeometryType>(); m.Column(c => c.SqlType("geometry")); });
 
-            Discriminator(d => { d.Column("UserType"); d.Length(1); });
+            Discriminator(x =>
+            {
+                x.Force(true);
+                x.Insert(true);
+                x.Length(10);
+                x.NotNullable(true);
+                x.Type(NHibernateUtil.String);
+
+                x.Column("UserType");
+            });
 
             Table("Users");
             Schema("dbo");

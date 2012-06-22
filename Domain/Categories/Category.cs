@@ -22,7 +22,7 @@ namespace AtYourService.Domain.Categories
 
         public virtual ISet<Category> SubCategories { get; set; }
 
-        public virtual ISet<Advert> Adverts { get; set; }
+        public virtual ISet<Service> Adverts { get; set; }
 
         public virtual int AdCount { get; set; }
     }

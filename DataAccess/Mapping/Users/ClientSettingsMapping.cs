@@ -4,9 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-
-using NHibernate.Mapping.ByCode;
-
 namespace AtYourService.Data.Mapping.Users
 {
     using Domain.Users;

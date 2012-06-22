@@ -70,7 +70,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adverts\Advert.cs" />
+    <Compile Include="Adverts\CreateServiceCommand.cs" />
+    <Compile Include="Adverts\Service.cs" />
+    <Compile Include="Adverts\ServiceOffering.cs" />
+    <Compile Include="Adverts\ServiceRequest.cs" />
     <Compile Include="Categories\AddCategoryCommand.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\RenameCategoryCommand.cs" />

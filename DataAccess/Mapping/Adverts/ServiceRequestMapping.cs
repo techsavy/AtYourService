@@ -1,22 +1,22 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="AdministratorMapping.cs" company="">
+// <copyright file="ServiceRequestMapping.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace AtYourService.Data.Mapping.Users
+namespace AtYourService.Data.Mapping.Adverts
 {
-    using Domain.Users;
+    using Domain.Adverts;
     using NHibernate.Mapping.ByCode.Conformist;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class AdministratorMapping : SubclassMapping<Administrator>
+    public class ServiceRequestMapping : SubclassMapping<ServiceRequest>
     {
-        public AdministratorMapping()
+        public ServiceRequestMapping()
         {
-            DiscriminatorValue("Admin");
+            DiscriminatorValue("Request");
         }
     }
 }

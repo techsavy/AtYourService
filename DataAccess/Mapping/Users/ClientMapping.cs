@@ -17,9 +17,9 @@ namespace AtYourService.Data.Mapping.Users
     {
         public ClientMapping()
         {
-            DiscriminatorValue(2);
+            DiscriminatorValue("Client");
             OneToOne(c => c.ClientSettings, m => m.PropertyReference(typeof(ClientSettings).GetPropertyOrFieldMatchingName("Client")));
-            Set(c => c.Adverts, m => { m.OrderBy(c => c.Title); m.Key(k => k.Column("ClientId")); }, l => l.OneToMany());
+            Set(c => c.Services, m => { m.OrderBy(c => c.Title); m.Key(k => k.Column("ClientId")); }, l => l.OneToMany());
         }
     }
 }

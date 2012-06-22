@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adverts\CreateAdvertTest.cs" />
     <Compile Include="Category\AddCategoryTest.cs" />
     <Compile Include="Category\RenameCategoryTest.cs" />
     <Compile Include="NHibernateIntegrationTestBase.cs" />

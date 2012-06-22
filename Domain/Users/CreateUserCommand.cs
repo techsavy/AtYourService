@@ -32,9 +32,9 @@ namespace AtYourService.Domain.Users
 
         public string Brag { get; private set; }
 
-        public double Latitude { get; set; }
+        public double Latitude { get; private set; }
 
-        public double Longitude { get; set; }
+        public double Longitude { get; private set; }
 
         protected override void OnCreate(Entity entity)
         {

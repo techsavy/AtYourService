@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Advert.cs" company="">
+// <copyright file="Service.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace AtYourService.Domain.Adverts
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class Advert : Entity
+    public abstract class Service : Entity
     {
         public virtual string Title { get; set; }
 
@@ -28,6 +28,8 @@ namespace AtYourService.Domain.Adverts
         public virtual Point Location { get; set; }
 
         public virtual long Views { get; set; }
+
+        public virtual long Impressions { get; set; }
 
         public virtual DateTime? ExpiryDate { get; set; }
 

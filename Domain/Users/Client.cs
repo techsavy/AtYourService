@@ -8,6 +8,6 @@ namespace AtYourService.Domain.Users
     {
         public virtual ClientSettings ClientSettings { get; set; }
 
-        public virtual ISet<Advert> Adverts { get; set; }
+        public virtual ISet<Service> Services { get; set; }
     }
 }
