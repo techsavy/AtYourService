@@ -4,6 +4,7 @@ namespace AtYourService.Web.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Domain;
     using Domain.Categories;
     using Helpers;
     using NHibernate.Transform;
@@ -79,6 +80,24 @@ namespace AtYourService.Web.Controllers
             TempData[ViewDataKeys.Message] = new SuccessMessage(Resources.CategoryRenameSuccess);
 
             return Json(new { Success = true });
+        }
+
+        public JsonResult DeleteCategory(int categoryId)
+        {
+            try
+            {
+                ExecuteCommand(new DeleteCategoryCommand(categoryId));
+
+                TempData[ViewDataKeys.Message] = new SuccessMessage(Resources.CategoryRenameSuccess);
+
+                return Json(new { Success = true });
+            }
+            catch (DomainException de)
+            {
+                TempData[ViewDataKeys.Message] = new FailMessage(de.Message);
+
+                return Json(new { Success = false, de.Message });
+            }
         }
     }
 }

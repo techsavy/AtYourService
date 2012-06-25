@@ -9,6 +9,7 @@ namespace AtYourService.Web.Tests.Controllers
     using System;
     using System.Collections.Generic;
     using Core.Commanding;
+    using Domain;
     using Domain.Categories;
     using Moq;
     using NHibernate;
@@ -20,7 +21,7 @@ namespace AtYourService.Web.Tests.Controllers
     /// TODO: Update summary.
     /// </summary>
     [TestFixture]
-    public class CategoriesControllerTests
+    public class CategoriesControllerTest
     {
         private const string UserName = "test";
 
@@ -127,6 +128,43 @@ namespace AtYourService.Web.Tests.Controllers
 
             dynamic json = jsonResult.Data;
             Assert.IsTrue(json.Success);
+        }
+
+        [Test]
+        public void DeleteCategory_Sucess()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+
+            var controller = new CategoriesController(nHbernateContextMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeUnauthenticatedHttpContext("~/Categories/DeleteCategory", UserName));
+
+            var jsonResult = controller.DeleteCategory(4);
+
+            nHbernateContextMock.Verify(c => c.ExecuteCommand(It.IsAny<ICommand>()));
+
+            dynamic json = jsonResult.Data;
+            Assert.IsTrue(json.Success);
+        }
+
+        [Test]
+        public void DeleteCategory_Fail()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+            const string errorMessage = "Error message";
+            nHbernateContextMock.Setup(c => c.ExecuteCommand(It.IsAny<ICommand>())).Throws(new DomainException(errorMessage));
+
+            var controller = new CategoriesController(nHbernateContextMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeUnauthenticatedHttpContext("~/Categories/DeleteCategory", UserName));
+
+            var jsonResult = controller.DeleteCategory(4);
+
+            nHbernateContextMock.Verify(c => c.ExecuteCommand(It.IsAny<ICommand>()));
+
+            dynamic json = jsonResult.Data;
+            Assert.IsFalse(json.Success);
+            Assert.AreEqual(errorMessage, json.Message);
         }
     }
 }

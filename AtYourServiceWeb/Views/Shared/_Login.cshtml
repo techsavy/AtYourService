@@ -3,6 +3,7 @@
 {
     <fieldset>
         <legend>Login</legend>
+        @Html.Partial("ValidatiuonSummary", ViewData.ModelState)
         <div class="control-group">
             @Html.Custom().LabelFor(model => model.Email)
             <div class="controls">

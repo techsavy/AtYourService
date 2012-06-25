@@ -1,9 +1,17 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="SignUpViewModel.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace AtYourService.Web.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
     public class SignUpViewModel
     {
         [Required]

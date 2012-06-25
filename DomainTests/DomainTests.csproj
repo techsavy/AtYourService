@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Adverts\CreateAdvertTest.cs" />
     <Compile Include="Category\AddCategoryTest.cs" />
+    <Compile Include="Category\DeleteCategoryTest.cs" />
     <Compile Include="Category\RenameCategoryTest.cs" />
     <Compile Include="NHibernateIntegrationTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

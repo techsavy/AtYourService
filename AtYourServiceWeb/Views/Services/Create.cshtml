@@ -1,0 +1,104 @@
+﻿@model CreateServiceModel
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+    <div class="span9">
+        @using (Html.BeginForm("Create", "Services", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <legend>New Ad</legend>
+                <div class="row">
+                    <div class="span5">
+                        <div class="control-group">
+                            @Html.Custom().LabelFor(model => model.Title)
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Title)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.Custom().LabelFor(model => model.Body)
+                            <div class="controls">
+                                @Html.TextAreaFor(model => model.Body, new { @class = "input-xlarge", rows = "15" })
+                                @Html.ValidationMessageFor(model => model.Body)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.Custom().LabelFor(model => model.CategoryId)
+                            <div class="controls">
+                                <select id="CategoryId" name="Source">
+                                    <optgroup label="Level One">
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </optgroup>
+                                    <optgroup label="Level Two">
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <span><i class="icon-map-marker"></i><span id="location-text">Select your location on
+                            the map by clicking on it</span></span>
+                        @Html.HiddenFor(model => model.Latitude)
+                        @Html.HiddenFor(model => model.Longitude)
+                    </div>
+                    <div class="span4" id="map-canvas" style="height: 400px">
+                    </div>
+                    <div class="row">
+                        <div class="span9">
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit">
+                                    Create</button>
+                                <button class="btn">
+                                    Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ays.signup.js")"></script>
+<script type="text/javascript">
+    var geoService;
+
+    function initialize() {
+        var latlng = new google.maps.LatLng(6.9319444, 79.8877778);
+        var options = { zoom: 14, center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById
+            ("map-canvas"), options);
+
+        geoService = new SignUpGeoSerivce(map);
+    }
+
+    $(function () {
+        $('.dropdown-toggle').dropdown();
+        initialize();
+    });
+
+    $("form").submit(function (e) {
+        if ($(this).valid()) {
+            var lat = $('#Latitude').val();
+            var lng = $('#Longitude').val();
+            if (lat == null || lat == '' || lng == null || lng == '') {
+                alert('lat test');
+                $('#modal-message-body').html('<p>Please select your location on the map.</p>');
+                $('#modal-message').modal('show');
+            }
+
+        }
+        else {
+            e.preventDefault();
+        }
+    });
+</script>

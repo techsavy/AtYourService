@@ -159,12 +159,14 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SignUpModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -318,6 +320,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Profile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ValidatiuonSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Services\Create.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

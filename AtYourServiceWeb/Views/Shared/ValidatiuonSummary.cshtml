@@ -1,0 +1,14 @@
+﻿@model ModelStateDictionary
+
+@if(!Model.IsValid)
+{
+    <div class="alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <ul>
+            @foreach (var modelError in Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+            {
+                <li>@modelError.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}

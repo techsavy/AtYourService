@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<AtYourService.Domain.Categories.Category>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories";
 }
 <div class="row">
     <div class="span9">
@@ -24,7 +24,7 @@
                             <div class="btn-group">
                                 <a class="btn btn-info btn-add-sub" href="#" data-parent="@category.Id"><i class="icon-plus icon-white"></i> Add Sub Category</a>                                 
                                 <a class="btn btn-info btn-edit-cat" href="#" data-id="@category.Id" data-name="@category.Name"><i class="icon-pencil icon-white"></i> Edit</a>                                 
-                                <a class="btn btn-info btn-del-cat" href="#" data-parent="@category.Id" data-name="@category.Name"><i class="icon-trash icon-white"></i> Delete</a>
+                                <a class="btn btn-info btn-del-cat" href="#" data-id="@category.Id" data-name="@category.Name"><i class="icon-trash icon-white"></i> Delete</a>
                             </div>
                             <p class="divider">
                             </p>
@@ -36,7 +36,6 @@
                                             <a class="btn btn-edit-cat" href="#" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-pencil"></i> @subCategory.Name</a> <a class="btn dropdown-toggle"
                                                                                                                                                                 href="#" data-toggle="dropdown"><span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#" class="btn-edit-cat" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-pencil"></i> Edit</a></li>
                                                 <li><a href="#" class="btn-del-cat" data-id="@subCategory.Id" data-name="@subCategory.Name"><i class="icon-trash"></i> Delete</a></li>
                                             </ul>
                                         </div>
@@ -223,7 +222,30 @@
         // delete cat
         $('.btn-del-cat').click(function () {
             $('#ph-del-name').html($(this).attr('data-name'));
+            categoryIdtoDelete = $(this).attr('data-id');
             $('#modal-del-cat').modal('show');
+        });
+        
+        $('#btn-del-cat').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DeleteCategory")",
+                data: { categoryId : categoryIdtoDelete },
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        location.reload();
+                    }
+                    else {
+                        $('#modal-del-cat').modal('hide');
+                        $('#modal-message-body').html('<p>' + data.Message + '</p>');
+                        $('#modal-message').modal('show');                        
+                    }
+                }
+            });
+            
         });
     });
 
@@ -253,7 +275,8 @@
             }
         });
     });
-    
+
+    var categoryIdtoDelete = null;
 
     function clearValidationErrors() {
         $('.field-validation-error')
