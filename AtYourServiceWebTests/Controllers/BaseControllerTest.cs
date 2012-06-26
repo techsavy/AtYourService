@@ -14,8 +14,8 @@ namespace AtYourService.Web.Tests.Controllers
     using Moq;
     using NHibernate;
     using NUnit.Framework;
-    using Util;
     using Web.Controllers;
+    using Web.Util;
 
     /// <summary>
     /// TODO: Update summary.
@@ -55,6 +55,11 @@ namespace AtYourService.Web.Tests.Controllers
             public TResult ExecuteExecuteQuery<TResult>(Func<ISession, TResult> query)
             {
                 return ExecuteQuery(query);
+            }
+
+            public UserInfo GetUserInfo()
+            {
+                return UserInfo;
             }
         }
 
@@ -134,6 +139,37 @@ namespace AtYourService.Web.Tests.Controllers
 
             nHbernateContextMock.Verify(c => c.ExecuteQuery(It.IsAny<Func<ISession, NHibernateContext>>()));
             Assert.AreEqual(nHbernateContextMock.Object, actualResult);
+        }
+
+        [Test]
+        public void Unauthenticated_User_UserInfo()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+
+            var controller = new FakeBaseController(nHbernateContextMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeUnauthenticatedHttpContext("~/Home/", UserName));
+
+            var userInfo = controller.GetUserInfo();
+
+            Assert.IsNull(userInfo);
+        }
+
+        [Test]
+        public void Authenticated_User_UserInfo()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+            var userInfoMock = new Mock<UserInfo>();
+
+            var controller = new FakeBaseController(nHbernateContextMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Home/", UserName));
+            controller.Session[SessionKeys.User] = userInfoMock.Object;
+
+            var userInfo = controller.GetUserInfo();
+
+            Assert.IsNotNull(userInfo);
+            Assert.AreEqual(userInfoMock.Object, userInfo);
         }
     }
 }

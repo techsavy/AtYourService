@@ -14,8 +14,8 @@ namespace AtYourService.Web.Tests.Controllers
     using Moq;
     using NHibernate;
     using NUnit.Framework;
-    using Util;
     using Web.Controllers;
+    using Web.Util;
 
     /// <summary>
     /// TODO: Update summary.

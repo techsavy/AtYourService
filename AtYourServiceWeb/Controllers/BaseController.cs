@@ -11,7 +11,7 @@ namespace AtYourService.Web.Controllers
     using Util;
 
     public abstract class BaseController : Controller
-    {
+    {        
         protected BaseController(NHibernateContext nHibernateContext)
         {
             Contract.Requires(nHibernateContext != null);
@@ -41,6 +41,8 @@ namespace AtYourService.Web.Controllers
 
             return _nHibernateContext.ExecuteQuery(query);
         }
+
+        protected UserInfo UserInfo { get { return (UserInfo)Session[SessionKeys.User]; } }
 
         /// <summary>
         /// Called before the action method is invoked.

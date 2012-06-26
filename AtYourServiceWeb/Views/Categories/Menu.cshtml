@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<AtYourService.Domain.Categories.Category>
-
-@foreach(var category in Model)
-{
-    <div>@category.Name</div>
-    foreach (var subCategory in category.SubCategories)
+<select id="CategoryId" name="CategoryId">
+    @foreach (var category in Model)
     {
-     <span>-</span><div>@subCategory.Name</div>
+        <optgroup label="@category.Name">
+            @foreach (var subCategory in category.SubCategories) {
+            <option value="@subCategory.Id">@subCategory.Name</option>
+            }
+        </optgroup>
     }
-}
-
+</select>

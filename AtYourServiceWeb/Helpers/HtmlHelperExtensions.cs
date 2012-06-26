@@ -2,7 +2,10 @@
 namespace AtYourService.Web.Helpers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Web.Mvc;
+    using System.Web.Mvc.Html;
 
     public static class HtmlHelperExtensions
     {
@@ -62,6 +65,24 @@ namespace AtYourService.Web.Helpers
             }
 
             return new MvcHtmlString(string.Empty);
+        }
+
+        public static MvcHtmlString CategoryFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<GroupedSelectListItem> selectList)
+        {
+            var attributes = new Dictionary<string, object>();
+            attributes.Add("data-val", "true");
+            attributes.Add("data-val-required", "The Category field is required");
+            attributes.Add("data-val-number", "The Category field is required");
+
+            return htmlHelper.DropDownGroupListFor(expression, selectList, "-", attributes);
+        }
+
+        public static MvcHtmlString HiddenLocation(this HtmlHelper helper)
+        {
+            var lat = helper.Hidden("Latitude");
+            var lng = helper.Hidden("Longitude");
+
+            return new MvcHtmlString(lat.ToHtmlString() + lng.ToHtmlString());
         }
     }
 }

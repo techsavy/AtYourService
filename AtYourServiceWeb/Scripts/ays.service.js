@@ -1,25 +1,25 @@
 ﻿
-function SignUpGeoSerivce(map) {
-    
+function AdvertGeoSerivce(map) {
+
     this.map = map;
     this.geocoder = new google.maps.Geocoder();
     this.marker = null;
-    var signUpService = this;
+    var advertGeoSerivce = this;
 
     google.maps.event.addListener(map, 'click', function (args) {
-        signUpService.lookupLocation(args.latLng);
+        advertGeoSerivce.lookupLocation(args.latLng);
     });
 }
 
-SignUpGeoSerivce.prototype.lookupLocation = function (latLng) {
+AdvertGeoSerivce.prototype.lookupLocation = function (latLng) {
 
-    var signUpService = this;
+    var advertGeoSerivce = this;
 
     this.geocoder.geocode({ 'latLng': latLng }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
 
-            if (signUpService.isValidLocation(results)) {
-                signUpService.moveMarker(latLng);
+            if (advertGeoSerivce.isValidLocation(results)) {
+                advertGeoSerivce.moveMarker(latLng);
                 if (results.length > 1) {
                     $('#location-text').html(' ' + results[1].formatted_address);
                 } else {
@@ -27,7 +27,7 @@ SignUpGeoSerivce.prototype.lookupLocation = function (latLng) {
                 }
 
             } else {
-                signUpService.clearLocation();
+                advertGeoSerivce.clearLocation();
 
                 $('#modal-message-body').html('<p>Please select a location in Sri Lanka.</p>');
                 $('#modal-message').modal('show');
@@ -36,13 +36,13 @@ SignUpGeoSerivce.prototype.lookupLocation = function (latLng) {
             }
 
         } else {
-            signUpService.clearLocation();
+            advertGeoSerivce.clearLocation();
             alert("Geocoder failed due to: " + status);
         }
     });
 };
 
-SignUpGeoSerivce.prototype.isValidLocation = function (results) {
+AdvertGeoSerivce.prototype.isValidLocation = function (results) {
 
     var valid = false;
     $.each(results[0].address_components, function (key, component) {
@@ -56,8 +56,8 @@ SignUpGeoSerivce.prototype.isValidLocation = function (results) {
     return valid;
 };
 
-SignUpGeoSerivce.prototype.moveMarker = function (latLng) {
-    
+AdvertGeoSerivce.prototype.moveMarker = function (latLng) {
+
     if (this.marker != null) {
         this.marker.setPosition(latLng);
     }
@@ -74,8 +74,8 @@ SignUpGeoSerivce.prototype.moveMarker = function (latLng) {
     $('#Longitude').val(latLng.lng());
 };
 
-SignUpGeoSerivce.prototype.clearLocation = function () {
-    
+AdvertGeoSerivce.prototype.clearLocation = function () {
+
     $('#Latitude').val('');
     $('#Longitude').val('');
     $('#location-text').html(' Select your location on the map by clicking on it');

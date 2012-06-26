@@ -1,4 +1,5 @@
-﻿@model CreateServiceModel
+﻿@using AtYourService.Web
+@model CreateServiceModel
 @{
     ViewBag.Title = "Create";
 }
@@ -27,26 +28,13 @@
                         <div class="control-group">
                             @Html.Custom().LabelFor(model => model.CategoryId)
                             <div class="controls">
-                                <select id="CategoryId" name="Source">
-                                    <optgroup label="Level One">
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </optgroup>
-                                    <optgroup label="Level Two">
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </optgroup>
-                                </select>
+                                @Html.CategoryFor(model => model.CategoryId, (IEnumerable<GroupedSelectListItem>) ViewData[ViewDataKeys.Categories])
+                                @Html.ValidationMessageFor(model => model.CategoryId)
                             </div>
                         </div>
                         <span><i class="icon-map-marker"></i><span id="location-text">Select your location on
                             the map by clicking on it</span></span>
-                        @Html.HiddenFor(model => model.Latitude)
-                        @Html.HiddenFor(model => model.Longitude)
+                        @Html.HiddenLocation()
                     </div>
                     <div class="span4" id="map-canvas" style="height: 400px">
                     </div>
@@ -55,8 +43,7 @@
                             <div class="form-actions">
                                 <button class="btn btn-primary" type="submit">
                                     Create</button>
-                                <button class="btn">
-                                    Cancel</button>
+                                @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn"})
                             </div>
                         </div>
                     </div>
@@ -66,7 +53,7 @@
     </div>
 </div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/ays.signup.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ays.service.js")"></script>
 <script type="text/javascript">
     var geoService;
 
@@ -78,7 +65,7 @@
         map = new google.maps.Map(document.getElementById
             ("map-canvas"), options);
 
-        geoService = new SignUpGeoSerivce(map);
+        geoService = new AdvertGeoSerivce(map);
     }
 
     $(function () {
@@ -92,7 +79,7 @@
             var lng = $('#Longitude').val();
             if (lat == null || lat == '' || lng == null || lng == '') {
                 alert('lat test');
-                $('#modal-message-body').html('<p>Please select your location on the map.</p>');
+                $('#modal-message-body').html('<p>Please select the location of the service on the map.</p>');
                 $('#modal-message').modal('show');
             }
 

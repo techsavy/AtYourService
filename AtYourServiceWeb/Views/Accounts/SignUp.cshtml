@@ -61,8 +61,7 @@
                             </div>
                         </div>
                         <span><i class="icon-map-marker"></i><span id="location-text"> Select your location on the map by clicking on it</span></span>
-                        @Html.HiddenFor(model => model.Latitude)
-                        @Html.HiddenFor(model => model.Longitude)
+                        @Html.HiddenLocation()
                     </div>
                     <div class="span4" id="map-canvas" style="height: 400px">
                     </div>

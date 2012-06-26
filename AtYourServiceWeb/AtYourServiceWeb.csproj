@@ -163,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DropDownGroupListExtensions.cs" />
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
@@ -224,6 +225,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ays.init.js" />
+    <Content Include="Scripts\ays.service.js" />
     <Content Include="Scripts\ays.util.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

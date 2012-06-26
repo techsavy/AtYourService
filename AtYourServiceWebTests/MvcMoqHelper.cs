@@ -8,6 +8,7 @@ namespace AtYourService.Web.Tests
     using System.Web.Mvc;
     using System.Web.Routing;
     using Moq;
+    using AtYourService.Web.Models;
 
     /// <summary>
     /// MVC Mocking helpers
@@ -87,6 +88,11 @@ namespace AtYourService.Web.Tests
             controller.ControllerContext = context;
         }
 
+        public static void SetUserInfo(this Controller controller)
+        {
+            controller.Session[SessionKeys.User] = new UserInfo();
+        }
+
         static string GetUrlFileName(string url)
         {
             if (url.Contains("?"))
@@ -151,7 +157,7 @@ namespace AtYourService.Web.Tests
                 new RouteData(),
                 new Mock<ControllerBase>().Object),
               new Mock<IView>().Object, vd,
-              new TempDataDictionary());
+              new TempDataDictionary(), new Mock<System.IO.TextWriter>().Object);
 
             var mockViewDataContainer = new Mock<IViewDataContainer>();
             mockViewDataContainer.Setup(v => v.ViewData).Returns(vd);

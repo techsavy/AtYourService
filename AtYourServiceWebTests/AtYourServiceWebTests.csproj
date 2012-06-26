@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseControllerTest.cs" />
     <Compile Include="Controllers\CategoriesControllerTest.cs" />
+    <Compile Include="Controllers\ServicesControllerTest.cs" />
     <Compile Include="Helpers\HtmlHelperTest.cs" />
     <Compile Include="MockHttpSession.cs" />
     <Compile Include="MvcMoqHelper.cs" />
