@@ -5,7 +5,6 @@ namespace AtYourService.Web.Helpers
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Web.Mvc;
-    using System.Web.Mvc.Html;
 
     public static class HtmlHelperExtensions
     {
@@ -79,10 +78,33 @@ namespace AtYourService.Web.Helpers
 
         public static MvcHtmlString HiddenLocation(this HtmlHelper helper)
         {
-            var lat = helper.Hidden("Latitude");
-            var lng = helper.Hidden("Longitude");
+            var lat = BuildHiddenLocationComponent(helper, "Latitude");
+            var lng = BuildHiddenLocationComponent(helper, "Longitude");
 
-            return new MvcHtmlString(lat.ToHtmlString() + lng.ToHtmlString());
+            return new MvcHtmlString(lat + lng);
+        }
+
+        private static string BuildHiddenLocationComponent(HtmlHelper helper, string component)
+        {
+            var componentValue = string.Empty;
+            var componentModelValue = helper.ViewData.Eval(component);
+
+            if (helper.ViewData.ModelState.ContainsKey(component))
+            {
+                componentValue = helper.ViewData.ModelState[component].Value.AttemptedValue;
+            }
+            else if (componentModelValue != null)
+            {
+                componentValue = componentModelValue.ToString();
+            }
+
+            var tagBuilder = new TagBuilder("input");
+            tagBuilder.MergeAttribute("type", "hidden");
+            tagBuilder.MergeAttribute("id", component);
+            tagBuilder.MergeAttribute("name", component);
+            tagBuilder.MergeAttribute("value", componentValue);
+
+            return tagBuilder.ToString(TagRenderMode.SelfClosing);
         }
     }
 }

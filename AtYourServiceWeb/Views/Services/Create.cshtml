@@ -32,7 +32,7 @@
                                 @Html.ValidationMessageFor(model => model.CategoryId)
                             </div>
                         </div>
-                        <span><i class="icon-map-marker"></i><span id="location-text">Select your location on
+                        <span><i class="icon-map-marker"></i><span id="location-text">&nbsp;Select your location on
                             the map by clicking on it</span></span>
                         @Html.HiddenLocation()
                     </div>
@@ -78,11 +78,10 @@
             var lat = $('#Latitude').val();
             var lng = $('#Longitude').val();
             if (lat == null || lat == '' || lng == null || lng == '') {
-                alert('lat test');
                 $('#modal-message-body').html('<p>Please select the location of the service on the map.</p>');
                 $('#modal-message').modal('show');
+                e.preventDefault();
             }
-
         }
         else {
             e.preventDefault();

@@ -60,7 +60,7 @@
                                 @Html.ValidationMessageFor(model => model.Brag)
                             </div>
                         </div>
-                        <span><i class="icon-map-marker"></i><span id="location-text"> Select your location on the map by clicking on it</span></span>
+                        <span><i class="icon-map-marker"></i><span id="location-text">&nbsp;Select your location on the map by clicking on it</span></span>
                         @Html.HiddenLocation()
                     </div>
                     <div class="span4" id="map-canvas" style="height: 400px">
@@ -106,9 +106,9 @@
             var lat = $('#Latitude').val();
             var lng = $('#Longitude').val();
             if (lat == null || lat == '' || lng == null || lng == '') {
-                alert('lat test');
                 $('#modal-message-body').html('<p>Please select your location on the map.</p>');
                 $('#modal-message').modal('show');
+                e.preventDefault();
             }
 
         }
