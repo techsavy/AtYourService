@@ -85,3 +85,7 @@ body
     font-size: 14px;
     text-transform: none;
 }
+
+.input-xxlarge {
+  width: 450px;
+}

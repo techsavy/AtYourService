@@ -24,8 +24,8 @@
                 else
                 {
                     <div class="btn-group pull-right">
-                        @Html.ActionLink("Sign Up", "SignUp", "Accounts", null, new { @class = "btn btn-info"})
-                        @Html.ActionLink("Sign In", "Login", "Accounts", null, new { @class = "btn"})
+                        @Html.ActionLink("Sign Up", "SignUp", "Accounts", null, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Sign In", "Login", "Accounts", null, new { @class = "btn" })
                     </div>
                 }
                 <div class="nav-collapse">
@@ -49,48 +49,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="span3">
-                <div class="well sidebar-nav">
-                    <h3>
-                        &nbsp;&nbsp;Categories</h3>
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Major Category 1 <span class="badge">4</span></li>
-                        <li class="active"><a href="#">Sub Category 1</a></li>
-                        <li>@Html.ActionLink("Sub Category 2", "Browse", "Categories", new { id = 2 }, null)</li>
-                        <li><a href="#">Sub Category 3</a></li>
-                        <li><a href="#">Sub Category 4</a></li>
-                        <li class="nav-header">Major Category 2</li>
-                        <li><a href="#">Sub Category 1</a></li>
-                        <li><a href="#">Sub Category 2</a></li>
-                        <li><a href="#">Sub Category 3</a></li>
-                        <li><a href="#">Sub Category 4</a></li>
-                        <li><a href="#">Sub Category 5</a></li>
-                        <li><a href="#">Sub Category 6</a></li>
-                        <li class="nav-header"><a href="#">Major Category 2</a></li>
-                        <li><a href="#">Sub Category 1</a></li>
-                        <li><a href="#">Sub Category 2</a></li>
-                        <li><a href="#">Sub Category 3</a></li>
-                        <li class="divider"></li>
-                        <li>@Html.ActionLink("All categories", "Index", "Categories", null, new { @class = "btn" })</li>
-                    </ul>
-                </div>
-                <!--/.well -->
-                <blockquote>
-                    <p>
-                        Success story 1</p>
-                    <small>Person 1</small>
-                </blockquote>
-                <blockquote>
-                    <p>
-                        Success story 2</p>
-                    <small>Person 2</small>
-                </blockquote>
-            </div>
-            <div class="span9">
-                @RenderBody()
-            </div>
-        </div>
+        @RenderBody()
         <footer class="footer">
             <p class="pull-right">
                 <a href="#">Back to top</a></p>

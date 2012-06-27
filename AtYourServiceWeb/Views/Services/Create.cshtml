@@ -4,24 +4,24 @@
     ViewBag.Title = "Create";
 }
 <div class="row">
-    <div class="span9">
+    <div class="span12">
         @using (Html.BeginForm("Create", "Services", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             <fieldset>
                 <legend>New Ad</legend>
                 <div class="row">
-                    <div class="span5">
+                    <div class="span7">
                         <div class="control-group">
                             @Html.Custom().LabelFor(model => model.Title)
                             <div class="controls">
-                                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+                                @Html.TextBoxFor(model => model.Title, new { @class = "input-xxlarge" })
                                 @Html.ValidationMessageFor(model => model.Title)
                             </div>
                         </div>
                         <div class="control-group">
                             @Html.Custom().LabelFor(model => model.Body)
                             <div class="controls">
-                                @Html.TextAreaFor(model => model.Body, new { @class = "input-xlarge", rows = "15" })
+                                @Html.TextAreaFor(model => model.Body, new { @class = "input-xxlarge", rows = "15" })
                                 @Html.ValidationMessageFor(model => model.Body)
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="span4" id="map-canvas" style="height: 400px">
                     </div>
                     <div class="row">
-                        <div class="span9">
+                        <div class="span12">
                             <div class="form-actions">
                                 <button class="btn btn-primary" type="submit">
                                     Create</button>

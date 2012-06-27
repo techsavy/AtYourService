@@ -3,28 +3,69 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="span5">
-        <div class="well">
-            <h2>
-                Welcome!</h2>
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <h3>
+                &nbsp;&nbsp;Categories</h3>
+            <ul class="nav nav-list">
+                <li class="nav-header">Major Category 1 <span class="badge">4</span></li>
+                <li class="active"><a href="#">Sub Category 1</a></li>
+                <li>@Html.ActionLink("Sub Category 2", "Browse", "Categories", new { id = 2 }, null)</li>
+                <li><a href="#">Sub Category 3</a></li>
+                <li><a href="#">Sub Category 4</a></li>
+                <li class="nav-header">Major Category 2</li>
+                <li><a href="#">Sub Category 1</a></li>
+                <li><a href="#">Sub Category 2</a></li>
+                <li><a href="#">Sub Category 3</a></li>
+                <li><a href="#">Sub Category 4</a></li>
+                <li><a href="#">Sub Category 5</a></li>
+                <li><a href="#">Sub Category 6</a></li>
+                <li class="nav-header"><a href="#">Major Category 2</a></li>
+                <li><a href="#">Sub Category 1</a></li>
+                <li><a href="#">Sub Category 2</a></li>
+                <li><a href="#">Sub Category 3</a></li>
+                <li class="divider"></li>
+                <li>@Html.ActionLink("All categories", "Index", "Categories", null, new { @class = "btn" })</li>
+            </ul>
+        </div>
+        <!--/.well -->
+        <blockquote>
             <p>
-                We help you find businesses/services that you are looking for near your area. You
-                can also publish your business with us.</p>
-        </div>
-        <div id="social">
-            <h2>
-                Social network integration area</h2>
-            <ul>
-                <li>Facebook</li><li>Google+</li></ul>
-        </div>
+                Success story 1</p>
+            <small>Person 1</small>
+        </blockquote>
+        <blockquote>
+            <p>
+                Success story 2</p>
+            <small>Person 2</small>
+        </blockquote>
     </div>
-    <div class="span4">
-        @(User.Identity.IsAuthenticated ? Html.Partial("_Actions") : Html.Partial("_Login"))
-    </div>
-    <!--/span-->
-</div>
-<div class="row">
-    <div class="span9" id="map-canvas" style="width: 100%; height: 300px">
+    <div class="span9">
+        <div class="row">
+            <div class="span5">
+                <div class="well">
+                    <h2>
+                        Welcome!</h2>
+                    <p>
+                        We help you find businesses/services that you are looking for near your area. You
+                        can also publish your business with us.</p>
+                </div>
+                <div id="social">
+                    <h2>
+                        Social network integration area</h2>
+                    <ul>
+                        <li>Facebook</li><li>Google+</li></ul>
+                </div>
+            </div>
+            <div class="span4">
+                @(User.Identity.IsAuthenticated ? Html.Partial("_Actions") : Html.Partial("_Login"))
+            </div>
+            <!--/span-->
+        </div>
+        <div class="row">
+            <div class="span9" id="map-canvas" style="width: 100%; height: 300px">
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
