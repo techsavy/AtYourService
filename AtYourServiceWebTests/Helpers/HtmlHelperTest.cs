@@ -131,5 +131,19 @@ namespace AtYourService.Web.Tests.Helpers
 
             Assert.AreEqual(expectedHtml, actualHtml.ToHtmlString());
         }
+
+        [Test]
+        public void ImageUploadFor()
+        {
+            var model = new CreateServiceModel();
+            var viewData = new ViewDataDictionary<CreateServiceModel>(model);
+
+            var htmlHelper = MvcMockHelpers.CreateHtmlHelper(viewData);
+            const string expectedHtml = "<input accept=\"image/gif,image/jpeg,image/png\" id=\"Image\" name=\"Image\" type=\"file\" />";
+
+            var actualHtml = htmlHelper.ImageUploadFor(m => m.Image);
+
+            Assert.AreEqual(expectedHtml, actualHtml.ToHtmlString());
+        }
     }
 }

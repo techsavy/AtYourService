@@ -9,6 +9,7 @@ namespace AtYourService.Domain.Adverts
     using System;
     using Categories;
     using Core.Data;
+    using Files;
     using NetTopologySuite.Geometries;
     using Users;
 
@@ -34,5 +35,7 @@ namespace AtYourService.Domain.Adverts
         public virtual DateTime? ExpiryDate { get; set; }
 
         public virtual DateTime? EffectiveDate { get; set; }
+
+        public virtual Image Image { get; set; }
     }
 }

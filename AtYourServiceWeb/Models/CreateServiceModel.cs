@@ -8,6 +8,8 @@ namespace AtYourService.Web.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
+    using Util;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,5 +31,8 @@ namespace AtYourService.Web.Models
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }
+
+        [ImageFile]
+        public HttpPostedFileBase Image { get; set; }
     }
 }

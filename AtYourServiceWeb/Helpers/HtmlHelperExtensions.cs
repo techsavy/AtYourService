@@ -106,5 +106,18 @@ namespace AtYourService.Web.Helpers
 
             return tagBuilder.ToString(TagRenderMode.SelfClosing);
         }
+
+        public static MvcHtmlString ImageUploadFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+        {
+            var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
+
+            var tagBuilder = new TagBuilder("input");
+            tagBuilder.MergeAttribute("type", "file");
+            tagBuilder.MergeAttribute("id", htmlFieldName);
+            tagBuilder.MergeAttribute("name", htmlFieldName);
+            tagBuilder.MergeAttribute("accept", "image/gif,image/jpeg,image/png");
+
+            return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
+        }
     }
 }

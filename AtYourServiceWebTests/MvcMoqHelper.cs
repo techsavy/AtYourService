@@ -164,5 +164,21 @@ namespace AtYourService.Web.Tests
 
             return new HtmlHelper(mockViewContext.Object, mockViewDataContainer.Object);
         }
+
+        public static HtmlHelper<TModel> CreateHtmlHelper<TModel>(ViewDataDictionary<TModel> vd)
+        {
+            var mockViewContext = new Mock<ViewContext>(
+              new ControllerContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData(),
+                new Mock<ControllerBase>().Object),
+              new Mock<IView>().Object, vd,
+              new TempDataDictionary(), new Mock<System.IO.TextWriter>().Object);
+
+            var mockViewDataContainer = new Mock<IViewDataContainer>();
+            mockViewDataContainer.Setup(v => v.ViewData).Returns(vd);
+
+            return new HtmlHelper<TModel>(mockViewContext.Object, mockViewDataContainer.Object);
+        }
     }
 }

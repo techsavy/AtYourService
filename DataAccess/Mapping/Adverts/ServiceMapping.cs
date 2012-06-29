@@ -27,17 +27,18 @@ namespace AtYourService.Data.Mapping.Adverts
                 x.Column("ServiceType");
             });
 
-            Property(advert => advert.Title, m => { m.NotNullable(true); m.Length(200); });
-            Property(advert => advert.Body, m => { m.NotNullable(true); m.Length(5000); });
-            Property(advert => advert.Views, m => { m.NotNullable(true); });
-            Property(advert => advert.Impressions, m => { m.NotNullable(true); });
-            Property(advert => advert.EffectiveDate, m => { m.NotNullable(true); });
-            Property(advert => advert.ExpiryDate, m => { m.NotNullable(true); });
+            Property(service => service.Title, m => { m.NotNullable(true); m.Length(200); });
+            Property(service => service.Body, m => { m.NotNullable(true); m.Length(5000); });
+            Property(service => service.Views, m => { m.NotNullable(true); });
+            Property(service => service.Impressions, m => { m.NotNullable(true); });
+            Property(service => service.EffectiveDate, m => { m.NotNullable(true); });
+            Property(service => service.ExpiryDate, m => { m.NotNullable(true); });
 
-            Property(user => user.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeometryType>(); m.Column(c => c.SqlType("geometry")); });
+            Property(service => service.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeometryType>(); m.Column(c => c.SqlType("geometry")); });
 
-            ManyToOne(category => category.Category, m => { m.Column("CategoryId"); m.NotNullable(true); m.ForeignKey("FK_Advert_Category"); });
-            ManyToOne(category => category.Client, m => { m.Column("ClientId"); m.NotNullable(true); m.ForeignKey("FK_Advert_Client"); });
+            ManyToOne(service => service.Category, m => { m.Column("CategoryId"); m.NotNullable(true); m.ForeignKey("FK_Service_Category"); });
+            ManyToOne(service => service.Client, m => { m.Column("ClientId"); m.NotNullable(true); m.ForeignKey("FK_Service_Client"); });
+            ManyToOne(service => service.Image, m => { m.Column("ImageId"); m.NotNullable(false); m.ForeignKey("FK_Service_Image"); });
         }
     }
 }

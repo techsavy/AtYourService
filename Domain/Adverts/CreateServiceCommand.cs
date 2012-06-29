@@ -7,15 +7,19 @@
 namespace AtYourService.Domain.Adverts
 {
     using System;
+    using System.IO;
     using Categories;
+    using Core;
     using Core.Commanding;
     using Core.Geo;
+    using Files;
+    using Iesi.Collections.Generic;
     using Users;
 
     public class CreateServiceCommand : EntityCommand
     {
-        public CreateServiceCommand(bool isServiceOffering, string title, string body, int categoryId, 
-            int clientId, double latitude, double longitude, DateTime? effectiveDate)
+        public CreateServiceCommand(bool isServiceOffering, string title, string body, int categoryId,
+            int clientId, double latitude, double longitude, DateTime? effectiveDate, IFileSystem fileSystem, FileBase imageFile)
         {
             IsServiceOffering = isServiceOffering;
             Title = title;
@@ -25,6 +29,8 @@ namespace AtYourService.Domain.Adverts
             Latitude = latitude;
             Longitude = longitude;
             EffectiveDate = effectiveDate;
+            ImageFile = imageFile;
+            FileSystem = fileSystem;
         }
 
         public bool IsServiceOffering { get; private set; }
@@ -43,12 +49,16 @@ namespace AtYourService.Domain.Adverts
 
         public DateTime? EffectiveDate { get; private set; }
 
+        public IFileSystem FileSystem { get; private set; }
+
+        public FileBase ImageFile { get; private set; }
+
         protected override void OnExecute()
         {
             var client = Session.QueryOver<Client>().Fetch(c => c.ClientSettings).Eager.FutureValue();
-            var category = new Category {Id = CategoryId};
+            var category = new Category { Id = CategoryId };
 
-            var service = IsServiceOffering ? (Service) new ServiceOffering() : new ServiceRequest();
+            var service = IsServiceOffering ? (Service)new ServiceOffering() : new ServiceRequest();
 
             service.Title = Title;
             service.Body = Body;
@@ -59,9 +69,29 @@ namespace AtYourService.Domain.Adverts
 
             service.ExpiryDate = DateTime.Now.Date.AddDays(90);
 
+            ProcessImange(service);
             OnCreate(service);
 
             Session.Save(service);
+        }
+
+        private void ProcessImange(Service service)
+        {
+            if (ImageFile == null)
+                return;
+
+            var guidId = Guid.NewGuid();
+            var extension = Path.GetExtension(ImageFile.FileName);
+            var fileName = string.Format("img-{0}{1}", guidId, extension);
+
+            FileSystem.Save(ImageFile.InputStream, fileName, true);
+
+            var image = new Image { FileName = fileName, ContentType = ImageFile.ContentType };
+            image.Services = new HashedSet<Service> { service };
+            service.Image = image;
+            
+            OnCreate(image);
+            Session.Save(image);
         }
     }
 }

@@ -184,7 +184,10 @@
     <Compile Include="SessionKeys.cs" />
     <Compile Include="Util\AutoMapperConfiguration.cs" />
     <Compile Include="Util\BundleExtensions.cs" />
+    <Compile Include="Util\FileBaseAdapter.cs" />
+    <Compile Include="Util\ImageFileAttribute.cs" />
     <Compile Include="Util\NHibernateContext.cs" />
+    <Compile Include="Util\WindowsFileSystem.cs" />
     <Compile Include="ViewDataKeys.cs" />
   </ItemGroup>
   <ItemGroup>

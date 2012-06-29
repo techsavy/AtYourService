@@ -40,6 +40,12 @@ namespace AtYourService.Core.Commanding
 
                 throw;
             }
+
+            OnAfterExecute();
+        }
+
+        protected virtual void OnAfterExecute()
+        {
         }
 
         protected abstract void OnExecute();
@@ -80,11 +86,17 @@ namespace AtYourService.Core.Commanding
 
                 throw;
             }
+
+            OnAfterExecute();
         }
 
         public TResult Result { get; private set; }
 
         protected abstract TResult OnExecute();
+
+        protected virtual void OnAfterExecute()
+        {
+        }
 
         protected virtual void OnException(Exception exception)
         {

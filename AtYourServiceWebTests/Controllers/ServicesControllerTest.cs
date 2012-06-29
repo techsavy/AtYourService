@@ -8,6 +8,7 @@ namespace AtYourService.Web.Tests.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using Core;
     using Core.Commanding;
     using Domain.Categories;
     using Iesi.Collections.Generic;
@@ -37,7 +38,9 @@ namespace AtYourService.Web.Tests.Controllers
             nHbernateContextMock.Setup(c => c.ExecuteQuery(It.IsAny<Func<ISession, IList<Category>>>()))
                 .Returns(categories);
 
-            var controller = new ServicesController(nHbernateContextMock.Object);
+            var fileSystemMock = new Mock<IFileSystem>();
+
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object);
             controller.SetFakeControllerContext(MvcMockHelpers.FakeUnauthenticatedHttpContext("~/Services/Create/", UserName));
 
             controller.Create();
@@ -58,7 +61,9 @@ namespace AtYourService.Web.Tests.Controllers
             nHbernateContextMock.Setup(c => c.ExecuteQuery(It.IsAny<Func<ISession, IList<Category>>>()))
                 .Returns(categories);
 
-            var controller = new ServicesController(nHbernateContextMock.Object);
+            var fileSystemMock = new Mock<IFileSystem>();
+
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object);
             controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Services/Create/", UserName));
             controller.SetUserInfo();
 

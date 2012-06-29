@@ -23,7 +23,7 @@ namespace AtYourService.Domain.Tests.Adverts
             int categoryId, clientId;
             PupulateEntities(out categoryId, out clientId);
 
-            var command = new CreateServiceCommand(true, "title", "body", categoryId, clientId, 23.234, 5.343, null);
+            var command = new CreateServiceCommand(true, "title", "body", categoryId, clientId, 23.234, 5.343, null, null, null);
             ExecuteCommand(command);
 
             var service = Session.QueryOver<ServiceOffering>()
@@ -42,7 +42,7 @@ namespace AtYourService.Domain.Tests.Adverts
             int categoryId, clientId;
             PupulateEntities(out categoryId, out clientId);
 
-            var command = new CreateServiceCommand(false, "title", "body", categoryId, clientId, 23.234, 5.343, null);
+            var command = new CreateServiceCommand(false, "title", "body", categoryId, clientId, 23.234, 5.343, null, null, null);
             ExecuteCommand(command);
 
             var service = Session.QueryOver<ServiceRequest>()

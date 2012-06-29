@@ -16,6 +16,7 @@ using NHibernate.Tool.hbm2ddl;
 namespace AtYourService.Web
 {
     using System.Web;
+    using Core;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -88,6 +89,8 @@ namespace AtYourService.Web
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();
             builder.RegisterType<NHibernateContext>().AsSelf()
                 .WithParameter((info, context) => info.Name == "userName", (info, context) => HttpContext.Current.User.Identity.Name);
+            builder.RegisterType<WindowsFileSystem>().As<IFileSystem>()
+                .WithParameter((info, context) => true, (info, context) => new HttpServerUtilityWrapper(HttpContext.Current.Server));
 
             builder.RegisterModule(new AutofacWebTypesModule());
             var container = builder.Build();

@@ -5,6 +5,7 @@ namespace AtYourService.Web.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Core;
     using Domain.Adverts;
     using Domain.Categories;
     using Helpers;
@@ -14,11 +15,13 @@ namespace AtYourService.Web.Controllers
 
     public class ServicesController : BaseController
     {
+        private IFileSystem _fileSystem;
         //
         // GET: /Services/
 
-        public ServicesController(NHibernateContext nHibernateContext) : base(nHibernateContext)
+        public ServicesController(NHibernateContext nHibernateContext, IFileSystem fileSystem) : base(nHibernateContext)
         {
+            _fileSystem = fileSystem;
         }
 
         public ActionResult Create()
@@ -33,9 +36,11 @@ namespace AtYourService.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                FileBase image = createServiceModel.Image != null ? new FileBaseAdapter(createServiceModel.Image) : null;
+
                 var command = new CreateServiceCommand(true, createServiceModel.Title, createServiceModel.Body,
                                                        createServiceModel.CategoryId, UserInfo.Id, createServiceModel.Latitude,
-                                                       createServiceModel.Longitude, null);
+                                                       createServiceModel.Longitude, null, _fileSystem, image);
                 ExecuteCommand(command);
             }
 
