@@ -9,6 +9,7 @@
         {
             <fieldset>
                 <legend>New Ad</legend>
+                @Html.Partial("ValidatiuonSummary", ViewData.ModelState)
                 <div class="row">
                     <div class="span7">
                         <div class="control-group">
@@ -36,6 +37,7 @@
                             @Html.Custom().LabelFor(model => model.Image)
                             <div class="controls">
                                 @Html.ImageUploadFor(model => model.Image)
+                                @Html.ValidationMessageFor(model => model.Body)
                             </div>
                         </div>
                         <span><i class="icon-map-marker"></i><span id="location-text">&nbsp;Select your location

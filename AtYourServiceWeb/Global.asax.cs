@@ -1,22 +1,23 @@
-﻿using System.Reflection;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using AtYourService.Data;
-using AtYourService.Web.Security;
-using AtYourService.Web.Util;
-using Autofac;
-using Autofac.Integration.Mvc;
-using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Mapping.ByCode;
-using NHibernate.Tool.hbm2ddl;
+﻿
 
 namespace AtYourService.Web
 {
+    using System.Reflection;
     using System.Web;
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using Autofac;
+    using Autofac.Integration.Mvc;
     using Core;
+    using Data;
+    using NHibernate;
+    using NHibernate.Cfg;
+    using NHibernate.Mapping.ByCode;
+    using NHibernate.Tool.hbm2ddl;
+    using Security;
+    using Util;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801

@@ -10,6 +10,7 @@ namespace AtYourService.Web.Util
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.Web;
+    using Core;
 
     public class ImageFileAttribute : ValidationAttribute
     {
@@ -36,6 +37,11 @@ namespace AtYourService.Web.Util
 
             if (file.ContentLength > 1 * 1024 * 1024)
             {
+                if (ErrorMessage.IsNullOrEmpty())
+                {
+                    ErrorMessage = "File is larger than 1Mb.";
+                }
+
                 return false;
             }
 
@@ -43,7 +49,13 @@ namespace AtYourService.Web.Util
             {
                 using (var img = Image.FromStream(file.InputStream))
                 {
-                    return img.RawFormat.Equals(ImageFormat.Png) || img.RawFormat.Equals(ImageFormat.Jpeg) || img.RawFormat.Equals(ImageFormat.Gif);
+                    var isValidFormat = img.RawFormat.Equals(ImageFormat.Png) || img.RawFormat.Equals(ImageFormat.Jpeg) || img.RawFormat.Equals(ImageFormat.Gif);
+                    if (!isValidFormat && ErrorMessage.IsNullOrEmpty())
+                    {
+                        ErrorMessage = "Invalid file format";
+                    }
+
+                    return isValidFormat;
                 }
             }
 // ReSharper disable EmptyGeneralCatchClause
