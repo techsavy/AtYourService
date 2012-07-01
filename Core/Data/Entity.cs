@@ -7,12 +7,14 @@
 namespace AtYourService.Core.Data
 {
     using System;
+    using NHibernate.Search.Attributes;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public abstract class Entity
     {
+        [DocumentId]
         public virtual int Id { get; set; }
 
         public virtual DateTime CreationDate { get; set; }

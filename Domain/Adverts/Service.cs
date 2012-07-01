@@ -11,17 +11,23 @@ namespace AtYourService.Domain.Adverts
     using Core.Data;
     using Files;
     using NetTopologySuite.Geometries;
+    using NHibernate.Search.Attributes;
     using Users;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [Indexed]
     public abstract class Service : Entity
     {
+        [Field(Index.Tokenized, Store = Store.Yes)]
+        [Boost(2.0f)]
         public virtual string Title { get; set; }
 
+        [Field(Index.Tokenized, Store = Store.Yes)]
         public virtual string Body { get; set; }
 
+        [IndexedEmbedded(Depth = 1, Prefix = "Category_")]
         public virtual Category Category { get; set; }
 
         public virtual Client Client { get; set; }

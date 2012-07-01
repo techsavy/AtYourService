@@ -36,6 +36,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTests", "DomainTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtYourServiceWebTests", "AtYourServiceWebTests\AtYourServiceWebTests.csproj", "{8BE16098-2F4E-46F0-AC56-44EB8D25753A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{DE03D608-59DF-4CB2-B66E-34B441297FC9}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Search\NHibernate.Search.dll = Libs\Search\NHibernate.Search.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = AtYourService.vsmdi
@@ -80,5 +85,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{438A8C45-9DA9-48FF-AACA-60B34EE1C073} = {C0BE7AFE-8001-436E-945C-AA735A697ED2}
 		{3DF0434B-B352-4EF0-A7AE-97A72000DC4C} = {438A8C45-9DA9-48FF-AACA-60B34EE1C073}
+		{DE03D608-59DF-4CB2-B66E-34B441297FC9} = {438A8C45-9DA9-48FF-AACA-60B34EE1C073}
 	EndGlobalSection
 EndGlobal

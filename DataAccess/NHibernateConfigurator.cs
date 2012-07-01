@@ -9,6 +9,7 @@ namespace AtYourService.Data
     using NHibernate;
     using NHibernate.Cfg;
     using NHibernate.Mapping.ByCode;
+    using NHibernate.Search.Event;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,6 +28,10 @@ namespace AtYourService.Data
 
             var mapping = modelMapper.CompileMappingForAllExplicitlyAddedEntities();
             config.AddMapping(mapping);
+
+            config.SetListener(NHibernate.Event.ListenerType.PostUpdate, new FullTextIndexEventListener());
+            config.SetListener(NHibernate.Event.ListenerType.PostInsert, new FullTextIndexEventListener());
+            config.SetListener(NHibernate.Event.ListenerType.PostDelete, new FullTextIndexEventListener());
 
             return config;
         }

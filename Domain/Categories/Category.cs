@@ -10,12 +10,15 @@ namespace AtYourService.Domain.Categories
     using Adverts;
     using Core.Data;
     using Iesi.Collections.Generic;
+    using NHibernate.Search.Attributes;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [Indexed]
     public class Category : Entity
     {
+        [Field(Index.Tokenized, Store = Store.Yes)]
         public virtual string Name { get; set; }
 
         public virtual Category ParentCategory { get; set; }
