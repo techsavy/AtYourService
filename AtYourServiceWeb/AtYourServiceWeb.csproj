@@ -228,6 +228,7 @@
     <Compile Include="Util\FileBaseAdapter.cs" />
     <Compile Include="Util\ImageFileAttribute.cs" />
     <Compile Include="Util\NHibernateContext.cs" />
+    <Compile Include="Util\SearchExtensions.cs" />
     <Compile Include="Util\WindowsFileSystem.cs" />
     <Compile Include="ViewDataKeys.cs" />
   </ItemGroup>
@@ -372,6 +373,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Services\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Services\Category.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

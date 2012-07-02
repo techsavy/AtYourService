@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<AtYourService.Domain.Categories.Category>
-<select id="CategoryId" name="CategoryId">
+<h3>
+    &nbsp;&nbsp;Categories</h3>
+<ul class="nav nav-list">
     @foreach (var category in Model)
     {
-        <optgroup label="@category.Name">
-            @foreach (var subCategory in category.SubCategories) {
-            <option value="@subCategory.Id">@subCategory.Name</option>
-            }
-        </optgroup>
+        <li class="nav-header"><a href="@Url.Action("Category", "Services", new { id = category.Id, name = category.Name }, null)"> @category.Name <span class="badge badge-info">@category.SubCategories.Sum(s => s.AdCount)</span></a></li>
+        foreach (var subCategory in category.SubCategories)
+        {
+            <li><a href="@Url.Action("Category", "Services", new { id = subCategory.Id, name = subCategory.Name }, null)"> @subCategory.Name <span class="badge">@subCategory.AdCount</span></a></li>
+        }
     }
-</select>
+    <li class="divider"></li>
+    <li>@Html.ActionLink("All categories", "Index", "Categories", null, new { @class = "btn" })</li>
+</ul>

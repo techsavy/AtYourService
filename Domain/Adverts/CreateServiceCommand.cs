@@ -55,7 +55,10 @@ namespace AtYourService.Domain.Adverts
 
         protected override void OnExecute()
         {
-            var client = Session.QueryOver<Client>().Fetch(c => c.ClientSettings).Eager.FutureValue();
+            var client = Session.QueryOver<Client>()
+                .Where(c => c.Id == ClientId)
+                .Fetch(c => c.ClientSettings).Eager.FutureValue();
+
             var category = new Category { Id = CategoryId };
 
             var service = IsServiceOffering ? (Service)new ServiceOffering() : new ServiceRequest();
@@ -73,6 +76,12 @@ namespace AtYourService.Domain.Adverts
             OnCreate(service);
 
             Session.Save(service);
+
+            client.Value.ClientSettings.AdCount++;
+
+            Session.CreateSQLQuery("update Category set AdCount = AdCount + 1 where Id=:id")
+                .SetInt32("id", CategoryId)
+                .ExecuteUpdate();
         }
 
         private void ProcessImange(Service service)
