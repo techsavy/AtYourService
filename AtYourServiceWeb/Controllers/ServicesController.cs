@@ -7,6 +7,7 @@ namespace AtYourService.Web.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using Core;
+    using Core.Geo;
     using Domain.Adverts;
     using Domain.Categories;
     using Helpers;
@@ -17,7 +18,9 @@ namespace AtYourService.Web.Controllers
     using Lucene.Net.Spatial.Tier;
     using Lucene.Net.Spatial.Tier.Projectors;
     using Models;
+    using NHibernate.Spatial.Criterion.Lambda;
     using NHibernate.Transform;
+    using NHibernate.Spatial;
     using Util;
 
     public class ServicesController : BaseController
@@ -38,6 +41,7 @@ namespace AtYourService.Web.Controllers
             var services = ExecuteQuery(
                 session => session.QueryOver<Service>()
                     .Where(s => s.EffectiveDate < DateTime.Now)
+                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(PointFactory.Create(6.9319444, 79.8877778), 0.1)
                     .OrderBy(s => s.EffectiveDate).Desc
                     .Fetch(s => s.Category).Eager
                     .JoinQueryOver(s => s.Category).Where(c => c.Id == id || c.ParentCategory.Id == id)
@@ -47,7 +51,7 @@ namespace AtYourService.Web.Controllers
             Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
             var queryParser = new QueryParser(Lucene.Net.Util.Version.LUCENE_29, "Title", analyzer);
             var qr = queryParser.Parse("Title:t*");
-            var dq = new DistanceQueryBuilder(6.9319444, 79.8877778, 5, "Location_Latitude", "Location_Longitude", CartesianTierPlotter.DefaltFieldPrefix, false);
+            var dq = new DistanceQueryBuilder(6.9319444, 79.8877778, 100, "Location_Latitude", "Location_Longitude", CartesianTierPlotter.DefaltFieldPrefix, true);
             var dsort = new DistanceFieldComparatorSource(dq.DistanceFilter);
             var sort = new Sort(new SortField("geo_distance", dsort));
 
@@ -57,7 +61,7 @@ namespace AtYourService.Web.Controllers
                 session => session.FullTextSession()
                                .CreateFullTextQuery(csq.Combine(new [] {qr}), typeof(Service)).List<Service>());
 
-            return View(q);
+            return View(services);
         }
 
         public ActionResult Create()
