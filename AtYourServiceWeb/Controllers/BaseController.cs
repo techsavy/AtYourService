@@ -7,8 +7,10 @@ namespace AtYourService.Web.Controllers
     using AutoMapper;
     using Core.Commanding;
     using Models;
+    using NetTopologySuite.Geometries;
     using NHibernate;
     using Util;
+    using Core.Geo;
 
     public abstract class BaseController : Controller
     {        
@@ -69,6 +71,18 @@ namespace AtYourService.Web.Controllers
 
                 var userInfo = Mapper.Map<UserInfo>(user);
                 Session[SessionKeys.User] = userInfo;
+            }
+        }
+
+        protected virtual Point GetUserLocation()
+        {
+            if (Session[SessionKeys.User] != null)
+            {
+                return ((UserInfo) Session[SessionKeys.User]).Location;
+            }
+            else
+            {
+                return PointFactory.Create(6.9319444, 79.8877778);
             }
         }
     }

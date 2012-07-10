@@ -39,11 +39,11 @@ namespace AtYourService.Web.Controllers
         public ActionResult Category(int id, int? page)
         {
             var skip = page ?? 0;
-;
+
             var services = ExecuteQuery(
                 session => session.QueryOver<Service>()
                     .Where(s => s.EffectiveDate < DateTime.Now)
-                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(PointFactory.Create(6.9319444, 79.8877778), Distance)
+                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(GetUserLocation(), Distance)
                     .OrderBy(s => s.EffectiveDate).Desc
                     .Fetch(s => s.Category).Eager
                     .JoinQueryOver(s => s.Category).Where(c => c.Id == id || c.ParentCategory.Id == id)

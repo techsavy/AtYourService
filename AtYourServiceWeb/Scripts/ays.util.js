@@ -17,3 +17,12 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 function setCaretToPos(input, pos) {
     setSelectionRange(input, pos, pos);
 }
+
+function formatInfoContent(service) {
+    var contentString = '<div id="content">' +
+    '<h3>' + service.Title + '</h3>' +
+    '<p>' + service.Body + '</p>' +
+    '</div>';
+
+    return contentString;
+}

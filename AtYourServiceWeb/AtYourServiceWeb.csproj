@@ -275,6 +275,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ays.init.js" />
+    <Content Include="Scripts\ays.location.js" />
     <Content Include="Scripts\ays.service.js" />
     <Content Include="Scripts\ays.util.js" />
     <Content Include="Scripts\bootstrap.js" />

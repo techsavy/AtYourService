@@ -21,6 +21,7 @@ namespace AtYourService.Web.Util
             bootstrapJs.AddFile("~/Scripts/jquery.validate.unobtrusive.js");
             bootstrapJs.AddFile("~/Scripts/jquery.placeholder.js");
             bootstrapJs.AddFile("~/Scripts/ays.init.js");
+            bootstrapJs.AddFile("~/Scripts/ays.util.js");
 
             bundles.Add(bootstrapJs);
         }

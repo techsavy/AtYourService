@@ -40,7 +40,7 @@
             <tbody>
                 @foreach (var service in Model)
                 {
-                    <tr>
+                    <tr data-id="@service.Id">
                         <td>
                             <div class="center">
                                 <h2>
@@ -90,21 +90,37 @@
                 map: map,
                 title: value.Title
             });
+            marker.set("id", value.Id);
             
-            google.maps.event.addListener(marker, 'click', function() {
-                
-                var infowindow = new google.maps.InfoWindow({
-                    content: value.Title
-                });
-                
-                infowindow.open(map,marker);
-            });
+            attachInfo(marker, value);
         });
     }
 
+    function attachInfo(marker, service) {
+
+        var infowindow = new google.maps.InfoWindow({
+            content: formatInfoContent(service)
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(marker.get('map'), marker);
+        });
+    }
+      
     $(function () {
         $('.dropdown-toggle').dropdown();
         initialize();
+
+        $('tbody > tr').hover(function() {
+            var id = $(this).attr('data-id');
+
+            $.each(services, function(index, value) { 
+                if (value.Id == id) {
+                    map.setCenter(new google.maps.LatLng(value.Lat, value.Lng));
+                }
+            
+            });
+        });
     });
 </script>
 <div></div>
