@@ -6,6 +6,7 @@ namespace AtYourService.Web.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
     using Core;
     using Core.Geo;
     using Domain.Adverts;
@@ -13,6 +14,7 @@ namespace AtYourService.Web.Controllers
     using Helpers;
     using Lucene.Net.Analysis;
     using Lucene.Net.Analysis.Standard;
+    using Lucene.Net.Index;
     using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
     using Lucene.Net.Spatial.Tier;
@@ -20,12 +22,12 @@ namespace AtYourService.Web.Controllers
     using Models;
     using NHibernate.Spatial.Criterion.Lambda;
     using NHibernate.Transform;
-    using NHibernate.Spatial;
     using Util;
 
     public class ServicesController : BaseController
     {
         private readonly IFileSystem _fileSystem;
+        private const double Distance = 1.5;
         //
         // GET: /Services/
 
@@ -37,11 +39,11 @@ namespace AtYourService.Web.Controllers
         public ActionResult Category(int id, int? page)
         {
             var skip = page ?? 0;
-
+;
             var services = ExecuteQuery(
                 session => session.QueryOver<Service>()
                     .Where(s => s.EffectiveDate < DateTime.Now)
-                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(PointFactory.Create(6.9319444, 79.8877778), 0.1)
+                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(PointFactory.Create(6.9319444, 79.8877778), Distance)
                     .OrderBy(s => s.EffectiveDate).Desc
                     .Fetch(s => s.Category).Eager
                     .JoinQueryOver(s => s.Category).Where(c => c.Id == id || c.ParentCategory.Id == id)
@@ -51,15 +53,16 @@ namespace AtYourService.Web.Controllers
             Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
             var queryParser = new QueryParser(Lucene.Net.Util.Version.LUCENE_29, "Title", analyzer);
             var qr = queryParser.Parse("Title:t*");
-            var dq = new DistanceQueryBuilder(6.9319444, 79.8877778, 100, "Location_Latitude", "Location_Longitude", CartesianTierPlotter.DefaltFieldPrefix, true);
+            var dq = new DistanceQueryBuilder(6.9319444, 79.8877778, 500, "Location_Latitude", "Location_Longitude", CartesianTierPlotter.DefaltFieldPrefix, false);
+            Query tq = new TermQuery(new Term("metafile", "doc"));
             var dsort = new DistanceFieldComparatorSource(dq.DistanceFilter);
-            var sort = new Sort(new SortField("geo_distance", dsort));
-
-            var csq = new ConstantScoreQuery(dq.Filter);
+            Sort sort = new Sort(new SortField("Location", dsort, false));
 
             var q = ExecuteQuery(
                 session => session.FullTextSession()
-                               .CreateFullTextQuery(csq.Combine(new [] {qr}), typeof(Service)).List<Service>());
+                               .CreateFullTextQuery(tq, typeof(Service)).SetFilter(dq.Filter).List<Service>());
+
+            ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
 
             return View(services);
         }

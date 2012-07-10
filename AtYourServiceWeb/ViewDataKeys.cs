@@ -6,5 +6,7 @@ namespace AtYourService.Web
         public static readonly string Message = "Message";
 
         public static readonly string Categories = "Categories";
+
+        public static readonly string ServiceSerializationInfos = "ServiceSerializationInfos";
     }
 }

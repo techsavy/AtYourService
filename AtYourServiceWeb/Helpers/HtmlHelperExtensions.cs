@@ -5,6 +5,7 @@ namespace AtYourService.Web.Helpers
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Web.Mvc;
+    using System.Web.Helpers;
 
     public static class HtmlHelperExtensions
     {
@@ -118,6 +119,11 @@ namespace AtYourService.Web.Helpers
             tagBuilder.MergeAttribute("accept", "image/gif,image/jpeg,image/png");
 
             return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
+        }
+
+        public static MvcHtmlString Serialize(this HtmlHelper helper, object value)
+        {
+            return new MvcHtmlString(Json.Encode(value));
         }
     }
 }
