@@ -30,8 +30,8 @@ namespace AtYourService.Domain.Adverts
         {
             var service = (Service)value;
             var location = service.Location;
-            var lat = new Field("Location_Latitude", NumericUtils.DoubleToPrefixCoded(location.X), Field.Store.YES, Field.Index.NOT_ANALYZED);
-            var lng = new Field("Location_Longitude", NumericUtils.DoubleToPrefixCoded(location.Y), Field.Store.YES, Field.Index.NOT_ANALYZED);
+            var lat = new Field("Location_Latitude", NumericUtils.DoubleToPrefixCoded(location.Y), Field.Store.YES, Field.Index.NOT_ANALYZED);
+            var lng = new Field("Location_Longitude", NumericUtils.DoubleToPrefixCoded(location.X), Field.Store.YES, Field.Index.NOT_ANALYZED);
 
             document.Add(lat);
             document.Add(lng);
@@ -42,7 +42,7 @@ namespace AtYourService.Domain.Adverts
             for (int i = 0; i < ctpsize; i++)
             {
                 CartesianTierPlotter ctp = Ctps[i];
-                var boxId = ctp.GetTierBoxId(location.X, location.Y);
+                var boxId = ctp.GetTierBoxId(location.Y, location.X);
                 document.Add(new Field(ctp.GetTierFieldName(), NumericUtils.DoubleToPrefixCoded(boxId), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
             }
         }

@@ -8,7 +8,6 @@ namespace AtYourService.Web.Controllers
     using System.Web.Mvc;
     using AutoMapper;
     using Core;
-    using Core.Geo;
     using Domain.Adverts;
     using Domain.Categories;
     using Helpers;
@@ -27,7 +26,11 @@ namespace AtYourService.Web.Controllers
     public class ServicesController : BaseController
     {
         private readonly IFileSystem _fileSystem;
-        private const double Distance = 1.5;
+
+        /// <summary>
+        /// Radius of the searched area
+        /// </summary>
+        private const double Distance = 10000; //10km
         //
         // GET: /Services/
 
@@ -63,6 +66,7 @@ namespace AtYourService.Web.Controllers
                                .CreateFullTextQuery(tq, typeof(Service)).SetFilter(dq.Filter).List<Service>());
 
             ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
+            ViewData[ViewDataKeys.UserLocation] = GetUserLocation();
 
             return View(services);
         }

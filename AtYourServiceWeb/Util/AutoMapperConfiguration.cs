@@ -16,8 +16,8 @@ namespace AtYourService.Web.Util
                 .ForMember(ui => ui.IsAdmin, opt => opt.Condition((User u) => u is Administrator));
 
             Mapper.CreateMap<Service, ServiceSerializeInfo>()
-                .ForMember(si => si.Lat, opt => opt.MapFrom(s => s.Location.X))
-                .ForMember(si => si.Lng, opt => opt.MapFrom(s => s.Location.Y));
+                .ForMember(si => si.Lat, opt => opt.MapFrom(s => s.Location.Y))
+                .ForMember(si => si.Lng, opt => opt.MapFrom(s => s.Location.X));
         }
     }
 }

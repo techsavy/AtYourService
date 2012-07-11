@@ -232,6 +232,7 @@
     <Compile Include="Util\FileBaseAdapter.cs" />
     <Compile Include="Util\ImageFileAttribute.cs" />
     <Compile Include="Util\NHibernateContext.cs" />
+    <Compile Include="Util\QueryOverExtensions.cs" />
     <Compile Include="Util\SearchExtensions.cs" />
     <Compile Include="Util\WindowsFileSystem.cs" />
     <Compile Include="ViewDataKeys.cs" />

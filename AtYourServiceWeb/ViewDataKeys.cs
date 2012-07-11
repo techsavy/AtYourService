@@ -8,5 +8,7 @@ namespace AtYourService.Web
         public static readonly string Categories = "Categories";
 
         public static readonly string ServiceSerializationInfos = "ServiceSerializationInfos";
+
+        public static readonly string UserLocation = "UserLocation";
     }
 }

@@ -23,8 +23,8 @@ namespace Core.Tests
 
             var point = PointFactory.Create(lat, lng);
 
-            Assert.AreEqual(lat, point.X);
-            Assert.AreEqual(lng, point.Y);
+            Assert.AreEqual(lat, point.Y);
+            Assert.AreEqual(lng, point.X);
             Assert.AreEqual(PointFactory.WorldGeodeticSystemSrid, point.SRID);
         }
     }

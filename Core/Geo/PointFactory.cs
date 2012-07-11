@@ -15,9 +15,9 @@ namespace AtYourService.Core.Geo
     {
         public const int WorldGeodeticSystemSrid = 4326;
 
-        public static Point Create(double x, double y)
+        public static Point Create(double latitude, double longitude)
         {
-            var point = new Point(x, y) { SRID = WorldGeodeticSystemSrid };
+            var point = new Point(longitude, latitude) { SRID = WorldGeodeticSystemSrid };
 
             return point;
         }

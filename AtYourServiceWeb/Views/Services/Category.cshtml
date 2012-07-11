@@ -1,6 +1,8 @@
-﻿@model IEnumerable<AtYourService.Domain.Adverts.Service>
+﻿@using NetTopologySuite.Geometries
+@model IEnumerable<AtYourService.Domain.Adverts.Service>
 @{
     ViewBag.Title = "Category";
+    var location = (Point)ViewData[AtYourService.Web.ViewDataKeys.UserLocation];
 }
 <div class="row">
     <div class="span6">

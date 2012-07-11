@@ -22,7 +22,7 @@ namespace AtYourService.Data.Mapping.Users
             Property(user => user.PasswordHash, m => m.NotNullable(true));
             Property(user => user.IsVerified, m => m.NotNullable(true));
             Property(user => user.LastActiveDate, m => m.NotNullable(true));
-            Property(user => user.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeometryType>(); m.Column(c => c.SqlType("geometry")); });
+            Property(user => user.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeographyType>(); m.Column(c => c.SqlType("geography")); });
 
             Discriminator(x =>
             {

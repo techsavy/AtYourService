@@ -34,8 +34,8 @@ namespace AtYourService.Domain.Tests.User
             Assert.AreEqual(name, client.Name);
             Assert.AreEqual(0, initialCount);
 
-            Assert.AreEqual(latitude, client.Location.X);
-            Assert.AreEqual(longitude, client.Location.Y);
+            Assert.AreEqual(latitude, client.Location.Y);
+            Assert.AreEqual(longitude, client.Location.X);
 
             Assert.NotNull(client.ClientSettings);
             Assert.AreEqual(0, client.ClientSettings.AdCount);

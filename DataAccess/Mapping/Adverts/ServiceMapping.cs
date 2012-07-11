@@ -34,7 +34,7 @@ namespace AtYourService.Data.Mapping.Adverts
             Property(service => service.EffectiveDate, m => { m.NotNullable(true); });
             Property(service => service.ExpiryDate, m => { m.NotNullable(true); });
 
-            Property(service => service.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeometryType>(); m.Column(c => c.SqlType("geometry")); });
+            Property(service => service.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeographyType>(); m.Column(c => c.SqlType("geography")); });
 
             ManyToOne(service => service.Category, m => { m.Column("CategoryId"); m.NotNullable(true); m.ForeignKey("FK_Service_Category"); });
             ManyToOne(service => service.Client, m => { m.Column("ClientId"); m.NotNullable(true); m.ForeignKey("FK_Service_Client"); });
