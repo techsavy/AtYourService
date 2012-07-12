@@ -5,6 +5,7 @@ namespace AtYourService.Web.Util
     using System.Diagnostics.Contracts;
     using Core.Commanding;
     using NHibernate;
+    using Queries;
 
     /// <summary>
     /// NHibernate based commanding and querying context
@@ -32,6 +33,13 @@ namespace AtYourService.Web.Util
             Contract.Requires(query != null);
 
             return query(Session);
+        }
+
+        public virtual TResult ExecuteQuery<TResult>(IQuery<TResult> query)
+        {
+            Contract.Requires(query != null);
+
+            return query.Execute(Session);
         }
 
         private CommandContext CreateCommandContext()

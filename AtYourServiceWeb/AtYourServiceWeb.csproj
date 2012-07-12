@@ -210,6 +210,7 @@
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Models\CategoryBrowseModel.cs" />
     <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
@@ -222,6 +223,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\NHibernateQuery.cs" />
+    <Compile Include="Queries\QueryByCategory.cs" />
     <Compile Include="Security\AccountMembershipService.cs" />
     <Compile Include="Security\FormsAuthenticationService.cs" />
     <Compile Include="Security\IFormsAuthenticationService.cs" />

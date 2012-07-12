@@ -9,6 +9,7 @@ namespace AtYourService.Web.Controllers
     using Models;
     using NetTopologySuite.Geometries;
     using NHibernate;
+    using Queries;
     using Util;
     using Core.Geo;
 
@@ -38,6 +39,13 @@ namespace AtYourService.Web.Controllers
         }
 
         protected TResult ExecuteQuery<TResult>(Func<ISession, TResult> query)
+        {
+            Contract.Requires(query != null);
+
+            return _nHibernateContext.ExecuteQuery(query);
+        }
+
+        protected virtual TResult ExecuteQuery<TResult>(IQuery<TResult> query)
         {
             Contract.Requires(query != null);
 
