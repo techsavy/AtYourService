@@ -1,8 +1,11 @@
 ﻿@using NetTopologySuite.Geometries
-@model IEnumerable<AtYourService.Domain.Adverts.Service>
+@using AtYourService.Domain.Adverts
+@model CategoryBrowseModel
 @{
     ViewBag.Title = "Category";
+    var services = (IEnumerable<Service>)ViewData[AtYourService.Web.ViewDataKeys.Services];
     var location = (Point)ViewData[AtYourService.Web.ViewDataKeys.UserLocation];
+
 }
 <div class="row">
     <div class="span6">
@@ -15,9 +18,9 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#">Distance</a></li>
-                <li><a href="#">Date</a></li>
-                <li><a href="#">Views</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Date})">Date</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Distance })">Distance</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Views })">Views</a></li>
             </ul>
         </div>
     </div>
@@ -40,7 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var service in Model)
+                @foreach (var service in services)
                 {
                     <tr data-id="@service.Id">
                         <td>
