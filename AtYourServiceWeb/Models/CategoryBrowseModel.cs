@@ -1,4 +1,8 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="CategoryBrowseModel.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace AtYourService.Web.Models
 {

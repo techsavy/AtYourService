@@ -1,0 +1,8 @@
+﻿@using AtYourService.Domain.Adverts
+@{
+    ViewBag.Title = "Search";
+    var services = (IEnumerable<Service>)ViewData[ViewDataKeys.Services];
+    var location = (Point)ViewData[ViewDataKeys.UserLocation];
+}
+
+<h2>Search</h2>

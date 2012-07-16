@@ -2,15 +2,18 @@
 
 namespace AtYourService.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
     using Core;
+    using Core.Geo;
     using Domain.Adverts;
     using Domain.Categories;
     using Helpers;
     using Models;
+    using NHibernate.Spatial.Criterion.Lambda;
     using NHibernate.Transform;
     using Queries;
     using Util;
@@ -42,6 +45,17 @@ namespace AtYourService.Web.Controllers
             return View(categoryBrowseModel);
         }
 
+        public ActionResult Search(SearchModel searchModel)
+        {
+            var services = ExecuteQuery(new AdvancedSearch(searchModel, GetUserLocation(), Distance));
+
+            ViewData[ViewDataKeys.Services] = services;
+            ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
+            ViewData[ViewDataKeys.UserLocation] = GetUserLocation();
+
+            return View(searchModel);
+        }
+
         public ActionResult Create()
         {
             ViewData[ViewDataKeys.Categories] = GetCategories();
@@ -65,6 +79,21 @@ namespace AtYourService.Web.Controllers
             ViewData[ViewDataKeys.Categories] = GetCategories();
 
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult ServicesNearLocation(double lat, double lng)
+        {
+            var userLocation = PointFactory.Create(lat, lng);
+
+            var services = ExecuteQuery(
+                session => session.QueryOver<Service>()
+                    .Where(s => s.EffectiveDate < DateTime.Now)
+                    .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(userLocation, Distance)
+                    .Fetch(s => s.Category).Eager
+                    .List());
+
+            return Json(Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services));
         }
 
         private IList<GroupedSelectListItem> GetCategories()

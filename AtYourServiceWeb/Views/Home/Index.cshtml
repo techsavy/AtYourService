@@ -58,20 +58,57 @@
         map = new google.maps.Map(document.getElementById
             ("map-canvas"), options);
 
-        placeMarker(new google.maps.LatLng(6.9349444, 79.8897778), "Abc Caterer");
-        placeMarker(new google.maps.LatLng(6.9389444, 79.8817778), "Xyz Cabs");
+        var captured = $('#user-location').attr('data-captured');
+        if (captured == 'no') {
+            getUserLocation(function (loc) {                
+                populateMap(loc);
+            });
+        }
+        else {
+            var lat = $('#user-location').attr('data-lat');
+            var lng = $('#user-location').attr('data-lng');
+
+            populateMap(new google.maps.LatLng(lat, lng));
+        }
     }
+    
     $(function () {
         $('.dropdown-toggle').dropdown();
         initialize();
     });
 
-    function placeMarker(location, name) {
-        var marker = new google.maps.Marker({
-            position: location,
-            animation: google.maps.Animation.DROP,
-            map: map,
-            title: name
+    function populateMap(location) {
+        map.setCenter(location);
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ServicesNearLocation", "Services")',
+            data: { lat: location.lat(), lng: location.lng() },
+            success: function (services) {
+                $.each(services, function (index, value) {
+                    var serviceLatlng = new google.maps.LatLng(value.Lat, value.Lng);
+
+                    var marker = new google.maps.Marker({
+                        position: serviceLatlng,
+                        animation: google.maps.Animation.DROP,
+                        map: map,
+                        title: value.Title
+                    });
+                    marker.set("id", value.Id);
+
+                    attachInfo(marker, value);
+                });
+            }
         });
     }
+
+    function attachInfo(marker, service) {
+
+        var infowindow = new google.maps.InfoWindow({
+            content: formatInfoContent(service)
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(marker.get('map'), marker);
+        });
+    }    
 </script>

@@ -1,8 +1,10 @@
 ﻿
 namespace AtYourService.Web.Controllers
 {
+    using System.Net;
     using System.Web.Mvc;
     using AutoMapper;
+    using Core.Geo;
     using Domain.Users;
     using Models;
     using Security;
@@ -95,6 +97,23 @@ namespace AtYourService.Web.Controllers
         public ActionResult MyProfile()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateLocation(double lat, double lng)
+        {
+            if (Session[SessionKeys.User] != null)
+            {
+                var userInfo = (UserInfo) Session[SessionKeys.User];
+                userInfo.Location = PointFactory.Create(lat, lng);
+            }
+            else
+            {
+                var userInfo = new UserInfo { IsAdmin = false, IsAuthenticated = false, Location = PointFactory.Create(lat, lng) };
+                Session[SessionKeys.User] = userInfo;
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

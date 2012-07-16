@@ -40,6 +40,12 @@ namespace AtYourService.Web
             );
 
             routes.MapRoute(
+                name: "UserLocatioin",
+                url: "*/UpdateLocation/",
+                defaults: new { controller = "Accounts", action = "UpdateLocation" }
+            );
+
+            routes.MapRoute(
                 name: "CategoryBrowse",
                 url: "Services/{action}/{id}/{name}",
                 defaults: new { controller = "Services", action = "Category", name = UrlParameter.Optional }

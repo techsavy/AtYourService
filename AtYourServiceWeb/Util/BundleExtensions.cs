@@ -22,6 +22,7 @@ namespace AtYourService.Web.Util
             bootstrapJs.AddFile("~/Scripts/jquery.placeholder.js");
             bootstrapJs.AddFile("~/Scripts/ays.init.js");
             bootstrapJs.AddFile("~/Scripts/ays.util.js");
+            bootstrapJs.AddFile("~/Scripts/ays.location.js");
 
             bundles.Add(bootstrapJs);
         }

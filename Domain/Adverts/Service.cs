@@ -34,6 +34,7 @@ namespace AtYourService.Domain.Adverts
 
         public virtual Point Location { get; set; }
 
+        [Field(Index.UnTokenized, Store = Store.Yes)]
         public virtual long Views { get; set; }
 
         public virtual long Impressions { get; set; }

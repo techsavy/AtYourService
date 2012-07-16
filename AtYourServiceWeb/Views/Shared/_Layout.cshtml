@@ -1,4 +1,3 @@
-@using AtYourService.Web
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,8 @@
     <title>@ViewBag.Title</title>
     <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bootstrap/css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bootstrap/js")"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ays.debug.js")"></script>
 </head>
 <body class="background">
     <div class="navbar navbar-fixed-top">
@@ -37,9 +38,9 @@
                         <li class="divider-vertical"></li>
                         <li class="divider-vertical"></li>
                         <li style="height: 25px;">
-                            <form class="form-search">
-                            <input type="text" class="input-medium search-query" placeholder="Looking For">
-                            <input type="text" class="input-medium search-query" placeholder="Location">
+                            <form class="form-search" action="@Url.Action("Search", "Services")">
+                            <input type="text" id="term" name="term" class="input-medium search-query" placeholder="Looking For">
+                            <input type="text" id="location" name="location" class="input-medium search-query" placeholder="Location">
                             <button type="submit" class="btn">
                                 Search</button></form>
                         </li>
@@ -48,6 +49,9 @@
                 <!--/.nav-collapse -->
             </div>
         </div>
+    </div>
+    <div id="msg-warn" class="alert hidden">
+        <a class="close" href="#" data-dismiss="alert">×</a> <span id="msg-warn-text"></span>
     </div>
     <div class="container">
         @RenderBody()
@@ -69,5 +73,6 @@
         <div class="modal-footer">
             <a href="#" data-dismiss="modal" class="btn btn-primary">OK</a></div>
     </div>
+    @Html.Partial("_UserLocation")
 </body>
 </html>

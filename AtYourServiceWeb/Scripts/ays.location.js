@@ -19,4 +19,9 @@ function handleLocationResolutionFail(callback) {
     if (location) {
         callback(new google.maps.LatLng(location.latitude, location.longitude));
     }
+    else {
+        $('#msg-warn-text').html('Unable detect your location. Please enable location service if your browser supports it');
+        $('#msg-warn').removeClass("hidden");
+        $('#msg-warn').alert();
+    }
 }

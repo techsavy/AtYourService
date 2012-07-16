@@ -1,0 +1,16 @@
+﻿@{
+    var locationCaptured = false;
+    Point location = null;
+    if (ViewData.ContainsKey(ViewDataKeys.UserLocation))
+    {
+        location = (Point)ViewData[AtYourService.Web.ViewDataKeys.UserLocation];
+        locationCaptured = true;
+    }
+    else if (Session[SessionKeys.User] != null)
+    {
+        var userInfo = (UserInfo)Session[SessionKeys.User];
+        location = userInfo.Location;
+        locationCaptured = true;
+    }
+}
+<div id="user-location" data-captured="@(locationCaptured ? "yes" : "no")" data-lat="@(locationCaptured ? location.Y.ToString() : string.Empty)" data-lng="@(locationCaptured ? location.X.ToString() : string.Empty)"></div>

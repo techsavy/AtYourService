@@ -66,7 +66,10 @@
     var geoService;
 
     function initialize() {
-        var latlng = new google.maps.LatLng(6.9319444, 79.8877778);
+        var lat = $('#user-location').attr('data-lat');
+        var lng = $('#user-location').attr('data-lng');
+
+        var latlng = new google.maps.LatLng(lat, lng);
         var options = { zoom: 14, center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };

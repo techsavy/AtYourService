@@ -1,16 +1,15 @@
-﻿@using NetTopologySuite.Geometries
-@using AtYourService.Domain.Adverts
+﻿@using AtYourService.Domain.Adverts
 @model CategoryBrowseModel
 @{
     ViewBag.Title = "Category";
-    var services = (IEnumerable<Service>)ViewData[AtYourService.Web.ViewDataKeys.Services];
-    var location = (Point)ViewData[AtYourService.Web.ViewDataKeys.UserLocation];
+    var services = (IEnumerable<Service>)ViewData[ViewDataKeys.Services];
+    var location = (Point)ViewData[ViewDataKeys.UserLocation];
 
 }
 <div class="row">
     <div class="span6">
         <h3 class="pull-left">
-            Adverts in category</h3>
+            Services in category</h3>
         <div class="btn-group pull-right">
             <button class="btn">
                 Sort By</button>
@@ -18,7 +17,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Date})">Date</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Date })">Date</a></li>
                 <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Distance })">Distance</a></li>
                 <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Views })">Views</a></li>
             </ul>
@@ -76,10 +75,10 @@
 </div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
-    var services = @Html.Serialize(ViewData[AtYourService.Web.ViewDataKeys.ServiceSerializationInfos]);
+    var services = @Html.Serialize(ViewData[ViewDataKeys.ServiceSerializationInfos]);
 
     function initialize() {
-        var latlng = new google.maps.LatLng(6.9319444, 79.8877778);
+        var latlng = new google.maps.LatLng(@location.Y, @location.X);
         var options = { zoom: 14, center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
