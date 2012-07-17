@@ -140,6 +140,7 @@
     <Compile Include="FileBase.cs" />
     <Compile Include="Geo\Circle.cs" />
     <Compile Include="Geo\GeoExtensions.cs" />
+    <Compile Include="Geo\IGeoCodingService.cs" />
     <Compile Include="Geo\PointFactory.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

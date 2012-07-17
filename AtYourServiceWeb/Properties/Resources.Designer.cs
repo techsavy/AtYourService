@@ -86,5 +86,14 @@ namespace AtYourService.Web.Properties {
                 return ResourceManager.GetString("EntityCreateSuccess", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are unable to determine the location {0}. Please check the spellings..
+        /// </summary>
+        internal static string GeoCodeFail {
+            get {
+                return ResourceManager.GetString("GeoCodeFail", resourceCulture);
+            }
+        }
     }
 }

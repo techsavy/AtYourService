@@ -126,4 +126,7 @@
   <data name="EntityCreateSuccess" xml:space="preserve">
     <value>{0} created successfully.</value>
   </data>
+  <data name="GeoCodeFail" xml:space="preserve">
+    <value>We are unable to determine the location {0}. Please check the spellings.</value>
+  </data>
 </root>

@@ -1,4 +1,8 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="ServicesController.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace AtYourService.Web.Controllers
 {
@@ -15,12 +19,15 @@ namespace AtYourService.Web.Controllers
     using Models;
     using NHibernate.Spatial.Criterion.Lambda;
     using NHibernate.Transform;
+    using NetTopologySuite.Geometries;
+    using Properties;
     using Queries;
     using Util;
 
     public class ServicesController : BaseController
     {
         private readonly IFileSystem _fileSystem;
+        private readonly IGeoCodingService _geoCodingService;
 
         /// <summary>
         /// Radius of the searched area
@@ -29,9 +36,10 @@ namespace AtYourService.Web.Controllers
         //
         // GET: /Services/
 
-        public ServicesController(NHibernateContext nHibernateContext, IFileSystem fileSystem) : base(nHibernateContext)
+        public ServicesController(NHibernateContext nHibernateContext, IFileSystem fileSystem, IGeoCodingService geoCodingService) : base(nHibernateContext)
         {
             _fileSystem = fileSystem;
+            _geoCodingService = geoCodingService;
         }
 
         public ActionResult Category(CategoryBrowseModel categoryBrowseModel)
@@ -47,11 +55,28 @@ namespace AtYourService.Web.Controllers
 
         public ActionResult Search(SearchModel searchModel)
         {
-            var services = ExecuteQuery(new AdvancedSearch(searchModel, GetUserLocation(), Distance));
+            Point location;
+            if (string.IsNullOrWhiteSpace(searchModel.Location))
+            {
+                location = GetUserLocation();
+            }
+            else
+            {
+                location = _geoCodingService.GetCoordinates(searchModel.Location);
+                if (location == null)
+                {
+                    TempData[ViewDataKeys.Message] = new FailMessage(string.Format(Resources.GeoCodeFail, searchModel.Location));
+                }
+            }
+            
+            if (location != null)
+            {
+                var services = ExecuteQuery(new AdvancedSearch(searchModel, location, Distance));
 
-            ViewData[ViewDataKeys.Services] = services;
-            ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
-            ViewData[ViewDataKeys.UserLocation] = GetUserLocation();
+                ViewData[ViewDataKeys.Services] = services;
+                ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
+                ViewData[ViewDataKeys.UserLocation] = location;
+            }
 
             return View(searchModel);
         }

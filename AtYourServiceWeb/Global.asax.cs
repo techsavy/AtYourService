@@ -11,7 +11,9 @@ namespace AtYourService.Web
     using Autofac;
     using Autofac.Integration.Mvc;
     using Core;
+    using Core.Geo;
     using Data;
+    using Geo;
     using NHibernate;
     using NHibernate.Cfg;
     using NHibernate.Mapping.ByCode;
@@ -100,6 +102,8 @@ namespace AtYourService.Web
 
             builder.RegisterType<AccountMembershipService>().As<IMembershipService>();
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();
+            builder.RegisterType<GeoCodingSerive>().As<IGeoCodingService>();
+
             builder.RegisterType<NHibernateContext>().AsSelf()
                 .WithParameter((info, context) => info.Name == "userName", (info, context) => HttpContext.Current.User.Identity.Name);
             builder.RegisterType<WindowsFileSystem>().As<IFileSystem>()

@@ -10,12 +10,15 @@ namespace AtYourService.Web.Tests.Controllers
     using System.Collections.Generic;
     using Core;
     using Core.Commanding;
+    using Core.Geo;
+    using Domain.Adverts;
     using Domain.Categories;
     using Iesi.Collections.Generic;
     using Models;
     using Moq;
     using NHibernate;
     using NUnit.Framework;
+    using Queries;
     using Web.Controllers;
     using Web.Helpers;
     using Web.Util;
@@ -26,6 +29,11 @@ namespace AtYourService.Web.Tests.Controllers
     [TestFixture]
     public class ServicesControllerTest
     {
+        static ServicesControllerTest()
+        {
+            AutoMapperConfiguration.Configure();
+        }
+
         private const string UserName = "test";
 
         [Test]
@@ -39,8 +47,9 @@ namespace AtYourService.Web.Tests.Controllers
                 .Returns(categories);
 
             var fileSystemMock = new Mock<IFileSystem>();
+            var geoCodingServicemMock = new Mock<IGeoCodingService>();
 
-            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object);
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object, geoCodingServicemMock.Object);
             controller.SetFakeControllerContext(MvcMockHelpers.FakeUnauthenticatedHttpContext("~/Services/Create/", UserName));
 
             controller.Create();
@@ -62,14 +71,61 @@ namespace AtYourService.Web.Tests.Controllers
                 .Returns(categories);
 
             var fileSystemMock = new Mock<IFileSystem>();
+            var geoCodingServicemMock = new Mock<IGeoCodingService>();
 
-            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object);
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object, geoCodingServicemMock.Object);
             controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Services/Create/", UserName));
             controller.SetUserInfo();
 
             controller.Create(createServiceModel);
 
             nHbernateContextMock.Verify(c => c.ExecuteCommand(It.IsAny<ICommand>()));
+        }
+
+        [Test]
+        public void Category_Browse()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+            var categoryBrowseModel = new CategoryBrowseModel();
+            var services = GetSampleServices();
+
+            nHbernateContextMock.Setup(c => c.ExecuteQuery(It.IsAny<QueryByCategory>()))
+                .Returns(services);
+
+            var fileSystemMock = new Mock<IFileSystem>();
+            var geoCodingServicemMock = new Mock<IGeoCodingService>();
+
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object, geoCodingServicemMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Services/Category/1/", UserName));
+            controller.SetUserInfo();
+
+            controller.Category(categoryBrowseModel);
+
+            Assert.AreEqual(services, controller.ViewData[ViewDataKeys.Services]);
+        }
+
+        [Test]
+        public void ServicesNearLocation()
+        {
+            var sessionMock = new Mock<ISession>();
+            var nHbernateContextMock = new Mock<NHibernateContext>(sessionMock.Object, UserName);
+            var services = GetSampleServices();
+
+            nHbernateContextMock.Setup(c => c.ExecuteQuery(It.IsAny<Func<ISession, IList<Service>>>()))
+                .Returns(services);
+
+            var fileSystemMock = new Mock<IFileSystem>();
+            var geoCodingServicemMock = new Mock<IGeoCodingService>();
+
+            var controller = new ServicesController(nHbernateContextMock.Object, fileSystemMock.Object, geoCodingServicemMock.Object);
+            controller.SetFakeControllerContext(MvcMockHelpers.FakeAuthenticatedHttpContext("~/Services/ServicesNearLocation", UserName));
+            controller.SetUserInfo();
+
+            var jsonResult = controller.ServicesNearLocation(1.337, 3.37);
+
+            dynamic json = jsonResult.Data;
+            Assert.AreEqual(2, json.Count);
         }
 
         private List<Category> GetSampleCategories()
@@ -85,6 +141,15 @@ namespace AtYourService.Web.Tests.Controllers
             bar.SubCategories = new HashedSet<Category> { barSub };
 
             return new List<Category> { foo, bar };
+        }
+
+        private List<Service> GetSampleServices()
+        {
+            var foo = new ServiceOffering { Id = 1, Title = "foo", Body = "foo", Category = new Category { Id = 1, Name = "foo"}};
+
+            var bar = new ServiceOffering { Id = 1, Title = "bar", Body = "bar", Category = new Category { Id = 2, Name = "bar" } };
+
+            return new List<Service> { foo, bar };
         }
     }
 }
