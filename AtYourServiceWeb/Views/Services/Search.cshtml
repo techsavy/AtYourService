@@ -1,8 +1,79 @@
 ﻿@using AtYourService.Domain.Adverts
+@model SearchModel
 @{
     ViewBag.Title = "Search";
     var services = (IEnumerable<Service>)ViewData[ViewDataKeys.Services];
     var location = (Point)ViewData[ViewDataKeys.UserLocation];
 }
-
-<h2>Search</h2>
+<div class="row">
+    <div class="span12">
+        @using (Html.BeginForm("Search", "Services", FormMethod.Get, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <legend>Search</legend>
+                <div class="row">
+                    <div class="control-group search-field">
+                        @Html.Custom().LabelFor(model => model.Terms)
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Terms, new { @class = "span2" })</div>
+                    </div>
+                    <div class="control-group search-field">
+                        @Html.Custom().LabelFor(model => model.Location)
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Location, new { @class = "input-large" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+     
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="span6">
+        <table class="table table-bordered table-striped">
+            <thead class="hide">
+                <tr>
+                    <th>
+                        Views
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in services)
+                {
+                    <tr data-id="@service.Id">
+                        <td>
+                            <div class="center">
+                                <h2>
+                                    2</h2>
+                                Reviews</div>
+                            <div class="center">
+                                <h3>
+                                    42</h3>
+                                Views
+                            </div>
+                        </td>
+                        <td>
+                            <img alt="" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                        </td>
+                        <td>
+                            <h3>
+                                @service.Title</h3>
+                            <p>
+                                @service.Body</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="span6" id="map-canvas" style="height: 600px">
+    </div>
+</div>

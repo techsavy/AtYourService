@@ -89,3 +89,10 @@ body
 .input-xxlarge {
   width: 450px;
 }
+
+.search-field
+{
+    display: inline;
+    float: left;
+    clear: none;
+}
