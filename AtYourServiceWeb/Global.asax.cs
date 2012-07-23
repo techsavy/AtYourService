@@ -87,6 +87,8 @@ namespace AtYourService.Web
             var schema = new SchemaExport(config);
             schema.SetOutputFile("D:\\script.sql");
             schema.Create(true, true);
+            //var update = new SchemaUpdate(config);
+            //update.Execute(false, true);
 
             var sessionFactory = config.BuildSessionFactory();
         }
@@ -95,10 +97,8 @@ namespace AtYourService.Web
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetAssembly(typeof(MvcApplication)));
-            builder.Register(x => new NHibernateConfigurator().GetSessionFactory())
-                .SingleInstance();
-            builder.Register(x => x.Resolve<ISessionFactory>().OpenSession())
-                .InstancePerHttpRequest();
+            builder.Register(x => new NHibernateConfigurator().GetSessionFactory()).SingleInstance();
+            builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).InstancePerHttpRequest();
 
             builder.RegisterType<AccountMembershipService>().As<IMembershipService>();
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();

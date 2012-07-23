@@ -46,6 +46,8 @@ namespace AtYourService.Web.Controllers
         {
             var services = ExecuteQuery(new QueryByCategory(categoryBrowseModel, GetUserLocation(), Distance));
 
+            LogImpressions(services);
+
             ViewData[ViewDataKeys.Services] = services;
             ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
             ViewData[ViewDataKeys.UserLocation] = GetUserLocation();
@@ -73,10 +75,16 @@ namespace AtYourService.Web.Controllers
             {
                 var services = ExecuteQuery(new AdvancedSearch(searchModel, location, Distance));
 
+                LogImpressions(services);
+
                 ViewData[ViewDataKeys.Services] = services;
                 ViewData[ViewDataKeys.ServiceSerializationInfos] = Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services);
                 ViewData[ViewDataKeys.UserLocation] = location;
             }
+
+            ViewData[ViewDataKeys.Categories] = GetCategories();
+            ViewData[ViewDataKeys.ServiceTypes] = GetServiceTypes();
+            ViewData[ViewDataKeys.SortTypes] = GetSortTypes();
 
             return View(searchModel);
         }
@@ -84,6 +92,7 @@ namespace AtYourService.Web.Controllers
         public ActionResult Create()
         {
             ViewData[ViewDataKeys.Categories] = GetCategories();
+            ViewData[ViewDataKeys.ServiceTypes] = GetServiceTypes();
 
             return View();
         }
@@ -102,6 +111,7 @@ namespace AtYourService.Web.Controllers
             }
 
             ViewData[ViewDataKeys.Categories] = GetCategories();
+            ViewData[ViewDataKeys.ServiceTypes] = GetServiceTypes();
 
             return View();
         }
@@ -117,6 +127,8 @@ namespace AtYourService.Web.Controllers
                     .WhereSpatialRestrictionOn(s => s.Location).IsWithinDistance(userLocation, Distance)
                     .Fetch(s => s.Category).Eager
                     .List());
+
+            LogImpressions(services);
 
             return Json(Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services));
         }
@@ -140,6 +152,27 @@ namespace AtYourService.Web.Controllers
                         }).ToList();
 
             return categorySelectList;
+        }
+
+        private IEnumerable<SelectListItem> GetServiceTypes()
+        {
+            yield return new SelectListItem { Value = "1", Text = "Service"};
+            yield return new SelectListItem { Value = "2", Text = "Wanted"};
+        }
+
+        private IEnumerable<SelectListItem> GetSortTypes()
+        {
+            yield return new SelectListItem { Value = "Distance", Text = "Distance" };
+            yield return new SelectListItem { Value = "Date", Text = "Date" };
+            yield return new SelectListItem { Value = "Views", Text = "Views" };
+        }
+
+        private void LogImpressions(IEnumerable<Service> services)
+        {
+            var serviceIds = services.Select(s => s.Id).ToList();
+            var logImpressionsCommand = new LogImpressionsCommand(serviceIds, Request.UserHostAddress);
+
+            ExecuteNonBlockingCommand(logImpressionsCommand);
         }
     }
 }

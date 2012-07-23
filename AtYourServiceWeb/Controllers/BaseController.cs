@@ -6,12 +6,12 @@ namespace AtYourService.Web.Controllers
     using System.Web.Mvc;
     using AutoMapper;
     using Core.Commanding;
+    using Core.Geo;
     using Models;
     using NetTopologySuite.Geometries;
     using NHibernate;
     using Queries;
     using Util;
-    using Core.Geo;
 
     public abstract class BaseController : Controller
     {        
@@ -29,6 +29,13 @@ namespace AtYourService.Web.Controllers
             Contract.Requires(command != null);
 
             _nHibernateContext.ExecuteCommand(command);
+        }
+
+        protected void ExecuteNonBlockingCommand(ICommand command)
+        {
+            Contract.Requires(command != null);
+
+            _nHibernateContext.ExecuteNonBlockingCommand(command);
         }
 
         protected TResult ExecuteCommand<TResult>(ICommand<TResult> command)

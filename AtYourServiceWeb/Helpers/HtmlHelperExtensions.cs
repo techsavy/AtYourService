@@ -67,14 +67,19 @@ namespace AtYourService.Web.Helpers
             return new MvcHtmlString(string.Empty);
         }
 
-        public static MvcHtmlString CategoryFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<GroupedSelectListItem> selectList)
+        public static MvcHtmlString CategoryFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<GroupedSelectListItem> selectList, string optionLabel = "-")
         {
             var attributes = new Dictionary<string, object>();
             attributes.Add("data-val", "true");
             attributes.Add("data-val-required", "The Category field is required");
             attributes.Add("data-val-number", "The Category field is required");
 
-            return htmlHelper.DropDownGroupListFor(expression, selectList, "-", attributes);
+            return htmlHelper.DropDownGroupListFor(expression, selectList, optionLabel, attributes);
+        }
+
+        public static MvcHtmlString CategoryFilterFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<GroupedSelectListItem> selectList, string optionLabel = "-")
+        {
+            return htmlHelper.DropDownGroupListFor(expression, selectList, optionLabel);
         }
 
         public static MvcHtmlString HiddenLocation(this HtmlHelper helper)

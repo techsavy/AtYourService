@@ -3,6 +3,7 @@ namespace AtYourService.Web.Util
 {
     using System;
     using System.Diagnostics.Contracts;
+    using System.Threading.Tasks;
     using Core.Commanding;
     using NHibernate;
     using Queries;
@@ -16,11 +17,14 @@ namespace AtYourService.Web.Util
         {
             UserName = userName;
             Session = session;
+            //SessionFactory = session.SessionFactory;
         }
 
         public string UserName { get; private set; }
 
         public ISession Session { get; private set; }
+
+        //public ISessionFactory SessionFactory { get; private set; }
 
         /// <summary>
         /// Executes nHibernate query
@@ -56,6 +60,36 @@ namespace AtYourService.Web.Util
             Contract.Requires(command != null);
 
             command.Execute(CreateCommandContext());
+        }
+
+        /// <summary>
+        /// Executes a command on a different thread
+        /// </summary>
+        /// <param name="command"></param>
+        public virtual void ExecuteNonBlockingCommand(ICommand command)
+        {
+            Contract.Requires(command != null);
+
+            var session = Session.SessionFactory.OpenSession();
+            var context = new CommandContext(session, UserName);
+            Task.Factory.StartNew(() =>
+                                      {
+                                          try
+                                          {
+                                              var transaction = session.BeginTransaction();
+                                              command.Execute(context);
+                                              transaction.Commit();
+                                          }
+                                          catch(Exception)
+                                          {
+                                                //no place to throw since this is on different thread  
+                                          }
+                                          finally
+                                          {
+                                              session.Close();
+                                              session.Dispose();
+                                          }                                          
+                                      });
         }
 
         /// <summary>

@@ -15,7 +15,7 @@
                     <div class="control-group search-field">
                         @Html.Custom().LabelFor(model => model.Terms)
                         <div class="controls">
-                            @Html.TextBoxFor(model => model.Terms, new { @class = "span2" })</div>
+                            @Html.TextBoxFor(model => model.Terms, new { @class = "input-large" })</div>
                     </div>
                     <div class="control-group search-field">
                         @Html.Custom().LabelFor(model => model.Location)
@@ -23,9 +23,35 @@
                             @Html.TextBoxFor(model => model.Location, new { @class = "input-large" })
                         </div>
                     </div>
+                    <div class="control-group search-field">
+                        @Html.Custom().LabelFor(model => model.CategoryId)
+                        <div class="controls">
+                            @Html.CategoryFilterFor(model => model.CategoryId, (IEnumerable<GroupedSelectListItem>)ViewData[ViewDataKeys.Categories], "All")
+                        </div>
+                    </div>
                 </div>
-            </fieldset>
-     
+                <div class="row">
+                    <div class="control-group search-field">
+                        @Html.Custom().LabelFor(model => model.Type)
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.Type, (IEnumerable<SelectListItem>)ViewData[ViewDataKeys.ServiceTypes], "All")
+                        </div>
+                    </div>
+                    <div class="control-group search-field">
+                        @Html.Custom().LabelFor(model => model.SortBy)
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.SortBy, (IEnumerable<SelectListItem>)ViewData[ViewDataKeys.SortTypes])
+                        </div>
+                    </div>
+                    <div class="control-group search-field">
+                        <div class="control-label"></div>
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit">
+                            Search</button>
+                        </div>                        
+                    </div>
+                </div>
+            </fieldset>     
         }
     </div>
 </div>

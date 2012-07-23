@@ -216,6 +216,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\ServiceSerializeInfo.cs" />
+    <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Models\SignUpModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
