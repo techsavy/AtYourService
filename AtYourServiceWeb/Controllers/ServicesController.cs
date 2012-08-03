@@ -139,7 +139,16 @@ namespace AtYourService.Web.Controllers
                 session => session.QueryOver<Service>()
                     .Where(s => s.Id == id)
                     .Fetch(s => s.Category).Eager
+                    .Fetch(s => s.Image).Eager
                     .SingleOrDefault());
+
+            if (service == null)
+            {
+                return View("ServiceNotFound");
+            }
+
+            var logViewCommand = new LogViewCommand(service.Id, Request.UserHostAddress);
+            ExecuteNonBlockingCommand(logViewCommand);
 
             return View(service);
         }

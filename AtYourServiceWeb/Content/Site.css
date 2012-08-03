@@ -96,3 +96,7 @@ body
     float: left;
     clear: none;
 }
+
+.detail-body {
+    font-size: 14px;
+}
