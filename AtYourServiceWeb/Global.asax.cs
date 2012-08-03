@@ -49,8 +49,14 @@ namespace AtYourService.Web
 
             routes.MapRoute(
                 name: "CategoryBrowse",
-                url: "Services/{action}/{id}/{name}",
+                url: "Services/Category/{id}/{name}",
                 defaults: new { controller = "Services", action = "Category", name = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "ServiceDetails",
+                url: "Services/Details/{id}/{title}",
+                defaults: new { controller = "Services", action = "Details", title = UrlParameter.Optional }
             );
 
             routes.MapRoute(

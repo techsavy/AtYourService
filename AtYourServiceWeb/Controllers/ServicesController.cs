@@ -133,6 +133,17 @@ namespace AtYourService.Web.Controllers
             return Json(Mapper.Map<IEnumerable<ServiceSerializeInfo>>(services));
         }
 
+        public ActionResult Details(int id)
+        {
+            var service = ExecuteQuery(
+                session => session.QueryOver<Service>()
+                    .Where(s => s.Id == id)
+                    .Fetch(s => s.Category).Eager
+                    .SingleOrDefault());
+
+            return View(service);
+        }
+
         private IList<GroupedSelectListItem> GetCategories()
         {
             var categories = ExecuteQuery(

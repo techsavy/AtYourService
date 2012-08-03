@@ -40,21 +40,44 @@ namespace AtYourService.Web.Queries
 
         public IEnumerable<Service> Execute(ISession session)
         {
+            var serviceType = typeof (Service);
             var dq = new DistanceQueryBuilder(_userLocation.Y, _userLocation.X, _distance * MeterInMiles, "Location_Latitude", "Location_Longitude", CartesianTierPlotter.DefaltFieldPrefix, false);
             var metaTermQuery = new TermQuery(new Term("metafile", "doc"));
-
-            var analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
-            var queryParser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, new [] { "Title", "Body" }, analyzer);
-            var termQuery = queryParser.Parse(_searchModel.Terms);
 
             var dsort = new DistanceFieldComparatorSource(dq.DistanceFilter);
             Sort sort = new Sort(new SortField("Location", dsort, false));
 
             var booleanQuery = new BooleanQuery();
             booleanQuery.Add(metaTermQuery, BooleanClause.Occur.SHOULD);
-            booleanQuery.Add(termQuery, BooleanClause.Occur.MUST);
+            
+            if (!string.IsNullOrWhiteSpace(_searchModel.Terms))
+            {
+                var analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
+                var queryParser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, new[] { "Title", "Body" }, analyzer);
+                var termQuery = queryParser.Parse(_searchModel.Terms);
 
-            return session.FullTextSession().CreateFullTextQuery(booleanQuery, typeof(Service))
+                booleanQuery.Add(termQuery, BooleanClause.Occur.MUST);
+            }
+
+            if (_searchModel.CategoryId != null)
+            {
+                var categoryQuery = new TermQuery(new Term("Category_Id", _searchModel.CategoryId.Value.ToString()));
+                booleanQuery.Add(categoryQuery, BooleanClause.Occur.MUST);
+            }
+
+            if (_searchModel.Type != null)
+            {
+                if (_searchModel.Type.Value == (byte)ServiceType.Offering)
+                {
+                    serviceType = typeof (ServiceOffering);
+                }
+                else if (_searchModel.Type.Value == (byte)ServiceType.Request)
+                {
+                    serviceType = typeof(ServiceRequest);
+                }
+            }
+
+            return session.FullTextSession().CreateFullTextQuery(booleanQuery, serviceType)
                 .SetFilter(dq.Filter).SetFetchSize(PageSize).List<Service>();
         }
     }

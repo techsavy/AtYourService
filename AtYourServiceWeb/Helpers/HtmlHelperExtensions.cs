@@ -6,6 +6,7 @@ namespace AtYourService.Web.Helpers
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Helpers;
+    using System.Web.Mvc.Html;
 
     public static class HtmlHelperExtensions
     {
@@ -129,6 +130,12 @@ namespace AtYourService.Web.Helpers
         public static MvcHtmlString Serialize(this HtmlHelper helper, object value)
         {
             return new MvcHtmlString(Json.Encode(value));
+        }
+
+        public static MvcHtmlString ServiceDetailsActionLink(this HtmlHelper helper, Domain.Adverts.Service service)
+        {
+            var formattedTitle = service.Title.Replace(' ', '-');
+            return helper.ActionLink(service.Title, "Details", "Services", new { id = service.Id, title = formattedTitle }, null);
         }
     }
 }
