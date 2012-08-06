@@ -96,7 +96,9 @@ namespace AtYourService.Web.Controllers
         [ActionName("Profile")]
         public ActionResult MyProfile()
         {
-            return View();
+            var user = ExecuteQuery(session => session.Load<User>(UserInfo.Id));
+
+            return View(user);
         }
 
         [HttpPost]

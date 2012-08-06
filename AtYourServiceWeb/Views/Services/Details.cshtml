@@ -25,6 +25,9 @@
                 <span class="span1">Category</span><strong> @Html.ActionLink(category.Name, "Category", "Services", new { id = category.Id, name = category.Name }, null)</strong>
                 <div>
                     <span class="span1">Posted </span><strong>@Html.FuzzyDate(Model.EffectiveDate)</strong></div>
+                <div>
+                    <span class="span1">Views </span><strong>@Model.Views</strong>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,52 @@
-﻿@{
+﻿@model AtYourService.Domain.Users.User
+@{
     ViewBag.Title = "Profile";
 }
-
-<h2>MyProfile</h2>
+<div class="row">
+    <div class="span6">
+        <h3>
+            My Profile</h3>
+        <div class="well well-large">
+            <div>
+                <span class="span1">Name </span><strong>@Model.Name</strong>
+            </div>
+            <div>
+                <span class="span1">Email </span><strong>@Model.Email</strong>
+            </div>
+            <div>
+                <span class="span1">About Me </span><strong>@Model.Brag</strong>
+            </div>
+            <br/>
+            <div>@Html.ActionLink("Edit", "Edit", "Accounts", null, new { @class = "btn btn-info"})</div>
+            
+        </div>
+    </div>
+    <div class="span3">
+        <h3>
+            My Ads and Reviews</h3>
+        <div>
+            <ul class="nav nav-tabs nav-stacked">
+                <li>@Html.ActionLink("Create Ad", "Create", "Services")</li>
+                <li>@Html.ActionLink("Manage Ads", "Create", "Services")</li>
+                <li>@Html.ActionLink("Manage Reviews", "Create", "Services")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <h3>
+            Reports</h3>
+        <div>
+            <div>
+                <span class="span1">Name </span><strong>@Model.Name</strong>
+            </div>
+            <div>
+                <span class="span1">Email </span><strong>@Model.Email</strong>
+            </div>
+            <div>
+                <span class="span1">About Me </span><strong>@Model.Brag</strong>
+            </div>
+        </div>
+    </div>
+</div>
