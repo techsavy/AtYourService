@@ -108,6 +108,10 @@ namespace AtYourService.Web.Controllers
                                                        createServiceModel.CategoryId, UserInfo.Id, createServiceModel.Latitude,
                                                        createServiceModel.Longitude, null, _fileSystem, image);
                 ExecuteCommand(command);
+
+                TempData[ViewDataKeys.Message] = new SuccessMessage(string.Format(Resources.EntityCreateSuccess, "Service"));
+
+                return RedirectToAction("Profile", "Accounts");
             }
 
             ViewData[ViewDataKeys.Categories] = GetCategories();

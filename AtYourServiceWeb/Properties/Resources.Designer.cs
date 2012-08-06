@@ -95,5 +95,14 @@ namespace AtYourService.Web.Properties {
                 return ResourceManager.GetString("GeoCodeFail", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile updated successfully..
+        /// </summary>
+        internal static string ProfileUpdateSuccess {
+            get {
+                return ResourceManager.GetString("ProfileUpdateSuccess", resourceCulture);
+            }
+        }
     }
 }

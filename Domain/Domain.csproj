@@ -134,6 +134,7 @@
     <Compile Include="Users\CreateClientCommand.cs" />
     <Compile Include="Users\CreateUserCommand.cs" />
     <Compile Include="Users\DuplicateEmailException.cs" />
+    <Compile Include="Users\EditProfileCommand.cs" />
     <Compile Include="Users\LoginUserCommand.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\ClientSettings.cs" />

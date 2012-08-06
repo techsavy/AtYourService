@@ -9,6 +9,8 @@ namespace AtYourService.Web.Controllers
     using Models;
     using Security;
     using Util;
+    using AtYourService.Web.Helpers;
+    using AtYourService.Web.Properties;
 
     public class AccountsController : BaseController
     {
@@ -94,11 +96,34 @@ namespace AtYourService.Web.Controllers
         }
 
         [ActionName("Profile")]
+        [Authorize]
         public ActionResult MyProfile()
         {
             var user = ExecuteQuery(session => session.Load<User>(UserInfo.Id));
 
             return View(user);
+        }
+
+        [Authorize]
+        public ActionResult Edit()
+        {
+            var user = ExecuteQuery(session => session.Load<User>(UserInfo.Id));
+
+            var model = Mapper.Map<EditUserModel>(user);
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(EditUserModel model)
+        {
+            var command = new EditProfileCommand(UserInfo.Id, model.Brag, model.Latitude, model.Longitude);
+
+            ExecuteCommand(command);
+
+            TempData[ViewDataKeys.Message] = new SuccessMessage(Resources.ProfileUpdateSuccess);
+
+            return RedirectToAction("Profile");
         }
 
         [HttpPost]

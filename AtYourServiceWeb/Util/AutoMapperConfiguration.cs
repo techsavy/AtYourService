@@ -18,6 +18,10 @@ namespace AtYourService.Web.Util
             Mapper.CreateMap<Service, ServiceSerializeInfo>()
                 .ForMember(si => si.Lat, opt => opt.MapFrom(s => s.Location.Y))
                 .ForMember(si => si.Lng, opt => opt.MapFrom(s => s.Location.X));
+
+            Mapper.CreateMap<User, EditUserModel>()
+                .ForMember(si => si.Latitude, opt => opt.MapFrom(s => s.Location.Y))
+                .ForMember(si => si.Longitude, opt => opt.MapFrom(s => s.Location.X));
         }
     }
 }

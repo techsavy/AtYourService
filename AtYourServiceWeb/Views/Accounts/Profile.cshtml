@@ -4,6 +4,7 @@
 }
 <div class="row">
     <div class="span6">
+        @Html.Message()
         <h3>
             My Profile</h3>
         <div class="well well-large">
@@ -17,7 +18,10 @@
                 <span class="span1">About Me </span><strong>@Model.Brag</strong>
             </div>
             <br/>
-            <div>@Html.ActionLink("Edit", "Edit", "Accounts", null, new { @class = "btn btn-info"})</div>
+            <div class="btn-group">
+                @Html.ActionLink("Edit", "Edit", "Accounts", null, new { @class = "btn btn-info"})
+                @Html.ActionLink("Change Password", "ChangePassword", "Accounts", null, new { @class = "btn btn-info"})
+            </div>
             
         </div>
     </div>
