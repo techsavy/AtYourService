@@ -12,6 +12,7 @@ namespace AtYourService.Domain.Adverts
     /// TODO: Update summary.
     /// </summary>
     [ClassBridge(typeof(LocationFieldClassBridge), Index = Index.No, Store = Store.Yes)]
+    [ClassBridge(typeof(DateFieldsClassBridge), Index = Index.No, Store = Store.Yes)]
     public class ServiceOffering : Service
     {
     }

@@ -43,6 +43,9 @@ namespace AtYourService.Domain.Adverts
 
         public virtual DateTime? EffectiveDate { get; set; }
 
+        [Field(Index.UnTokenized, Store = Store.Yes)]
+        public virtual bool IsDeleted { get; set; }
+
         public virtual Image Image { get; set; }
     }
 }

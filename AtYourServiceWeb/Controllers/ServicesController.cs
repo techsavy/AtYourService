@@ -157,6 +157,18 @@ namespace AtYourService.Web.Controllers
             return View(service);
         }
 
+        [Authorize]
+        public ActionResult Manage()
+        {
+            var services = ExecuteQuery(
+                    session => session.QueryOver<Service>()
+                        .Where(s => s.Client.Id == UserInfo.Id)
+                        .Fetch(s => s.Category).Eager
+                        .List());
+
+            return View(services);
+        }
+
         private IList<GroupedSelectListItem> GetCategories()
         {
             var categories = ExecuteQuery(

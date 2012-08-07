@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AtYourService.Domain.Adverts.Service>
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="span12">
+        <h3>
+            Manage</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Expiry Date
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model)
+                {
+                    <tr data-id="@service.Id">
+                        <td>@service.Title
+                        </td>
+                        <td>@service.Category.Name
+                        </td>
+                        <td>@service.ExpiryDate.Value.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { Id = service.Id })"><i class="icon-edit" title="Edit">
+                            </i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-id="@service.Id"><i class="icon-remove" title="Delete"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

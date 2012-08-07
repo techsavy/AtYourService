@@ -33,6 +33,7 @@ namespace AtYourService.Data.Mapping.Adverts
             Property(service => service.Impressions, m => { m.NotNullable(true); });
             Property(service => service.EffectiveDate, m => { m.NotNullable(true); });
             Property(service => service.ExpiryDate, m => { m.NotNullable(true); });
+            Property(service => service.IsDeleted, m => { m.NotNullable(true); });
 
             Property(service => service.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeographyType>(); m.Column(c => c.SqlType("geography")); });
 
