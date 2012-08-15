@@ -10,6 +10,8 @@ namespace AtYourService.Domain.Adverts
     using Categories;
     using Core.Data;
     using Files;
+    using Iesi.Collections.Generic;
+    using Moderation;
     using NetTopologySuite.Geometries;
     using NHibernate.Search.Attributes;
     using Users;
@@ -47,5 +49,7 @@ namespace AtYourService.Domain.Adverts
         public virtual bool IsDeleted { get; set; }
 
         public virtual Image Image { get; set; }
+
+        public virtual ISet<Review> Reviews { get; set; }
     }
 }

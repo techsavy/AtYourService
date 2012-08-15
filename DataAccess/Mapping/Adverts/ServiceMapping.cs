@@ -40,6 +40,8 @@ namespace AtYourService.Data.Mapping.Adverts
             ManyToOne(service => service.Category, m => { m.Column("CategoryId"); m.NotNullable(true); m.ForeignKey("FK_Service_Category"); });
             ManyToOne(service => service.Client, m => { m.Column("ClientId"); m.NotNullable(true); m.ForeignKey("FK_Service_Client"); });
             ManyToOne(service => service.Image, m => { m.Column("ImageId"); m.NotNullable(false); m.ForeignKey("FK_Service_Image"); });
+
+            Set(c => c.Reviews, m => { m.OrderBy(c => c.LastModifiedDate); m.Key(k => k.Column("ServiceId")); }, l => l.OneToMany());
         }
     }
 }
