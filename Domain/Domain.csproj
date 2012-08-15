@@ -128,6 +128,7 @@
     <Compile Include="Categories\RenameCategoryCommand.cs" />
     <Compile Include="DomainException.cs" />
     <Compile Include="Files\Image.cs" />
+    <Compile Include="Moderation\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\Administrator.cs" />
     <Compile Include="Users\Client.cs" />
