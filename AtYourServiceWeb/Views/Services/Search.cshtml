@@ -87,7 +87,14 @@
                             </div>
                         </td>
                         <td>
-                            <img alt="" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                            @if (service.Image != null)
+                            {
+                                <img src="@Url.Action("GetSmall", "Images", new { id = service.Image.Id })" alt="Image"/>
+                            }
+                            else
+                            {
+                                <img alt="Image" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                            }
                         </td>
                         <td>
                             <h3>

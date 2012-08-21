@@ -109,6 +109,7 @@ namespace AtYourService.Web
             builder.RegisterType<AccountMembershipService>().As<IMembershipService>();
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();
             builder.RegisterType<GeoCodingSerive>().As<IGeoCodingService>();
+            builder.RegisterType<ImageResizer>().AsSelf();
 
             builder.RegisterType<NHibernateContext>().AsSelf()
                 .WithParameter((info, context) => info.Name == "userName", (info, context) => HttpContext.Current.User.Identity.Name);

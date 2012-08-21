@@ -144,6 +144,7 @@ namespace AtYourService.Web.Controllers
                     .Where(s => s.Id == id)
                     .Fetch(s => s.Category).Eager
                     .Fetch(s => s.Image).Eager
+                    .Fetch(s => s.Client).Eager
                     .SingleOrDefault());
 
             if (service == null)

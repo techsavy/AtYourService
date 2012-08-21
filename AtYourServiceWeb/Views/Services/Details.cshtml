@@ -18,7 +18,7 @@
             <div class="span3">
                 @if (Model.Image != null)
                 {
-                    <img src="@Url.Action("Get", "Images", new { id = Model.Image.Id })" alt="Image"/>
+                    <img src="@Url.Action("GetMedium", "Images", new { id = Model.Image.Id })" alt="Image"/>
                 }
             </div>
             <div class="span3">
@@ -26,9 +26,15 @@
                 <div>
                     <span class="span1">Posted </span><strong>@Html.FuzzyDate(Model.EffectiveDate)</strong></div>
                 <div>
+                    <span class="span1">By </span><strong>@Model.Client.Name</strong>
+                </div>
+                <div>
                     <span class="span1">Views </span><strong>@Model.Views</strong>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div id="review-section"></div>
         </div>
     </div>
     <div class="span6">
@@ -42,6 +48,7 @@
     $(function () {        
         $("abbr.timeago").timeago();
         initialize();
+        getReviews();
     });
 
     var map;
@@ -58,5 +65,17 @@
             map: map,
             title: '@Model.Title'
         });            
+    }
+
+    function getReviews() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Reviews", "Reviews")',
+            data: { serviceId: @Model.Id },
+            dataType: 'html',
+            success: function (data) {
+                $('#review-section').html(data);
+            }
+        }); 
     }
 </script>

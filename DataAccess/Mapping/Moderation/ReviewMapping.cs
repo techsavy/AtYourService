@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace AtYourService.Data.Mapping.Moderation
 {
     using Domain.Moderation;

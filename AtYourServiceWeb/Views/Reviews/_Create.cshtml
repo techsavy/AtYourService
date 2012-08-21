@@ -1,0 +1,24 @@
+﻿@model CreateReviewModel
+<div>
+    <h4>Review this service</h4>
+    <div class="control-group">
+        @Html.Custom().LabelFor(model => model.Body)
+        <div class="controls">
+            @Html.TextAreaFor(model => model.Body, new { @class = "input-xlarge", rows = "6" })
+            @Html.ValidationMessageFor(model => model.Body)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.Custom().LabelFor(model => model.Score)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Score)
+            @Html.ValidationMessageFor(model => model.Score)
+            @Html.HiddenFor(model => model.ServiceId)
+        </div>
+    </div>
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">
+            Save</button>
+        @Html.ActionLink("Cancel", "Profile", "Accounts", null, new { @class = "btn" })
+    </div>
+</div>

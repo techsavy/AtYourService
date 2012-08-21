@@ -203,6 +203,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Geo\GeoCodingSerive.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,9 +214,11 @@
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Models\CategoryBrowseModel.cs" />
+    <Compile Include="Models\CreateReviewModel.cs" />
     <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ReviewsModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\ServiceSerializeInfo.cs" />
     <Compile Include="Models\ServiceType.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="Util\BundleExtensions.cs" />
     <Compile Include="Util\FileBaseAdapter.cs" />
     <Compile Include="Util\ImageFileAttribute.cs" />
+    <Compile Include="Util\ImageResizer.cs" />
     <Compile Include="Util\NHibernateContext.cs" />
     <Compile Include="Util\QueryOverExtensions.cs" />
     <Compile Include="Util\SearchExtensions.cs" />
@@ -411,6 +415,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Services\Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reviews\Reviews.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reviews\_Create.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

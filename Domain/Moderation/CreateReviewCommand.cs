@@ -6,10 +6,6 @@
 
 namespace AtYourService.Domain.Moderation
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Adverts;
     using Core.Commanding;
     using Users;
@@ -37,12 +33,14 @@ namespace AtYourService.Domain.Moderation
 
         protected override void OnExecute()
         {
+            var service = Session.Load<Service>(ServiceId);
+
             var review = new Review
                              {
                                  Body = Body,
                                  Score = Score,
                                  Client = new Client { Id = ClientId },
-                                 Service = new ServiceOffering { Id = ServiceId }
+                                 Service = service
                              };
             OnCreate(review);
             Session.Save(review);

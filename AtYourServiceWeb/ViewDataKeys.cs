@@ -16,5 +16,7 @@ namespace AtYourService.Web
         public static readonly string ServiceTypes = "ServiceTypes";
 
         public static readonly string SortTypes = "SortTypes";
+
+        public static readonly string Reviews = "Reviews";
     }
 }

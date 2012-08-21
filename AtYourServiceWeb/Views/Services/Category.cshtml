@@ -16,9 +16,12 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Date })">Date</a></li>
-                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Distance })">Distance</a></li>
-                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Views })">Views</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Date })">
+                    Date</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Distance })">
+                    Distance</a></li>
+                <li><a href="@Url.Action("Category", new { Model.Id, Model.Page, SortBy = CategoryBrowseModel.Views })">
+                    Views</a></li>
             </ul>
         </div>
     </div>
@@ -57,7 +60,14 @@
                             </div>
                         </td>
                         <td>
-                            <img alt="" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                            @if (service.Image != null)
+                            {
+                                <img src="@Url.Action("GetSmall", "Images", new { id = service.Image.Id })" alt="Image"/>
+                            }
+                            else
+                            {
+                                <img alt="Image" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                            }
                         </td>
                         <td>
                             <h3>

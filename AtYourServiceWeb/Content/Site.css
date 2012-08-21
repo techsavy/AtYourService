@@ -100,3 +100,8 @@ body
 .detail-body {
     font-size: 14px;
 }
+
+#review-section {
+    padding-top: 15px;
+    padding-left: 30px;
+}

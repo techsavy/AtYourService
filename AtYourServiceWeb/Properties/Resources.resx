@@ -132,4 +132,7 @@
   <data name="ProfileUpdateSuccess" xml:space="preserve">
     <value>Profile updated successfully.</value>
   </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Thank you for reviewing the service.</value>
+  </data>
 </root>

@@ -1,0 +1,21 @@
+﻿@using AtYourService.Domain.Moderation
+@model ReviewsModel
+@{
+    var reviews = (IEnumerable<Review>)ViewData[ViewDataKeys.Reviews];
+}
+<div id="reviews">
+    <p>There are no reviews</p>
+</div>
+@if (Model.AllowCreate)
+{
+    <div id="create-review">
+        @using (Html.BeginForm("Create", "Reviews", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.Partial("_Create", new CreateReviewModel { ServiceId = Model.ServiceId })
+        }
+    </div>
+}
+else if (!Request.IsAuthenticated)
+{
+    <p>Login to review this service.</p>
+}
