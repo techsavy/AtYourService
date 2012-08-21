@@ -9,7 +9,7 @@ namespace AtYourService.Web.Util
         {
             var bootstrapCss = new Bundle("~/bootstrap/css", new CssMinify());
             bootstrapCss.AddFile("~/Content/bootstrap.css");
-            bootstrapCss.AddFile("~/Content/bootstrap-responsive.css");
+            //bootstrapCss.AddFile("~/Content/bootstrap-responsive.css");
             bootstrapCss.AddFile("~/Content/Site.css");
 
             bundles.Add(bootstrapCss);
