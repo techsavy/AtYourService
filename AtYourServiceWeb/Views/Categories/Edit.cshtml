@@ -174,7 +174,8 @@
         $('#btn-add-sub-cat').on('click', function (e) {
             e.preventDefault();
             
-            $.ajax({
+        if ($('#add-sub-cat-form').valid()) {
+                $.ajax({
                 type: "POST",
                 url: "@Url.Action("AddSubCategory")",
                 data: $('#add-sub-cat-form').serialize(),
@@ -184,7 +185,8 @@
                         location.reload();
                     }
                 }
-            });            
+            });
+        }            
         });
 
         // edit sub cat
@@ -205,7 +207,8 @@
         $('#btn-edit-cat').on('click', function (e) {
             e.preventDefault();
 
-            $.ajax({
+        if ($('#edit-cat-form').valid()) {
+                $.ajax({
                 type: "POST",
                 url: "@Url.Action("RenameCategory")",
                 data: $('#edit-cat-form').serialize(),
@@ -216,6 +219,7 @@
                     }
                 }
             });
+        }
             
         });
 
@@ -263,7 +267,8 @@
     $('#btn-add-main-cat').on('click', function (e) {
         e.preventDefault();
 
-        $.ajax({
+    if ($('#add-main-cat-form').valid()) {
+            $.ajax({
             type: "POST",
             url: "@Url.Action("AddCategory")",
             data: $('#add-main-cat-form').serialize(),
@@ -274,6 +279,7 @@
                 }
             }
         });
+    }
     });
 
     var categoryIdtoDelete = null;

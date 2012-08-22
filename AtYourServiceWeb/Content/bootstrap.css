@@ -517,23 +517,23 @@ h6 small {
   color: #999999;
 }
 h1 {
-  font-size: 36px;
-  line-height: 40px;
+  font-size: 30px;
+  line-height: 36px;
 }
 h2 {
-  font-size: 30px;
-  line-height: 40px;
+  font-size: 24px;
+  line-height: 36px;
 }
 h3 {
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 18px;
+  line-height: 27px;
 }
 h4 {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 20px;
 }
 h5 {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
 }
 h6 {
@@ -541,10 +541,10 @@ h6 {
   line-height: 20px;
 }
 h1 small {
-  font-size: 24px;
+  font-size: 18px;
 }
 h2 small {
-  font-size: 18px;
+  font-size: 16px;
 }
 h3 small {
   font-size: 14px;

@@ -129,10 +129,19 @@
   <data name="GeoCodeFail" xml:space="preserve">
     <value>We are unable to determine the location {0}. Please check the spellings.</value>
   </data>
+  <data name="IncorrectCurrentPassword" xml:space="preserve">
+    <value>Current password is incorrent.</value>
+  </data>
+  <data name="PasswordChangeSuccess" xml:space="preserve">
+    <value>Password changed successfully.</value>
+  </data>
   <data name="ProfileUpdateSuccess" xml:space="preserve">
     <value>Profile updated successfully.</value>
   </data>
   <data name="Reviewed" xml:space="preserve">
     <value>Thank you for reviewing the service.</value>
+  </data>
+  <data name="ValidationFailed" xml:space="preserve">
+    <value>Please correct the validation errors.</value>
   </data>
 </root>

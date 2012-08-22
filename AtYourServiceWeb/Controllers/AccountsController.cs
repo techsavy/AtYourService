@@ -6,11 +6,11 @@ namespace AtYourService.Web.Controllers
     using AutoMapper;
     using Core.Geo;
     using Domain.Users;
+    using Helpers;
     using Models;
+    using Properties;
     using Security;
     using Util;
-    using AtYourService.Web.Helpers;
-    using AtYourService.Web.Properties;
 
     public class AccountsController : BaseController
     {
@@ -141,6 +141,28 @@ namespace AtYourService.Web.Controllers
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        public JsonResult ChangePassword(ChangePasswordViewModel changePasswordView)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { Success = false, Message = Resources.ValidationFailed });
+            }
+
+            var command = new ChangePasswordCommand(UserInfo.Id, changePasswordView.CurrentPassword, changePasswordView.NewPassword);
+            var result = ExecuteCommand(command);
+
+            if (result)
+            {
+                TempData[ViewDataKeys.Message] = new SuccessMessage(Resources.PasswordChangeSuccess);
+
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false, Message = Resources.IncorrectCurrentPassword });
+            }
         }
     }
 }

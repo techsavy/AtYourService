@@ -20,7 +20,7 @@
             <br/>
             <div class="btn-group">
                 @Html.ActionLink("Edit", "Edit", "Accounts", null, new { @class = "btn btn-info"})
-                @Html.ActionLink("Change Password", "ChangePassword", "Accounts", null, new { @class = "btn btn-info"})
+                @Html.ActionLink("Change Password", "ChangePassword", "Accounts", null, new { @class = "btn btn-info", id = "btn-change-password"})
             </div>
             
         </div>
@@ -54,3 +54,4 @@
         </div>
     </div>
 </div>
+<div class="row">@Html.Partial("ChangePassword", new ChangePasswordViewModel())</div>

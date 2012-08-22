@@ -214,6 +214,7 @@
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Models\CategoryBrowseModel.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\CreateReviewModel.cs" />
     <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
@@ -421,6 +422,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Reviews\_Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Accounts\ChangePassword.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
