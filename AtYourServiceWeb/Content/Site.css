@@ -105,3 +105,11 @@ body
     padding-top: 15px;
     padding-left: 30px;
 }
+
+#create-review-area .control-label {
+    width: 60px;
+}
+
+#create-review-area .controls {
+    margin-left: 80px;
+}

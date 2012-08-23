@@ -19,6 +19,7 @@ namespace AtYourService.Web.Controllers
         {
         }
 
+        [OutputCache(NoStore = true, Duration = 0)]
         public PartialViewResult Reviews(int serviceId)
         {
             var reviews = ExecuteQuery(

@@ -9,7 +9,7 @@ namespace AtYourService.Web.Util
         {
             var bootstrapCss = new Bundle("~/bootstrap/css", new CssMinify());
             bootstrapCss.AddFile("~/Content/bootstrap.css");
-            //bootstrapCss.AddFile("~/Content/bootstrap-responsive.css");
+            bootstrapCss.AddFile("~/Content/rateit.css");
             bootstrapCss.AddFile("~/Content/Site.css");
 
             bundles.Add(bootstrapCss);
@@ -20,6 +20,7 @@ namespace AtYourService.Web.Util
             bootstrapJs.AddFile("~/Scripts/jquery.validate.js");
             bootstrapJs.AddFile("~/Scripts/jquery.validate.unobtrusive.js");
             bootstrapJs.AddFile("~/Scripts/jquery.placeholder.js");
+            bootstrapJs.AddFile("~/Scripts/jquery.rateit.js");
             bootstrapJs.AddFile("~/Scripts/ays.init.js");
             bootstrapJs.AddFile("~/Scripts/ays.util.js");
             bootstrapJs.AddFile("~/Scripts/ays.location.js");

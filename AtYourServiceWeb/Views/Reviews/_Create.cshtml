@@ -1,20 +1,27 @@
 ﻿@model CreateReviewModel
-<div>
+<div id="create-review-area">
     <h4>Review this service</h4>
     <div class="control-group">
         @Html.Custom().LabelFor(model => model.Body)
         <div class="controls">
-            @Html.TextAreaFor(model => model.Body, new { @class = "input-xlarge", rows = "6" })
+            @Html.TextAreaFor(model => model.Body, new { @class = "input-xxlarge", rows = "8" })
             @Html.ValidationMessageFor(model => model.Body)
         </div>
     </div>
     <div class="control-group">
         @Html.Custom().LabelFor(model => model.Score)
         <div class="controls">
-            @Html.TextBoxFor(model => model.Score)
-            @Html.ValidationMessageFor(model => model.Score)
-            @Html.HiddenFor(model => model.ServiceId)
+            <select id="Score" name="Score">
+                <option value="">-</option>
+                <option value="1">Bad</option>
+                <option value="2">OK</option>
+                <option value="3">Good</option>
+                <option value="4">Great</option>
+                <option value="5">Excellent</option>
+            </select>
+            <div class="rateit" data-rateit-backingfld="#Score"></div>
         </div>
+        @Html.ValidationMessageFor(model => model.Score)
     </div>
     <div class="form-actions">
         <button class="btn btn-primary" type="submit">

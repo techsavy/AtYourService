@@ -75,6 +75,8 @@
             dataType: 'html',
             success: function (data) {
                 $('#review-section').html(data);
+                $.validator.unobtrusive.parse("#create-review-form");
+                $('div.rateit').rateit();
             }
         }); 
     }
