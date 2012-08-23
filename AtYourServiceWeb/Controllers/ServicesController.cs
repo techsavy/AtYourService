@@ -141,7 +141,7 @@ namespace AtYourService.Web.Controllers
         {
             var service = ExecuteQuery(
                 session => session.QueryOver<Service>()
-                    .Where(s => s.Id == id)
+                    .Where(s => s.Id == id && !s.IsDeleted)
                     .Fetch(s => s.Category).Eager
                     .Fetch(s => s.Image).Eager
                     .Fetch(s => s.Client).Eager

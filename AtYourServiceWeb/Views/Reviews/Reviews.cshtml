@@ -4,7 +4,7 @@
     var reviews = (IEnumerable<Review>)ViewData[ViewDataKeys.Reviews];
 }
 <div id="reviews">
-    <p>There are no reviews</p>
+    <i>There are no reviews.</i>
 </div>
 @if (Model.AllowCreate)
 {
@@ -17,5 +17,5 @@
 }
 else if (!Request.IsAuthenticated)
 {
-    <p>Login to review this service.</p>
+    <p>@Html.ActionLink("Sign In", "Login", "Accounts") to review this service.</p>
 }

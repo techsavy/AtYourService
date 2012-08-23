@@ -20,7 +20,7 @@
                     <li class="nav-header">@category.Name</li>
                     @foreach (var subCategory in category.SubCategories)
                     {
-                        <li><a href="#">@subCategory.Name</a></li>
+                        <li><a href="@Url.Action("Category", "Services", new { id = subCategory.Id, name = subCategory.Name }, null)">@subCategory.Name</a></li>
                     }
                 </ul>
             </div>
