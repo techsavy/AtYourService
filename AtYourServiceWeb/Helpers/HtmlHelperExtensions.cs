@@ -157,5 +157,12 @@ namespace AtYourService.Web.Helpers
             tagBuilder.InnerHtml = helper.ActionLink(text, action, controller).ToString();
             return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.Normal));
         }
+
+        public static MvcHtmlString Markdown(this HtmlHelper helper, string text)
+        {
+            var markDown = new MarkdownSharp.Markdown();
+            
+            return new MvcHtmlString(markDown.Transform(text));
+        }
     }
 }
