@@ -22,6 +22,7 @@
             <div class="rateit" data-rateit-backingfld="#Score"></div>
         </div>
         @Html.ValidationMessageFor(model => model.Score)
+        @Html.HiddenFor(model => model.ServiceId)
     </div>
     <div class="form-actions">
         <button class="btn btn-primary" type="submit">

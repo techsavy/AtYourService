@@ -4,7 +4,30 @@
     var reviews = (IEnumerable<Review>)ViewData[ViewDataKeys.Reviews];
 }
 <div id="reviews">
-    <i>There are no reviews.</i>
+    @if (reviews.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Reviews
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in reviews)
+                {
+                    <tr>
+                        <td>@review.Body</td>
+                    </tr>  
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <i>There are no reviews.</i>
+    }
 </div>
 @if (Model.AllowCreate)
 {
