@@ -137,5 +137,25 @@ namespace AtYourService.Web.Helpers
             var formattedTitle = service.Title.Replace(' ', '-');
             return helper.ActionLink(service.Title, "Details", "Services", new { id = service.Id, title = formattedTitle }, null);
         }
+
+        public static MvcHtmlString MenuLink(this HtmlHelper helper, string text, string action, string controller)
+        {
+            var routeData = helper.ViewContext.RouteData.Values;
+            var currentController = routeData["controller"];
+            var currentAction = routeData["action"];
+
+            var tagBuilder = new TagBuilder("li");
+            if (String.Equals(action, currentAction as string,
+                      StringComparison.OrdinalIgnoreCase)
+                &&
+               String.Equals(controller, currentController as string,
+                       StringComparison.OrdinalIgnoreCase))
+            {
+                tagBuilder.AddCssClass("active");
+            }
+
+            tagBuilder.InnerHtml = helper.ActionLink(text, action, controller).ToString();
+            return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.Normal));
+        }
     }
 }

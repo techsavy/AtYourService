@@ -24,7 +24,7 @@ namespace AtYourService.Web.Util
                 var ratio = GetResizeRatio(size, image.Width, image.Height);
                 var width = (int)(image.Width * ratio);
                 var height = (int)(image.Height * ratio);
-                var bitmap = new Bitmap(width, height, image.PixelFormat);
+                var bitmap = new Bitmap(width, height);
                 var g = Graphics.FromImage(bitmap);
                 g.CompositingQuality = CompositingQuality.HighQuality;
                 g.SmoothingMode = SmoothingMode.HighQuality;

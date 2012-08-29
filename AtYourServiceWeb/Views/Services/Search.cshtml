@@ -72,37 +72,45 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var service in services)
+                @if (services != null)
                 {
-                    <tr data-id="@service.Id">
-                        <td>
-                            <div class="center">
-                                <h2>
-                                    2</h2>
-                                Reviews</div>
-                            <div class="center">
+                    foreach (var service in services)
+                    {
+                        <tr data-id="@service.Id">
+                            <td>
+                                <div class="center">
+                                    <h2>
+                                        2</h2>
+                                    Reviews</div>
+                                <div class="center">
+                                    <h3>
+                                        42</h3>
+                                    Views
+                                </div>
+                            </td>
+                            <td>
+                                @if (service.Image != null)
+                                {
+                                    <img src="@Url.Action("GetSmall", "Images", new {id = service.Image.Id})" alt="Image"/>
+                                }
+                                else
+                                {
+                                    <img alt="Image" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                                }
+                            </td>
+                            <td>
                                 <h3>
-                                    42</h3>
-                                Views
-                            </div>
-                        </td>
-                        <td>
-                            @if (service.Image != null)
-                            {
-                                <img src="@Url.Action("GetSmall", "Images", new { id = service.Image.Id })" alt="Image"/>
-                            }
-                            else
-                            {
-                                <img alt="Image" src="@Url.Content("~/Content/Images/150x100.jpg")" />
-                            }
-                        </td>
-                        <td>
-                            <h3>
-                                @Html.ServiceDetailsActionLink(service)</h3>
-                            <p>
-                                @service.Body</p>
-                        </td>
-                    </tr>
+                                    @Html.ServiceDetailsActionLink(service)</h3>
+                                <p>
+                                    @service.Body</p>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="3">No results found.</td></tr>
+  
                 }
             </tbody>
         </table>
