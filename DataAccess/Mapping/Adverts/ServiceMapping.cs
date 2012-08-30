@@ -31,6 +31,8 @@ namespace AtYourService.Data.Mapping.Adverts
             Property(service => service.Body, m => { m.NotNullable(true); m.Length(5000); });
             Property(service => service.Views, m => { m.NotNullable(true); });
             Property(service => service.Impressions, m => { m.NotNullable(true); });
+            Property(service => service.TotalReviewScore, m => { m.NotNullable(true); });
+            Property(service => service.ReviewCount, m => { m.NotNullable(true); });
             Property(service => service.EffectiveDate, m => { m.NotNullable(true); });
             Property(service => service.ExpiryDate, m => { m.NotNullable(true); });
             Property(service => service.IsDeleted, m => { m.NotNullable(true); });

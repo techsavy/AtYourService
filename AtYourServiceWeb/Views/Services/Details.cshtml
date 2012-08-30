@@ -31,10 +31,20 @@
                 <div>
                     <span class="span1">Views </span><strong>@Model.Views</strong>
                 </div>
+                @if (Model.ReviewCount > 0)
+                {
+                    var score = Model.TotalReviewScore/(float) Model.ReviewCount;
+                    <div>
+                        <span class="span1">Rating </span>
+                        <div class="rateit" data-rateit-value="@score" data-rateit-ispreset="true" data-rateit-readonly="true">
+                        </div>
+                    </div>
+                }
             </div>
         </div>
         <div class="row">
-            <div id="review-section"></div>
+            <div id="review-section">
+            </div>
         </div>
     </div>
     <div class="span6">
@@ -77,6 +87,7 @@
                 $('#review-section').html(data);
                 $.validator.unobtrusive.parse('#create-review-form');
                 $('div.rateit').rateit();
+                $('.timeago').timeago();
 
                 $('#create-review-form').submit(function() {
                     return $('#create-review-form').valid();                

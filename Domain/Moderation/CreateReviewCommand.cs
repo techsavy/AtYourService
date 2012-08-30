@@ -35,6 +35,9 @@ namespace AtYourService.Domain.Moderation
         {
             var service = Session.Load<Service>(ServiceId);
 
+            service.ReviewCount++;
+            service.TotalReviewScore += Score;
+
             var review = new Review
                              {
                                  Body = Body,
@@ -42,6 +45,7 @@ namespace AtYourService.Domain.Moderation
                                  Client = new Client { Id = ClientId },
                                  Service = service
                              };
+
             OnCreate(review);
             Session.Save(review);
         }

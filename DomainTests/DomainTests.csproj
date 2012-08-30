@@ -114,6 +114,7 @@
     <Compile Include="Moderation\CreateReviewTest.cs" />
     <Compile Include="NHibernateIntegrationTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\ChangePasswordTest.cs" />
     <Compile Include="User\CreateAdministratorTest.cs" />
     <Compile Include="User\CreateClientTest.cs" />
     <Compile Include="User\LoginUserTest.cs" />

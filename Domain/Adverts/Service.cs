@@ -41,6 +41,12 @@ namespace AtYourService.Domain.Adverts
 
         public virtual long Impressions { get; set; }
 
+        [Field(Index.UnTokenized, Store = Store.Yes)]
+        public virtual long TotalReviewScore { get; set; }
+
+        [Field(Index.UnTokenized, Store = Store.Yes)]
+        public virtual long ReviewCount { get; set; }
+
         public virtual DateTime? ExpiryDate { get; set; }
 
         public virtual DateTime? EffectiveDate { get; set; }

@@ -7,8 +7,10 @@ namespace AtYourService.Web.Tests
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Core.Geo;
     using Moq;
     using AtYourService.Web.Models;
+    using NetTopologySuite.Geometries;
 
     /// <summary>
     /// MVC Mocking helpers
@@ -91,6 +93,16 @@ namespace AtYourService.Web.Tests
         public static void SetUserInfo(this Controller controller)
         {
             controller.Session[SessionKeys.User] = new UserInfo();
+        }
+
+        public static void SetUserInfoWitLocation(this Controller controller, Point location)
+        {
+            controller.Session[SessionKeys.User] = new UserInfo { Location = location};
+        }
+
+        public static void SetUserInfoWitLocation(this Controller controller)
+        {
+            SetUserInfoWitLocation(controller, PointFactory.Create(6.9319444, 79.8877778));
         }
 
         static string GetUrlFileName(string url)

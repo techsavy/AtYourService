@@ -61,8 +61,11 @@ namespace AtYourService.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var command = new CreateReviewCommand(createReview.ServiceId, UserInfo.Id, createReview.Score, createReview.Body);
-                ExecuteCommand(command);
+                var createReviewCommand = new CreateReviewCommand(createReview.ServiceId, UserInfo.Id, createReview.Score, createReview.Body);
+                ExecuteCommand(createReviewCommand);
+
+                var updateScreeningsCommand = new UpdateScreeningsCommand(createReview.ServiceId);
+                ExecuteNonBlockingCommand(updateScreeningsCommand);
 
                 TempData[ViewDataKeys.Message] = new SuccessMessage(Resources.Reviewed); 
             }

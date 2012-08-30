@@ -21,17 +21,22 @@ namespace AtYourService.Domain.Tests.Moderation
         public void Create_Review_With_All_Required_Information()
         {
             int serviceId, clientId;
+            const byte score = 5;
             PupulateEntities(out clientId, out serviceId);
 
             const string body = "Review Body";
-            var command = new CreateReviewCommand(serviceId, clientId, 5, body);
+            var command = new CreateReviewCommand(serviceId, clientId, score, body);
             ExecuteCommand(command);
 
-            var review = Session.QueryOver<Review>().Where(r => r.Service.Id == serviceId && r.Client.Id == clientId)
+            var review = Session.QueryOver<Review>()
+                .Fetch(r => r.Service).Eager
+                .Where(r => r.Service.Id == serviceId && r.Client.Id == clientId)
                 .And(r => r.Body == body).SingleOrDefault();
 
             Assert.NotNull(review);
             Assert.AreEqual(body, review.Body);
+            Assert.AreEqual(score, review.Service.TotalReviewScore);
+            Assert.AreEqual(1, review.Service.ReviewCount);
         }
 
         void PupulateEntities(out int clientId, out int serviceId)
