@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AtYourService.Domain.Moderation.Review>
+@{
+    ViewBag.Title = "Manage";
+}
+<div class="row">
+    <div class="span12">
+        <h3>
+            Manage</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Service
+                    </th>
+                    <th>
+                        Review
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in Model)
+                {
+                    <tr data-id="@review.Id">
+                        <td>@review.Service.Title
+                        </td>
+                        <td>@review.Body
+                        </td>
+                        <td>
+                            <div class="rateit" data-rateit-value="@review.Score" data-rateit-ispreset="true" data-rateit-readonly="true">
+                            </div>
+                        </td>
+                        <td>
+                            @Html.FuzzyDate(review.CreationDate)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/jquery.timeago.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("abbr.timeago").timeago();
+        $('div.rateit').rateit();
+    });    
+</script>

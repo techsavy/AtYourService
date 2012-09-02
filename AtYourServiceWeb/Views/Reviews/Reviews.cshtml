@@ -36,7 +36,7 @@
 @if (Model.AllowCreate)
 {
     <div id="create-review">
-        @using (Html.BeginForm("Create", "Reviews", FormMethod.Post, new { @class = "form-horizontal", id = "create-review-from" }))
+        @using (Html.BeginForm("Create", "Reviews", FormMethod.Post, new { @class = "form-horizontal", id = "create-review-form" }))
         {
             @Html.Partial("_Create", new CreateReviewModel { ServiceId = Model.ServiceId })
         }

@@ -12,7 +12,7 @@
         @Html.Custom().LabelFor(model => model.Score)
         <div class="controls">
             <select id="Score" name="Score">
-                <option value="">-</option>
+                <option value="" selected="selected">-</option>
                 <option value="1">Bad</option>
                 <option value="2">OK</option>
                 <option value="3">Good</option>
@@ -20,12 +20,13 @@
                 <option value="5">Excellent</option>
             </select>
             <div class="rateit" data-rateit-backingfld="#Score"></div>
-        </div>
-        @Html.ValidationMessageFor(model => model.Score)
+            @Html.ValidationMessageFor(model => model.Score)
+            <span id="curr-error"></span>
+        </div>        
         @Html.HiddenFor(model => model.ServiceId)
     </div>
     <div class="form-actions">
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit" id="btn-create-review">
             Save</button>
         @Html.ActionLink("Cancel", "Profile", "Accounts", null, new { @class = "btn" })
     </div>

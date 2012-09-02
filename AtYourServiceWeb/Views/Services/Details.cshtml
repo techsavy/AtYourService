@@ -84,13 +84,28 @@
             data: { serviceId: @Model.Id },
             dataType: 'html',
             success: function (data) {
-                $('#review-section').html(data);
+                $('#review-section').append(data);
+
                 $.validator.unobtrusive.parse('#create-review-form');
                 $('div.rateit').rateit();
                 $('.timeago').timeago();
 
-                $('#create-review-form').submit(function() {
-                    return $('#create-review-form').valid();                
+                $('form#create-review-form').submit(function() {
+                    var isValid = $('#create-review-form').valid();
+                    if (isValid) {
+                        var score = $('#Score').val();
+                        if (!(!isNaN(parseFloat(score)) && isFinite(score))) {
+                            var span = $('#curr-error');
+                            span.html('Please rate the service.');
+                            span.addClass("field-validation-error");
+                            
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                    
+                    return isValid;
                 });
             }
         }); 

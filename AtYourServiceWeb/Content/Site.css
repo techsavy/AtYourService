@@ -113,3 +113,5 @@ body
 #create-review-area .controls {
     margin-left: 80px;
 }
+
+#map-canvas img { max-width:none; }

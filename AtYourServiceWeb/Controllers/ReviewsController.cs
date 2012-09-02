@@ -2,6 +2,7 @@
 
 namespace AtYourService.Web.Controllers
 {
+    using System;
     using System.Web.Mvc;
     using Domain.Adverts;
     using Domain.Moderation;
@@ -71,6 +72,21 @@ namespace AtYourService.Web.Controllers
             }
 
             return RedirectToAction("Profile", "Accounts");
+        }
+
+        [Authorize]
+        public ActionResult Manage()
+        {
+            var reviews = ExecuteQuery(
+                session => session.QueryOver<Review>()
+                               .Where(r => r.Client.Id == UserInfo.Id)
+                               .Fetch(r => r.Service).Eager
+                               .JoinQueryOver(r => r.Service)
+                               .Where(s => s.EffectiveDate < DateTime.Now)
+                               .And(s => s.ExpiryDate > DateTime.Now)
+                               .List());
+
+            return View(reviews);
         }
     }
 }
