@@ -25,3 +25,28 @@ function handleLocationResolutionFail(callback) {
         $('#msg-warn').alert();
     }
 }
+
+function setUserMarker(map, latLng) {
+    var image = new google.maps.MarkerImage(
+            '/Content/Images/me.png',
+            new google.maps.Size(50, 50),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(25, 50)
+        );
+
+    var shadow = new google.maps.MarkerImage(
+            '/Content/Images/me-shadow.png',
+            new google.maps.Size(78, 50),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(25, 50)
+        );
+    
+    var marker = new google.maps.Marker({
+        position: latLng,
+        animation: google.maps.Animation.DROP,
+        map: map,
+        icon: image,
+        shadow: shadow,
+        title: 'You are here'
+    });
+}

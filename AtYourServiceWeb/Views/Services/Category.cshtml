@@ -94,6 +94,8 @@
         };
         map = new google.maps.Map(document.getElementById
             ("map-canvas"), options);
+
+        setUserMarker(map, latlng);
         
         $.each(services, function(index, value) { 
             var serviceLatlng = new google.maps.LatLng(value.Lat, value.Lng);

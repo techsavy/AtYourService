@@ -84,6 +84,8 @@
             url: '@Url.Action("ServicesNearLocation", "Services")',
             data: { lat: location.lat(), lng: location.lng() },
             success: function (services) {
+                setUserMarker(map, location);
+                
                 $.each(services, function (index, value) {
                     var serviceLatlng = new google.maps.LatLng(value.Lat, value.Lng);
 
