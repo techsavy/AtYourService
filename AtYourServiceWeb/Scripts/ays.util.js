@@ -26,3 +26,7 @@ function formatInfoContent(service) {
 
     return contentString;
 }
+
+function toMilliseconds(mins) {
+    return mins * (60 * 1000);
+}

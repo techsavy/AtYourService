@@ -27,5 +27,17 @@ namespace AtYourService.Web.Util
 
             bundles.Add(bootstrapJs);
         }
+
+        public static void EnableReportingBundle(this BundleCollection bundles)
+        {
+            //it looks like there is a parsing error when files are combined
+            var reportJs = new Bundle("~/reports/js", new JsMinify());
+            reportJs.AddFile("~/Scripts/raphael.js");
+            reportJs.AddFile("~/Scripts/g.raphael.js");
+            reportJs.AddFile("~/Scripts/g.line.js");
+            reportJs.AddFile("~/Scripts/date.format.js");
+
+            bundles.Add(reportJs);
+        }
     }
 }

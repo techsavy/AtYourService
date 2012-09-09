@@ -1,0 +1,46 @@
+﻿@model ServiceScreeningViewModel
+@{
+    ViewBag.Title = "Screening";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/raphael.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/g.raphael.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/g.line.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/date.format.js")"></script>
+<div class="row">
+    <div class="span12">
+        <h3>@Model.Service.Title <small>Views and Impressions</small></h3>
+        <div id="canvas_container">
+        </div>
+        @Html.ActionLink("Back to profile", "Profile", "Accounts")
+    </div>
+</div>
+<script type="text/javascript">
+
+    var r = null;
+
+    $(function () {
+        r = new Raphael(document.getElementById('canvas_container'), 750, 480);
+
+        var lines = r.linechart(10, 10, 750, 450, [@Html.Serialize(Model.Impressions.Keys.Select(k => k.ToMinutes())), @Html.Serialize(Model.Views.Keys.Select(k => k.ToMinutes()))], [@Html.Serialize(Model.Impressions.Values), @Html.Serialize(Model.Views.Values)], { nostroke: false, axis: "0 0 1 1", symbol: "circle", smooth: false, axisxstep : 10, axisystep : 10 }).hoverColumn(function () {
+            this.tags = r.set();
+
+            for (var i = 0, ii = this.y.length; i < ii; i++) {
+                this.tags.push(r.tag(this.x, this.y[i], this.values[i], 0, 10).insertBefore(this).attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill")}]));
+            }
+        }, function () {
+            this.tags && this.tags.remove();
+        });
+
+        lines.symbols.attr({ r: 6 });
+        
+        // change the x-axis labels
+        var axisItems = lines.axis[0].text.items;
+        for( var i = 0, l = axisItems.length; i < l; i++ ) {
+            var date = new Date(toMilliseconds(parseInt(axisItems[i].attr("text"))));
+            // using the excellent dateFormat code from Steve Levithan
+            axisItems[i].attr("text", dateFormat(date, "yyyy-mm-dd"));
+        }
+    });
+
+</script>

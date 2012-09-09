@@ -74,6 +74,7 @@ namespace AtYourService.Web
             RegisterRoutes(RouteTable.Routes);
 
             BundleTable.Bundles.EnableBootstrapBundle();
+            BundleTable.Bundles.EnableReportingBundle();
 
             ConfigureDependencies();
             //NHibernateConfiguration();

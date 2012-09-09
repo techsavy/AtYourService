@@ -27,7 +27,7 @@
                 @foreach (var service in Model)
                 {
                     <tr data-id="@service.Id">
-                        <td>@service.Title
+                        <td>@Html.ServiceDetailsActionLink(service)
                         </td>
                         <td>@service.Category.Name
                         </td>
@@ -35,12 +35,14 @@
                         </td>
                         <td>
                             <a href="@Url.Action("Edit", new { Id = service.Id })"><i class="icon-edit" title="Edit">
-                            </i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-id="@service.Id"><i class="icon-remove" title="Delete"></i>
-                            </a>
+                                                                                   </i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-id="@service.Id"><i class="icon-remove" title="Delete"></i>
+                                                                                                             </a>&nbsp;&nbsp;&nbsp;<a href="@Url.Action("Screening", "Reports", new { serviceId = service.Id })"><i class="icon-signal" title="Screening"></i>
+                                                                                                                                   </a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        @Html.ActionLink("Back to profile", "Profile", "Accounts")
     </div>
 </div>
