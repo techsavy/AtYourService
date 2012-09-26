@@ -38,5 +38,12 @@ namespace AtYourService.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Views()
+        {
+            var model = ExecuteQuery(new ServicesScreeningQuery(UserInfo.Id));
+
+            return View(model);
+        }
+
     }
 }

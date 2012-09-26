@@ -3,7 +3,7 @@
 namespace AtYourService.Web.Models
 {
     using System;
-    using AtYourService.Domain.Adverts;
+    using Domain.Adverts;
 
     public class ServiceScreeningViewModel
     {

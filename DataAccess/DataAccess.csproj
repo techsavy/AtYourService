@@ -113,6 +113,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationExtensions.cs" />
+    <Compile Include="Configuration\INamedSqlQueryDefinitionBuilder.cs" />
+    <Compile Include="Configuration\INativeSqlQueryRootReturnBuilder.cs" />
     <Compile Include="Mapping\Adverts\ScreeningMapping.cs" />
     <Compile Include="Mapping\Adverts\ServiceMapping.cs" />
     <Compile Include="Mapping\Adverts\ServiceOfferingMapping.cs" />

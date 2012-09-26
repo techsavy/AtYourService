@@ -27,7 +27,7 @@
     </div>
     <div class="span3">
         <h3>
-            My Ads and Reviews</h3>
+            My Services and Reviews</h3>
         <div>
             <ul class="nav nav-tabs nav-stacked">
                 <li>@Html.ActionLink("Create Ad", "Create", "Services")</li>
@@ -42,15 +42,11 @@
         <h3>
             Reports</h3>
         <div>
-            <div>
-                <span class="span1">Name </span><strong>@Model.Name</strong>
-            </div>
-            <div>
-                <span class="span1">Email </span><strong>@Model.Email</strong>
-            </div>
-            <div>
-                <span class="span1">About Me </span><strong>@Model.Brag</strong>
-            </div>
+            <ul class="nav nav-tabs nav-stacked">
+                <li>@Html.ActionLink("Service Views", "Views", "Reports")</li>
+                <li>@Html.ActionLink("Manage Ads", "Manage", "Services")</li>
+                <li>@Html.ActionLink("Manage Reviews", "Manage", "Reviews")</li>
+            </ul>
         </div>
     </div>
 </div>

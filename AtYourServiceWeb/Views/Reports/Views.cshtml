@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ServicesScreeningViewModel>
+@{
+    ViewBag.Title = "Views";
+}
+<div class="row">
+    <div class="span12">
+        <h3>
+            Service Views</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Available Date
+                    </th>
+                    <th>
+                        First Viewed Date
+                    </th>
+                    <th>
+                        Latest Viewed Date
+                    </th>
+                    <th>
+                        View Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model)
+                {
+                    <tr data-id="@service.Id">
+                        <td>@Html.ServiceDetailsActionLink(service.Id, service.Title)
+                        </td>
+                        <td>@service.Category
+                        </td>
+                        <td>@service.EffectiveDate.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>@service.FirstDate.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>@service.LatestDate.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>@service.Count
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to profile", "Profile", "Accounts")
+    </div>
+</div>
+

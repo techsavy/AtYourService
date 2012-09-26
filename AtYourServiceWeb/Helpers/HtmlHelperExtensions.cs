@@ -138,6 +138,12 @@ namespace AtYourService.Web.Helpers
             return helper.ActionLink(service.Title, "Details", "Services", new { id = service.Id, title = formattedTitle }, null);
         }
 
+        public static MvcHtmlString ServiceDetailsActionLink(this HtmlHelper helper, int id, string title)
+        {
+            var formattedTitle = title.Replace(' ', '-');
+            return helper.ActionLink(title, "Details", "Services", new { id, title = formattedTitle }, null);
+        }
+
         public static MvcHtmlString MenuLink(this HtmlHelper helper, string text, string action, string controller)
         {
             var routeData = helper.ViewContext.RouteData.Values;

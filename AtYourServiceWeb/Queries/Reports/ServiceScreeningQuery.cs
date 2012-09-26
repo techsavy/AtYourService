@@ -1,10 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿
 
 namespace AtYourService.Web.Queries.Reports
 {
-    using AtYourService.Web.Models;
+    using System;
+    using System.Linq;
     using Domain.Adverts;
+    using Models;
     using NHibernate;
 
     public class ServiceScreeningQuery : IQuery<ServiceScreeningViewModel>
