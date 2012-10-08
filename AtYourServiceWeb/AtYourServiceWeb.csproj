@@ -226,6 +226,7 @@
     <Compile Include="Models\ReviewsModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\Series.cs" />
+    <Compile Include="Models\ServicesByUserViewModel.cs" />
     <Compile Include="Models\ServiceScreeningViewModel.cs" />
     <Compile Include="Models\ServiceSerializeInfo.cs" />
     <Compile Include="Models\ServicesScreeningViewModel.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Queries\AdvancedSearch.cs" />
     <Compile Include="Queries\NHibernateQuery.cs" />
     <Compile Include="Queries\QueryByCategory.cs" />
+    <Compile Include="Queries\Reports\ServicesByScreeningQuery.cs" />
+    <Compile Include="Queries\Reports\ServicesByUsersQuery.cs" />
     <Compile Include="Queries\Reports\ServiceScreeningQuery.cs" />
     <Compile Include="Queries\Reports\ServicesScreeningQuery.cs" />
     <Compile Include="Security\AccountMembershipService.cs" />
@@ -460,6 +463,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Reports\Views.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\Impressions.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

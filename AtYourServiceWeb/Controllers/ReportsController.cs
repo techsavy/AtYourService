@@ -40,7 +40,14 @@ namespace AtYourService.Web.Controllers
 
         public ActionResult Views()
         {
-            var model = ExecuteQuery(new ServicesScreeningQuery(UserInfo.Id));
+            var model = ExecuteQuery(new ServicesScreeningQuery(UserInfo.Id, true));
+
+            return View(model);
+        }
+
+        public ActionResult Impressions()
+        {
+            var model = ExecuteQuery(new ServicesScreeningQuery(UserInfo.Id, false));
 
             return View(model);
         }
