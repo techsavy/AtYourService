@@ -61,7 +61,7 @@ namespace AtYourService.Domain.Tests.User
             var loginUserCommand = new LoginUserCommand(email, "12345678");
             ExecuteCommand(loginUserCommand);
 
-            Assert.IsNull(loginUserCommand.Result);
+            Assert.AreEqual(1, loginUserCommand.Result.RetryCount);
         }
     }
 }

@@ -17,6 +17,8 @@ namespace AtYourService.Domain.Users
     /// </summary>
     public abstract class User : Entity
     {
+        public const int MaxRetryCount = 5;
+
         public virtual string Name { get; set; }
 
         public virtual string Email { get; set; }
@@ -24,6 +26,10 @@ namespace AtYourService.Domain.Users
         public virtual string Brag { get; set; }
 
         public virtual string PasswordHash { get; protected set; }
+
+        public virtual short RetryCount { get; set; }
+
+        public virtual bool IsLocked { get { return RetryCount < MaxRetryCount; } }
 
         public virtual string ProfilePicId { get; set; }
 
@@ -34,7 +40,7 @@ namespace AtYourService.Domain.Users
         public virtual DateTime? ExpiryDate { get; set; }
 
         public virtual Point Location { get; set; }
-
+        
         /// <summary>
         /// Sets the password of new user.
         /// </summary>

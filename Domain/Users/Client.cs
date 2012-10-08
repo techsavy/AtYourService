@@ -9,6 +9,8 @@ namespace AtYourService.Domain.Users
     {
         public virtual ClientSettings ClientSettings { get; set; }
 
+        public virtual EmailVerification EmailVerification { get; set; }
+
         public virtual ISet<Service> Services { get; set; }
 
         public virtual ISet<Review> Reviews { get; set; }

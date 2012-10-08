@@ -21,6 +21,7 @@ namespace AtYourService.Data.Mapping.Users
             Property(user => user.Brag, m => m.Length(1000));
             Property(user => user.PasswordHash, m => m.NotNullable(true));
             Property(user => user.IsVerified, m => m.NotNullable(true));
+            Property(user => user.RetryCount, m => m.NotNullable(true));
             Property(user => user.LastActiveDate, m => m.NotNullable(true));
             Property(user => user.Location, m => { m.Type<NHibernate.Spatial.Type.MsSql2008GeographyType>(); m.Column(c => c.SqlType("geography")); });
 

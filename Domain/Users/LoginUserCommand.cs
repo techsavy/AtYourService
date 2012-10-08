@@ -29,8 +29,14 @@ namespace AtYourService.Domain.Users
             var user = Session.QueryOver<User>().And(u => u.Email == Email && u.IsVerified).SingleOrDefault();
             if (user != null && user.VerifyPassword(Password))
             {
+                user.RetryCount = 0;
                 user.LastActiveDate = DateTime.Now;
 
+                return user;
+            }
+            else if (user != null && !user.VerifyPassword(Password))
+            {
+                user.RetryCount++;
                 return user;
             }
 

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ClientSettingsMapping.cs" company="">
+// <copyright file="EmailVerificationMapping.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,21 +11,20 @@ namespace AtYourService.Data.Mapping.Users
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ClientSettingsMapping : EntityMapping<ClientSettings>
+    public class EmailVerificationMapping : EntityMapping<EmailVerification>
     {
-        public ClientSettingsMapping()
+        public EmailVerificationMapping()
         {
             //NOTE: Shared primary key maping did not work when saving the entities
 
-            Property(clientSettings => clientSettings.Source, m => m.NotNullable(true));
-            Property(clientSettings => clientSettings.AdCount, m => m.NotNullable(true));
+            Property(clientSettings => clientSettings.VerificationCode, m => m.NotNullable(true));
             ManyToOne(o => o.Client,
                   o =>
                   {
                       o.Column("UserId");
-                      o.NotNullable(true);
                       o.Unique(true);
-                      o.ForeignKey("FK_Users_ClientSettings");
+                      o.NotNullable(true);
+                      o.ForeignKey("FK_Users_EmailVerification");
                   });
         }
     }

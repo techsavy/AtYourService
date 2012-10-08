@@ -127,6 +127,7 @@
     <Compile Include="Mapping\Users\AdministratorMapping.cs" />
     <Compile Include="Mapping\Users\ClientMapping.cs" />
     <Compile Include="Mapping\Users\ClientSettingsMapping.cs" />
+    <Compile Include="Mapping\Users\EmailVerificationMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
     <Compile Include="ModelInspector.cs" />
     <Compile Include="MsSqlSpatialDialect.cs" />

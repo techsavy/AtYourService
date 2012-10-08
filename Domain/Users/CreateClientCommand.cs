@@ -7,6 +7,7 @@
 namespace AtYourService.Domain.Users
 {
     using System;
+    using System.Security.Cryptography;
     using Core.Geo;
 
     /// <summary>
@@ -29,13 +30,27 @@ namespace AtYourService.Domain.Users
 
             client.Location = PointFactory.Create(Latitude, Longitude);
 
+            client.EmailVerification = new EmailVerification { VerificationCode =  GenerateVerificationCode(), Client = client };
+
             OnCreate(client);
+            OnCreate(client.EmailVerification);
 
             client.ClientSettings = new ClientSettings { AdCount = 0, Source = Source, Client = client };
             OnCreate(client.ClientSettings);
 
             Session.Save(client);
             Session.Save(client.ClientSettings);
+            Session.Save(client.EmailVerification);
+        }
+
+        private string GenerateVerificationCode()
+        {
+            var rngCsp = new RNGCryptoServiceProvider();
+            var randBytes = new byte[12];
+
+            rngCsp.GetBytes(randBytes);
+
+            return BitConverter.ToString(randBytes).Replace("-", string.Empty);
         }
     }
 }

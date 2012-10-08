@@ -67,12 +67,13 @@ namespace AtYourService.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = ExecuteCommand(new LoginUserCommand(model.Email, model.Password));
-                if (user != null)
+                if (user != null && !user.IsLocked)
                 {
                     var userInfo = Mapper.Map<UserInfo>(user);
                     Session[SessionKeys.User] = userInfo;
 
                     _formsAuthenticationService.SignIn(model.Email, model.RememberMe);
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -82,6 +83,10 @@ namespace AtYourService.Web.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
+                }
+                else if (user != null && user.IsLocked)
+                {
+                    ModelState.AddModelError(string.Empty, "Your account is locked.");
                 }
                 else
                 {
