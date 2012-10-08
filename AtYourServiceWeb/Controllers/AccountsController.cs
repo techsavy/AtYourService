@@ -56,6 +56,11 @@ namespace AtYourService.Web.Controllers
             return View();
         }
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
