@@ -7,6 +7,7 @@ namespace AtYourService.Web.Controllers
     using Core.Geo;
     using Domain.Users;
     using Helpers;
+    using Mailers;
     using Models;
     using Properties;
     using Security;
@@ -15,11 +16,13 @@ namespace AtYourService.Web.Controllers
     public class AccountsController : BaseController
     {
         private readonly IFormsAuthenticationService _formsAuthenticationService;
+        private readonly IUserMailer _userMailer;
 
-        public AccountsController(NHibernateContext nHibernateContext, IFormsAuthenticationService formsAuthenticationService)
+        public AccountsController(NHibernateContext nHibernateContext, IFormsAuthenticationService formsAuthenticationService, IUserMailer userMailer)
             : base(nHibernateContext)
         {
             _formsAuthenticationService = formsAuthenticationService;
+            _userMailer = userMailer;
         }
 
         //
@@ -39,6 +42,8 @@ namespace AtYourService.Web.Controllers
                     signUp.Latitude, signUp.Longitude, signUp.Source.Value);
 
                 ExecuteCommand(createClient);
+
+                _userMailer.Welcome().Send();
 
                 return RedirectToAction("SignUpSuccess");
             }

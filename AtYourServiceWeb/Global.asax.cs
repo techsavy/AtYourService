@@ -14,6 +14,7 @@ namespace AtYourService.Web
     using Core.Geo;
     using Data;
     using Geo;
+    using Mailers;
     using NHibernate;
     using NHibernate.Cfg;
     using NHibernate.Mapping.ByCode;
@@ -110,6 +111,7 @@ namespace AtYourService.Web
             builder.RegisterType<AccountMembershipService>().As<IMembershipService>();
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>();
             builder.RegisterType<GeoCodingSerive>().As<IGeoCodingService>();
+            builder.RegisterType<UserMailer>().As<IUserMailer>();
             builder.RegisterType<ImageResizer>().AsSelf();
 
             builder.RegisterType<NHibernateContext>().AsSelf()

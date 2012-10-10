@@ -49,6 +49,10 @@
     <Reference Include="Contrib.Regex">
       <HintPath>..\packages\Lucene.Net.Contrib.2.9.4.1\lib\net40\Contrib.Regex.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="GeoAPI, Version=1.4.0.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Spatial\GeoAPI.dll</HintPath>
@@ -99,6 +103,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.0\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="NetTopologySuite, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Spatial\NetTopologySuite.dll</HintPath>
@@ -126,6 +133,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -217,6 +225,8 @@
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\EnhancedHtmlHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
     <Compile Include="Models\CategoryBrowseModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\CreateReviewModel.cs" />
@@ -469,6 +479,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserMailer\Welcome.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

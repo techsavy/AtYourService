@@ -23,6 +23,8 @@ namespace AtYourService.Domain.Users
 
         public int Source { get; set; }
 
+        public string EmailVerificationCode { get; private set; }
+
         protected override void OnExecute()
         {
             var client = new Client { Name = Name, Email = Email, Brag = Brag, IsVerified = false, LastActiveDate = DateTime.Now };
@@ -41,6 +43,8 @@ namespace AtYourService.Domain.Users
             Session.Save(client);
             Session.Save(client.ClientSettings);
             Session.Save(client.EmailVerification);
+
+            EmailVerificationCode = client.EmailVerification.VerificationCode;
         }
 
         private string GenerateVerificationCode()
