@@ -39,7 +39,7 @@ namespace AtYourService.Domain.Tests
             if (Configuration == null)
             {
                 Configuration = new NHibernateConfigurator().Configure()
-                    .SetProperty(Environment.ConnectionString, "Data Source=localhost;Initial Catalog=AtYourServiceDomainTests;Integrated Security=True;");
+                    .SetProperty(Environment.ConnectionString, "Data Source=.\\SQLEXPRESS;Initial Catalog=AtYourServiceDomainTests;Integrated Security=True;");
 
                 SessionFactory = Configuration.BuildSessionFactory();
             }

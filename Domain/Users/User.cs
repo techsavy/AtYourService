@@ -86,6 +86,14 @@ namespace AtYourService.Domain.Users
             return hasedPassword == PasswordHash;
         }
 
+        public virtual void ResetPassword(string plainTextPassword)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(plainTextPassword));
+
+            var crypto = GetCryptoProvider();
+            PasswordHash = crypto.HashPassword(plainTextPassword);
+        }
+
         private ICryptoProvider GetCryptoProvider()
         {
             return new SHA256CryptoProvider();

@@ -43,7 +43,7 @@ namespace AtYourService.Web.Controllers
 
                 ExecuteCommand(createClient);
 
-                _userMailer.Welcome().Send();
+                _userMailer.Welcome(signUp.Name, createClient.EmailVerificationCode, signUp.Email).Send();
 
                 return RedirectToAction("SignUpSuccess");
             }
@@ -56,6 +56,15 @@ namespace AtYourService.Web.Controllers
             return View();
         }
 
+        public ActionResult VerifyEmail(string email, string verificationCode)
+        {
+            var verifyEmailCommand = new VerifyEmailCommand(email, verificationCode);
+
+            ExecuteCommand(verifyEmailCommand);
+
+            return View(verifyEmailCommand.Result);
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -63,6 +72,55 @@ namespace AtYourService.Web.Controllers
 
         public ActionResult ForgotPassword()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var passwordResetRequest = new PasswordResetRequestCommand(forgotPasswordModel.Email);
+                var result = ExecuteCommand(passwordResetRequest);
+
+                if (result)
+                {
+                    _userMailer.PasswordReset(passwordResetRequest.Name, passwordResetRequest.Token, forgotPasswordModel.Email).Send();
+
+                    return View("ForgotPasswordMailSent");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "We couldn't find an account with the given email address. Please check the email address.");
+                }
+            }
+
+            return View(forgotPasswordModel);
+        }
+
+        public ActionResult PasswordReset(string token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PasswordReset(string token, PasswordRestModel passwordRestModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var passwordReset = new PasswordResetCommand(token, passwordRestModel.NewPassword);
+                var result = ExecuteCommand(passwordReset);
+
+                if (result)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "The password reset token is invalid or expired.");
+                }
+            }
+
             return View();
         }
 

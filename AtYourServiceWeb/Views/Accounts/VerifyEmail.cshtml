@@ -1,0 +1,24 @@
+﻿@model bool
+@{
+    ViewBag.Title = "Email Verification";
+}
+<div class="row">
+    @if (Model)
+    {
+        <div class="alert alert-success">
+            <h2>
+                Thanks</h2>
+            Thank you for verifying your email address. Please login to continue.
+            @Html.Partial("_Login", (LoginModel)null)
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-error">
+            <h2>
+                Sorry</h2>
+            Email verification was not successful. Either you have already verified your email
+            or the verification code is incorrect.
+        </div>
+    }
+</div>

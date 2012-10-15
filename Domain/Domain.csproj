@@ -142,8 +142,12 @@
     <Compile Include="Users\EditProfileCommand.cs" />
     <Compile Include="Users\EmailVerification.cs" />
     <Compile Include="Users\LoginUserCommand.cs" />
+    <Compile Include="Users\PasswordResetCommand.cs" />
+    <Compile Include="Users\PasswordResetRequest.cs" />
+    <Compile Include="Users\PasswordResetRequestCommand.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\ClientSettings.cs" />
+    <Compile Include="Users\VerifyEmailCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain.cd" />

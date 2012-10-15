@@ -50,7 +50,7 @@ namespace AtYourService.Domain.Users
         private string GenerateVerificationCode()
         {
             var rngCsp = new RNGCryptoServiceProvider();
-            var randBytes = new byte[12];
+            var randBytes = new byte[24];
 
             rngCsp.GetBytes(randBytes);
 

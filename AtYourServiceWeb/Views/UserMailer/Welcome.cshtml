@@ -1,2 +1,6 @@
 
-HTML View for UserMailer#Welcome
+Hi @ViewBag.Username,
+Thank you for registering at our web site. Please verify your Email address by clicking @Html.ActionLink("this link", "VerifyEmail", "Accounts", new { email = ViewBag.Email, verificationCode = ViewBag.VerificationCode }, null).
+
+Best Regards,
+Team

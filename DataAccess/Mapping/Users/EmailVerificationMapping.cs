@@ -18,6 +18,8 @@ namespace AtYourService.Data.Mapping.Users
             //NOTE: Shared primary key maping did not work when saving the entities
 
             Property(clientSettings => clientSettings.VerificationCode, m => m.NotNullable(true));
+            Property(clientSettings => clientSettings.IsVerified, m => m.NotNullable(true));
+
             ManyToOne(o => o.Client,
                   o =>
                   {

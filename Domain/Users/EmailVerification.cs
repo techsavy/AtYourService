@@ -16,5 +16,7 @@ namespace AtYourService.Domain.Users
         public virtual Client Client { get; set; }
 
         public virtual string VerificationCode { get; set; }
+
+        public virtual bool IsVerified { get; set; }
     }
 }
