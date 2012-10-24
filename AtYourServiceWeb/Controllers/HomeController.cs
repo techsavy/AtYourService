@@ -18,5 +18,10 @@ namespace AtYourService.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Formatting()
+        {
+            return View();
+        }
     }
 }

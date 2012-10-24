@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CompetitorServiceViewModel>
+@{
+    ViewBag.Title = "Competitor Services";
+}
+<div class="row">
+    <div class="span12">
+        <h3>
+            Competitor Services</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Service Title
+                    </th>
+                    <th>
+                        Competitor Service Title
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Distance
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model)
+                {
+                    <tr>
+                        <td>@Html.ServiceDetailsActionLink(service.OwnServiceId, service.OwnServiceTitle)
+                        </td>
+                        <td>@Html.ServiceDetailsActionLink(service.OtherServiceId, service.OtherServiceTitle)
+                        </td>
+                        <td>@service.Category
+                        </td>
+                        <td><div align="right">@service.Distance.ToString("F")</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to profile", "Profile", "Accounts")
+    </div>
+</div>

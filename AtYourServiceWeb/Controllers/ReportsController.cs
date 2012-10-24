@@ -52,5 +52,12 @@ namespace AtYourService.Web.Controllers
             return View(model);
         }
 
+        public ActionResult CompetitorServices()
+        {
+            var model = ExecuteQuery(new CompetitorServicesQuery(UserInfo.Id));
+
+            return View(model);
+        }
+
     }
 }

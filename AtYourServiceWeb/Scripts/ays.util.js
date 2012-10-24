@@ -21,7 +21,7 @@ function setCaretToPos(input, pos) {
 function formatInfoContent(service) {
     var contentString = '<div id="content">' +
     '<h3>' + service.Title + '</h3>' +
-    '<p>' + service.Body + '</p>' +
+    '<div>' + service.Body + '</div>' +
     '</div>';
 
     return contentString;

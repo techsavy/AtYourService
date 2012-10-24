@@ -230,6 +230,7 @@
     <Compile Include="Mailers\UserMailer.cs" />
     <Compile Include="Models\CategoryBrowseModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\CompetitorServiceViewModel.cs" />
     <Compile Include="Models\CreateReviewModel.cs" />
     <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Queries\AdvancedSearch.cs" />
     <Compile Include="Queries\NHibernateQuery.cs" />
     <Compile Include="Queries\QueryByCategory.cs" />
+    <Compile Include="Queries\Reports\CompetitorServicesQuery.cs" />
     <Compile Include="Queries\Reports\ServicesByScreeningQuery.cs" />
     <Compile Include="Queries\Reports\ServicesByUsersQuery.cs" />
     <Compile Include="Queries\Reports\ServiceScreeningQuery.cs" />
@@ -500,6 +502,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserMailer\PasswordReset.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\CompetitorServices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Formatting.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

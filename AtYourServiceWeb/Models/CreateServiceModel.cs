@@ -21,6 +21,7 @@ namespace AtYourService.Web.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Description")]
         public string Body { get; set; }
 
         [Display(Name = "Category")]

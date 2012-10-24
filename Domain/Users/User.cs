@@ -29,7 +29,7 @@ namespace AtYourService.Domain.Users
 
         public virtual short RetryCount { get; set; }
 
-        public virtual bool IsLocked { get { return RetryCount < MaxRetryCount; } }
+        public virtual bool IsLocked { get { return RetryCount > MaxRetryCount; } }
 
         public virtual string ProfilePicId { get; set; }
 

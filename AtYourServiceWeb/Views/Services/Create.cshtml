@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            @Html.Custom().LabelFor(model => model.Body)
+                            <label class="control-label" for="Title">Description<span class="required-star">*</span> <br /><small> You can apply @Html.ActionLink("formatting", "Formatting", "Home")</small></label>
                             <div class="controls">
                                 @Html.TextAreaFor(model => model.Body, new { @class = "input-xxlarge", rows = "15" })
                                 @Html.ValidationMessageFor(model => model.Body)
