@@ -104,7 +104,8 @@ namespace AtYourService.Web.Controllers
             {
                 FileBase image = createServiceModel.Image != null ? new FileBaseAdapter(createServiceModel.Image) : null;
 
-                var command = new CreateServiceCommand(true, createServiceModel.Title, createServiceModel.Body,
+                var isServiceOffering = createServiceModel.Type == 1;
+                var command = new CreateServiceCommand(isServiceOffering, createServiceModel.Title, createServiceModel.Body,
                                                        createServiceModel.CategoryId, UserInfo.Id, createServiceModel.Latitude,
                                                        createServiceModel.Longitude, null, _fileSystem, image);
                 ExecuteCommand(command);

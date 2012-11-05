@@ -26,6 +26,16 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            <label class="control-label" for="Type">
+                                Type</label>
+                            <div class="controls">
+                                <select id="Type" name="Type">
+                                    <option selected="selected" value="1">Service</option>
+                                    <option value="2">Wanted</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
                             @Html.Custom().LabelFor(model => model.CategoryId)
                             <div class="controls">
                                 @Html.CategoryFor(model => model.CategoryId, (IEnumerable<GroupedSelectListItem>)ViewData[ViewDataKeys.Categories])

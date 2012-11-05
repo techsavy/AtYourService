@@ -27,6 +27,9 @@ namespace AtYourService.Web.Models
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
+        [Display(Name = "Type")]
+        public int Type { get; set; }
+
         public DateTime? EffectiveDate { get; set; }
 
         public double Latitude { get; set; }
