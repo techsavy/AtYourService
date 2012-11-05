@@ -77,6 +77,9 @@ namespace AtYourService.Web
             BundleTable.Bundles.EnableBootstrapBundle();
             BundleTable.Bundles.EnableReportingBundle();
 
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
             ConfigureDependencies();
             //NHibernateConfiguration();
         }

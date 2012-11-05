@@ -123,6 +123,7 @@
     <Compile Include="Mapping\CategoryMapping.cs" />
     <Compile Include="Mapping\EntityMapping.cs" />
     <Compile Include="Mapping\ImageMapping.cs" />
+    <Compile Include="Mapping\Moderation\FlagMapping.cs" />
     <Compile Include="Mapping\Moderation\ReviewMapping.cs" />
     <Compile Include="Mapping\Users\AdministratorMapping.cs" />
     <Compile Include="Mapping\Users\ClientMapping.cs" />

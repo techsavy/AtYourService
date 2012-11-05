@@ -129,6 +129,7 @@
     <Compile Include="DomainException.cs" />
     <Compile Include="Files\Image.cs" />
     <Compile Include="Moderation\CreateReviewCommand.cs" />
+    <Compile Include="Moderation\Flag.cs" />
     <Compile Include="Moderation\Review.cs" />
     <Compile Include="Moderation\UpdateScreeningsCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
