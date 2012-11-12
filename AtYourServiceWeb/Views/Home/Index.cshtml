@@ -30,10 +30,15 @@
                         can also publish your business with us.</p>
                 </div>
                 <div id="social">
-                    <h2>
-                        Social network integration area</h2>
-                    <ul>
-                        <li>Facebook</li><li>Google+</li></ul>
+                    <!-- AddThis Button BEGIN -->
+                    <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                        <a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2">
+                        </a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4">
+                        </a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style">
+                        </a>
+                    </div>
+                    <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50a18109127b7410"></script>
+                    <!-- AddThis Button END -->
                 </div>
             </div>
             <div class="span4">
@@ -60,7 +65,7 @@
 
         var captured = $('#user-location').attr('data-captured');
         if (captured == 'no') {
-            getUserLocation(function (loc) {                
+            getUserLocation(function (loc) {
                 populateMap(loc);
             });
         }
@@ -71,7 +76,7 @@
             populateMap(new google.maps.LatLng(lat, lng));
         }
     }
-    
+
     $(function () {
         $('.dropdown-toggle').dropdown();
         initialize();
@@ -85,7 +90,7 @@
             data: { lat: location.lat(), lng: location.lng() },
             success: function (services) {
                 setUserMarker(map, location);
-                
+
                 $.each(services, function (index, value) {
                     var serviceLatlng = new google.maps.LatLng(value.Lat, value.Lng);
 
