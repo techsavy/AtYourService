@@ -1,4 +1,8 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="FlagsController.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace AtYourService.Web.Controllers
 {
@@ -11,11 +15,6 @@ namespace AtYourService.Web.Controllers
     {
         public FlagsController(NHibernateContext nHibernateContext) : base(nHibernateContext)
         {
-        }
-
-        public ActionResult Index()
-        {
-            return View();
         }
 
         [HttpPost]
