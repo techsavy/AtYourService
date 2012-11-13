@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\FlagsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Models\CreateReviewModel.cs" />
     <Compile Include="Models\CreateServiceModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\FlagModel.cs" />
     <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PasswordRestModel.cs" />
