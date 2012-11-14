@@ -1,10 +1,13 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="ReviewsController.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace AtYourService.Web.Controllers
 {
     using System;
     using System.Web.Mvc;
-    using Domain.Adverts;
     using Domain.Moderation;
     using Helpers;
     using Models;
