@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{DE03D6
 		Libs\Search\NHibernate.Search.dll = Libs\Search\NHibernate.Search.dll
 	EndProjectSection
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AtYourServiceWeb.Azure", "AtYourServiceWeb.Azure\AtYourServiceWeb.Azure.ccproj", "{1F426223-3335-4A38-A564-3FA351CD22DB}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = AtYourService.vsmdi
@@ -78,6 +80,10 @@ Global
 		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE16098-2F4E-46F0-AC56-44EB8D25753A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F426223-3335-4A38-A564-3FA351CD22DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F426223-3335-4A38-A564-3FA351CD22DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F426223-3335-4A38-A564-3FA351CD22DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F426223-3335-4A38-A564-3FA351CD22DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
