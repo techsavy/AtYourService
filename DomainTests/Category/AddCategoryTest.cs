@@ -37,7 +37,7 @@ namespace AtYourService.Domain.Tests.Category
         [Test]
         public void Add_Sub_Category()
         {
-            string parentCategoryName = "parent";
+            const string parentCategoryName = "parent";
             var addParentCategoryCommand = new AddCategoryCommand(null, parentCategoryName);
             ExecuteCommand(addParentCategoryCommand);
 

@@ -25,6 +25,8 @@ namespace AtYourService.Data.Mapping
 
             Property(c => c.LastModifiedDate, c => c.NotNullable(true));
             Property(c => c.LastModifiedBy, c => c.NotNullable(true));
+
+            Schema("dbo");
         }
     }
 }

@@ -53,7 +53,7 @@ namespace AtYourService.Web.Queries
             if (!string.IsNullOrWhiteSpace(_searchModel.Terms))
             {
                 var analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
-                var queryParser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, new[] { "Title", "Body" }, analyzer);
+                var queryParser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, new[] { "Title", "Body", "Category_Name" }, analyzer);
                 var termQuery = queryParser.Parse(_searchModel.Terms);
 
                 booleanQuery.Add(termQuery, BooleanClause.Occur.MUST);

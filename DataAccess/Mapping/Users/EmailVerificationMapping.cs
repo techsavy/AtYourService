@@ -28,6 +28,8 @@ namespace AtYourService.Data.Mapping.Users
                       o.NotNullable(true);
                       o.ForeignKey("FK_Users_EmailVerification");
                   });
+
+            Schema("dbo");
         }
     }
 }

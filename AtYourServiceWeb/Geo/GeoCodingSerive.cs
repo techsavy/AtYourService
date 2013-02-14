@@ -55,7 +55,7 @@ namespace AtYourService.Web.Geo
             var url = string.Format("{0}{1}&sensor=false", BaseUrl, location);
             var webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.Method = "GET";
-            webRequest.Proxy.Credentials = new NetworkCredential("", "");
+            //webRequest.Proxy.Credentials = new NetworkCredential("", "");
 
             return webRequest.GetResponse();
         }

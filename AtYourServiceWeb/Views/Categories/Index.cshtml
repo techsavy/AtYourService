@@ -7,7 +7,10 @@
         <h2 class="pull-left">
             All Categories</h2>
         <div class="btn-group pull-right">
-            @Html.ActionLink("Edit", "Edit", null, new { @class = "btn" })
+            @if (User.Identity.IsAuthenticated && ((UserInfo)Session[SessionKeys.User]).IsAdmin)
+            {
+                 @Html.ActionLink("Edit", "Edit", null, new { @class = "btn" })
+            }            
         </div>
     </div>
 </div>

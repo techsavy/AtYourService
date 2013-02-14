@@ -23,6 +23,8 @@ namespace AtYourService.Data.Mapping.Users
                       o.NotNullable(true);
                       o.ForeignKey("FK_Users_PasswordResetRequest");
                   });
+
+            Schema("dbo");
         }
     }
 }

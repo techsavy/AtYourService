@@ -1,6 +1,6 @@
 
 Hi @ViewBag.Username,
-Thank you for registering at our web site. Please verify your Email address by clicking @Html.ActionLink("this link", "VerifyEmail", "Accounts", new { email = ViewBag.Email, verificationCode = ViewBag.VerificationCode }, null).
+Thank you for registering at our web site. Please verify your Email address by clicking @Html.Raw(string.Format("http://atyourservice.lk/accounts/VerifyEmail?email={0}&verificationCode={1}", ViewBag.Email, ViewBag.VerificationCode)).
 
 Best Regards,
 Team

@@ -9,6 +9,7 @@ namespace AtYourService.Web.Controllers
     using Helpers;
     using NHibernate.Transform;
     using Properties;
+    using Security;
     using Util;
 
     public class CategoriesController : BaseController
@@ -27,6 +28,7 @@ namespace AtYourService.Web.Controllers
             return View(GetCategories());
         }
 
+        [AdminOnly]
         public ActionResult Edit()
         {
             return View(GetCategories().OrderBy(category => category.Name));
@@ -55,6 +57,7 @@ namespace AtYourService.Web.Controllers
             return PartialView(cats);
         }
 
+        [AdminOnly]
         public JsonResult AddSubCategory(string subCategoryName, int parentCategory)
         {
             ExecuteCommand(new AddCategoryCommand(parentCategory, subCategoryName));
@@ -64,6 +67,7 @@ namespace AtYourService.Web.Controllers
             return Json(new {Success = true});
         }
 
+        [AdminOnly]
         public JsonResult AddCategory(string mainCategoryName)
         {
             ExecuteCommand(new AddCategoryCommand(null, mainCategoryName));
@@ -73,6 +77,7 @@ namespace AtYourService.Web.Controllers
             return Json(new { Success = true });
         }
 
+        [AdminOnly]
         public JsonResult RenameCategory(int categoryId, string categoryName)
         {
             ExecuteCommand(new RenameCategoryCommand(categoryId, categoryName));
@@ -82,6 +87,7 @@ namespace AtYourService.Web.Controllers
             return Json(new { Success = true });
         }
 
+        [AdminOnly]
         public JsonResult DeleteCategory(int categoryId)
         {
             try

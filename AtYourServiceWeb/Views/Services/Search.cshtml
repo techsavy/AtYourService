@@ -95,7 +95,7 @@
                                 }
                                 else
                                 {
-                                    <img alt="Image" src="@Url.Content("~/Content/Images/150x100.jpg")" />
+                                    <img alt="Image" src="@Url.Content("~/Content/Images/NoPreview.png")" />
                                 }
                             </td>
                             <td>
@@ -117,4 +117,60 @@
     </div>
     <div class="span6" id="map-canvas" style="height: 600px">
     </div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var services = @Html.Serialize(ViewData[ViewDataKeys.ServiceSerializationInfos]);
+
+    function initialize() {
+        var latlng = new google.maps.LatLng(@location.Y, @location.X);
+        var options = { zoom: 14, center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById
+            ("map-canvas"), options);
+
+        setUserMarker(map, latlng);
+        
+        $.each(services, function(index, value) { 
+            var serviceLatlng = new google.maps.LatLng(value.Lat, value.Lng);
+            
+            var marker = new google.maps.Marker({
+                position: serviceLatlng,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: value.Title
+            });
+            marker.set("id", value.Id);
+            
+            attachInfo(marker, value);
+        });
+    }
+
+    function attachInfo(marker, service) {
+
+        var infowindow = new google.maps.InfoWindow({
+            content: formatInfoContent(service)
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(marker.get('map'), marker);
+        });
+    }
+      
+    $(function () {
+        $('.dropdown-toggle').dropdown();
+        initialize();
+
+        $('tbody > tr').hover(function() {
+            var id = $(this).attr('data-id');
+
+            $.each(services, function(index, value) { 
+                if (value.Id == id) {
+                    map.setCenter(new google.maps.LatLng(value.Lat, value.Lng));
+                }
+            
+            });
+        });
+    });
+</script>
 </div>

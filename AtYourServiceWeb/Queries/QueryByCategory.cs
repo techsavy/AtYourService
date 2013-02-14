@@ -59,7 +59,7 @@ namespace AtYourService.Web.Queries
                     .JoinQueryOver(s => s.Category).Where(c => c.Id == _categoryBrowseModel.Id || c.ParentCategory.Id == _categoryBrowseModel.Id)
                     .List();
 
-            return services.OrderByDescending(s => s.Location.Coordinate.Distance(_userLocation.Coordinate)).ToList();
+            return services.OrderBy(s => s.Location.Coordinate.Distance(_userLocation.Coordinate)).ToList();
         }
     }
 }

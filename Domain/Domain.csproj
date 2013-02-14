@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Adverts\CreateServiceCommand.cs" />
     <Compile Include="Adverts\DateFieldsClassBridge.cs" />
+    <Compile Include="Adverts\ExtendExpiryDateCommand.cs" />
     <Compile Include="Adverts\LogImpressionsCommand.cs" />
     <Compile Include="Adverts\LogViewCommand.cs" />
     <Compile Include="Adverts\Screening.cs" />
